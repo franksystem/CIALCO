@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="#{personTitle}" style="margin-bottom:20px">
+		<h:panelGrid columns="2">
+			<h:outputText value="C&#233;dula: *" />
+			<p:inputText id="idced" required="true"
+				requiredMessage="El campo C&#233;dula es requerido"
+				validatorMessage="Numero de c&#233;dula invalida"
+				value="#{personController.personaDTO.cedulaPersona}" maxlength="10">
+				<pe:keyFilter regEx="/[\d\-]/" />
+				<f:validateLength minimum="10" />
+				<f:validator validatorId="cedulaValidator" />
+				<p:ajax event="blur" update="idced" global="false" />
+			</p:inputText>
+
+			<h:outputText value="Nombres: *" />
+			<p:inputText required="true"
+				requiredMessage="El campo Nombres es requerido"
+				value="#{personController.personaDTO.nombrePersona}" maxlength="100">
+				<pe:keyFilter regEx="/[a-z_\s]/i" />
+			</p:inputText>
+
+			<h:outputText value="Apellidos: *" />
+			<p:inputText required="true"
+				requiredMessage="El campo Apellidos es requerido"
+				value="#{personController.personaDTO.apellidoPersona}"
+				maxlength="100">
+				<pe:keyFilter regEx="/[a-z_\s]/i" />
+			</p:inputText>
+
+			<h:outputText value="Edad:" />
+			<p:inputText value="#{personController.personaDTO.edadPersona}"
+				maxlength="3">
+				<pe:keyFilter regEx="/[\d\-]/" />
+				<f:validateLength minimum="1" />
+			</p:inputText>
+
+			<h:outputText value="G&#233;nero: *" />
+			<p:selectOneMenu
+				value="#{personController.personaDTO.idCatalogoGenero}"
+				required="true" requiredMessage="El campo G&#233;nero es requerido">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{personController.generoDTOs}" var="genero"
+					itemLabel="#{genero.elementoCatalogo}"
+					itemValue="#{genero.idCatalogo}" />
+				<p:ajax event="change" partialSubmit="true" process="@this"
+					global="false" update="@this" />
+			</p:selectOneMenu>
+
+			<h:outputText value="Correo:" />
+			<p:inputText id="pmail"
+				validatorMessage="El mail ingresado es inv&#225;lido"
+				value="#{personController.personaDTO.mailPersona}">
+				<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+				<f:validator validatorId="emailValidator" />
+				<p:ajax event="blur" update="pmail" global="false" />
+			</p:inputText>
+
+			<h:outputText value="Tel&#233;fono movil:" />
+			<p:inputMask value="#{personController.personaDTO.telefonoMovil}"
+				mask="(99) 99-999-999" maxlength="10">
+				<pe:keyFilter regEx="/[\d\-]/" />
+			</p:inputMask>
+
+			<h:outputText value="Tel&#233;fono fijo:" />
+			<p:inputMask value="#{personController.personaDTO.telefonoFijo}"
+				maxlength="9" mask="(99) 999-9999">
+				<pe:keyFilter regEx="/[\d\-]/" />
+			</p:inputMask>
+
+			<h:outputText value="Etnia: *" />
+			<p:selectOneMenu
+				value="#{personController.personaDTO.idCatalogoEtnia}"
+				required="true" requiredMessage="El campo Etnia es requerido">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{personController.etniaDTOs}" var="genero"
+					itemLabel="#{genero.elementoCatalogo}"
+					itemValue="#{genero.idCatalogo}" />
+				<p:ajax event="change" partialSubmit="true" process="@this"
+					update="@this" global="false" />
+			</p:selectOneMenu>
+
+			<h:outputText value="Escolaridad: *" />
+			<p:selectOneMenu
+				value="#{personController.personaDTO.idCatalogoEscolaridad}"
+				required="true" requiredMessage="El campo Escolaridad es requerido">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{personController.escolaridadDTOs}"
+					var="genero" itemLabel="#{genero.elementoCatalogo}"
+					itemValue="#{genero.idCatalogo}" />
+				<p:ajax event="change" partialSubmit="true" process="@this"
+					update="@this" global="false" />
+			</p:selectOneMenu>
+		</h:panelGrid>
+	</p:panel>
+</ui:composition>

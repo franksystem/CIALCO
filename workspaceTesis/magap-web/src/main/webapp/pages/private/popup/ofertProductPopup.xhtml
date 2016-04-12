@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addProSoc" header="Productos ofertados por socio"
+		widgetVar="dlgAddProSoc" modal="true" resizable="false" dynamic="true">
+		<h:form id="formAddProSoc">
+			<h:panelGroup style="width:100%;" layout="block">
+
+				<p:commandButton value="Selecionar socio" icon="ui-icon-plus"
+					actionListener="#{organizationController.newSocio}"
+					oncomplete="PF('dlgAddProducer').show();" partialSubmit="true"
+					process="@this" update="page:addProducer" />
+				<br />
+				<h:panelGrid columns="2">
+					<h:outputText value="Nombres: *" />
+					<h:outputText
+						value="#{organizationController.productoSocioVO.selectedPersonaDTO.nombrePersona}" />
+
+					<h:outputText value="Apellidos: *" />
+					<h:outputText
+						value="#{organizationController.productoSocioVO.selectedPersonaDTO.apellidoPersona}" />
+
+				</h:panelGrid>
+
+				<br />
+				<p:fieldset legend="Productos ofertados" style="margin-bottom:20px">
+					<p:selectManyCheckbox required="true"
+						requiredMessage="Debe seleccionar al menos un producto"
+						value="#{organizationController.productoSocioVO.idProdSocio}"
+						layout="responsive" columns="1">
+						<f:selectItems value="#{organizationController.productDTOs}"
+							var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+							itemValue="#{rubro.idCatalogo}" />
+					</p:selectManyCheckbox>
+				</p:fieldset>
+
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{organizationController.addProdSocio}"
+							update="page:tblOfert"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form" />
+						<p:resetInput target="formAddProSoc" />
+					</p:commandButton>
+
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddProSoc').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+						<p:resetInput target="formAddProSoc" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddProSoc').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddProSoc').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

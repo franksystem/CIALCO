@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Datos de la organizaci&#243;n"
+		style="margin-bottom:20px">
+
+		<p:commandButton value="Agregar organizaci&#243;n" icon="ui-icon-plus"
+			actionListener="#{orgController.newOrganizacion}"
+			oncomplete="PF('dlgAddOrgCan').show();" partialSubmit="true"
+			process="@this" update="addOrgCan" />
+
+		<p:dataTable id="canorgs" rowIndexVar="rowNum" style="width:100%;"
+			paginatorPosition="top" paginator="true" pageLinks="2"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+			emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+			value="#{orgController.organizacionDTOs}" var="org">
+			<f:facet name="header">Organizaciones</f:facet>
+			<p:column style="width:10%;text-align:center;" headerText="Nro">
+				<h:outputLabel value="#{rowNum+1}" />
+			</p:column>
+			<p:column headerText="Nombre organizaci&#243;n">
+				<h:outputText value="#{org.nombreOrganizacion}" />
+			</p:column>
+			<p:column headerText="Grado">
+				<h:outputText value="#{org.idcatalogoGrado}" />
+			</p:column>
+			<p:column headerText="Nombre representante">
+				<h:outputText value="#{org.nombreRepresentante}" />
+			</p:column>
+			<p:column headerText="Acciones" style="width:15%;text-align: center">
+				<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+					update="page:addOrgCan" global="false" process="@this"
+					oncomplete="PF('dlgAddOrgCan').show();">
+					<f:setPropertyActionListener value="#{org}"
+						target="#{orgController.organizacionDTO}" />
+				</p:commandButton>
+				<p:commandButton update=":page:canorgs" icon="ui-icon-trash"
+					partialSubmit="true" global="false" process="@this"
+					actionListener="#{orgController.deleteOrg(org)}">
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+
+</ui:composition>

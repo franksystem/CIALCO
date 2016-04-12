@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Feria" style="margin-bottom:20px">
+		<ui:param name="nombreCialco" value="Nombre feria" />
+		<ui:param name="showDays" value="true" />
+		<ui:param name="showWorking" value="true" />
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/cialco.xhtml" />
+		</h:panelGroup>
+
+		<p:panel header="Funcionamiento" style="margin-bottom:20px">
+
+			<p:selectManyCheckbox required="true"
+				requiredMessage="Debe seleccionar al menos un funcionamiento"
+				value="#{fairController.idFuncionamientos}" layout="responsive"
+				columns="1">
+				<f:selectItems value="#{fairController.funcionamientoDTOs}"
+					var="dest" itemLabel="#{dest.elementoCatalogo}"
+					itemValue="#{dest.idCatalogo}" />
+			</p:selectManyCheckbox>
+			<br />
+			<p:fieldset legend="Numero de participantes actuales"
+				style="margin-bottom:20px">
+
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un funcionamiento"
+					value="#{fairController.idParticipantes}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{fairController.participantesDTOs}"
+						var="dest" itemLabel="#{dest.elementoCatalogo}"
+						itemValue="#{dest.idCatalogo}" />
+				</p:selectManyCheckbox>
+				<br />
+				<h:panelGrid columns="2">
+					<h:outputText value="Cuantos hombres:" />
+					<p:inputText maxlength="5" value="#{fairController.hombres}">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputText>
+
+					<h:outputText value="Cuantas mujeres:" />
+					<p:inputText maxlength="5" value="#{fairController.mujeres}">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputText>
+				</h:panelGrid>
+
+			</p:fieldset>
+
+
+
+		</p:panel>
+
+		<p:panel header="Equipamiendo de la feria" style="margin-bottom:20px">
+			<p:selectManyCheckbox required="true"
+				requiredMessage="Debe seleccionar al menos un equipamiento"
+				value="#{fairController.idEquipamientos}" layout="responsive"
+				columns="1">
+				<f:selectItems value="#{fairController.equipamientoDTOs}" var="dest"
+					itemLabel="#{dest.elementoCatalogo}" itemValue="#{dest.idCatalogo}" />
+
+			</p:selectManyCheckbox>
+		</p:panel>
+
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/organization.xhtml" />
+		</h:panelGroup>
+
+		<p:panel header="Difusi&#243;n de la feria" style="margin-bottom:20px">
+			<p:selectManyCheckbox required="true"
+				requiredMessage="Debe seleccionar al menos una Difusi&#243;n"
+				value="#{fairController.idDifusiones}" layout="responsive"
+				columns="1">
+				<f:selectItems value="#{fairController.difusionDTOs}" var="dest"
+					itemLabel="#{dest.elementoCatalogo}" itemValue="#{dest.idCatalogo}" />
+			</p:selectManyCheckbox>
+		</p:panel>
+
+		<p:panel header="Productos" style="margin-bottom:20px">
+			<p:fieldset legend="Tipos de productos que ofertan"
+				style="margin-bottom:20px">
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un Tipo de producto"
+					value="#{fairController.idTiposProductos}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{fairController.tiposProdDTOs}" var="dest"
+						itemLabel="#{dest.elementoCatalogo}"
+						itemValue="#{dest.idCatalogo}" />
+				</p:selectManyCheckbox>
+
+			</p:fieldset>
+			<p:fieldset legend="Productos que oferta" style="margin-bottom:20px">
+				<p:fieldset legend="Datos de venta" style="margin-bottom:20px">
+					<h:panelGrid columns="2" id="idMonto">
+						<h:outputText value="Monto venta total / dia:" />
+						<h:outputText
+							value="#{fairController.productosController.montoTotal}" />
+					</h:panelGrid>
+				</p:fieldset>
+
+				<p:commandButton value="Agregar producto" icon="ui-icon-plus"
+					actionListener="#{fairController.productosController.newProductos(true)}"
+					oncomplete="PF('dlgAddProductPresent').show();"
+					partialSubmit="true" process="@this" update="addProductPresent" />
+
+				<p:dataTable id="tblpre" rowIndexVar="rowNum" style="width:100%;"
+					paginatorPosition="top" paginator="true" pageLinks="2"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+					emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+					value="#{fairController.productosController.presentacionProductoDTOs}"
+					var="org">
+					<f:facet name="header">Productos que oferta</f:facet>
+					<p:column style="width:10%;text-align:center;" headerText="Nro">
+						<h:outputLabel value="#{rowNum+1}" />
+					</p:column>
+					<p:column headerText="Producto">
+						<h:outputText value="#{org.nombreProducto}" />
+					</p:column>
+					<p:column headerText="Presentaci&#243;n">
+						<h:outputText value="#{org.nombrePresentacion}" />
+					</p:column>
+					<p:column headerText="Unidad">
+						<h:outputText value="#{org.nombreUnidad}" />
+					</p:column>
+					<p:column headerText="Precio">
+						<h:outputText value="#{org.precio}" />
+					</p:column>
+					<p:column headerText="Monto de venta / dia">
+						<h:outputText value="#{org.montoMes}" />
+					</p:column>
+
+					<p:column headerText="Volumen ofertado">
+						<h:outputText value="#{org.volumenOfertado}" />
+					</p:column>
+					<p:column headerText="Volumen vendido">
+						<h:outputText value="#{org.volumenVendido}" />
+					</p:column>
+
+					<p:column headerText="Acciones" style="text-align: center">
+						<p:commandButton icon="ui-icon-pencil"
+							update="page:addProductPresent" partialSubmit="true"
+							global="false" process="@this"
+							oncomplete="PF('dlgAddProductPresent').show();">
+							<f:setPropertyActionListener value="#{org}"
+								target="#{fairController.productosController.presentacionProductoDTO}" />
+						</p:commandButton>
+						<p:commandButton update=":page:tblpre page:idMonto"
+							icon="ui-icon-trash" partialSubmit="true" global="false"
+							process="@this"
+							actionListener="#{fairController.productosController.deleteProductPresent(org)}">
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel header="Existe trueque: *" style="margin-bottom:20px">
+			<p:selectOneMenu required="true"
+				requiredMessage="El campo Existe trueque es requerido"
+				value="#{fairController.idTrueque}" style="width:125px">
+				<f:selectItem itemLabel="Seleccione" itemValue="" />
+				<f:selectItem itemLabel="Si" itemValue="1" />
+				<f:selectItem itemLabel="No" itemValue="0" />
+				<p:ajax event="change" partialSubmit="true" process="@this"
+					update="@this" global="false" />
+			</p:selectOneMenu>
+
+		</p:panel>
+
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/consumer.xhtml" />
+		</h:panelGroup>
+	</p:panel>
+
+	<h:panelGroup layout="block" style="text-align: center">
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form"
+			actionListener="#{fairController.guardarCialco}">
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

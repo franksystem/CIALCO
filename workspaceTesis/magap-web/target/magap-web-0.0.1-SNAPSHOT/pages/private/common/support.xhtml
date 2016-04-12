@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Instituciones de apoyo" style="margin-bottom:20px">
+
+		<p:commandButton value="Agregar instituci&#243;n" icon="ui-icon-plus"
+			actionListener="#{supportController.newIntitucion}"
+			oncomplete="PF('dlgAddInst').show();" partialSubmit="true"
+			process="@this" update="addInst" />
+
+		<p:dataTable id="inst" rowIndexVar="rowNum" style="width:100%;"
+			paginatorPosition="top" paginator="true" pageLinks="2"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+			emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+			value="#{supportController.institucionApoyoDTOs}" var="dto">
+			<f:facet name="header">Instituciones de apoyo</f:facet>
+			<p:column style="width:10%;text-align:center;" headerText="Nro">
+				<h:outputLabel value="#{rowNum+1}" />
+			</p:column>
+			<p:column headerText="Nombre instituci&#243;n">
+				<h:outputText value="#{dto.nombreInstitucionApoyo}" />
+			</p:column>
+			<p:column headerText="Tipo de apoyo">
+				<h:outputText value="#{dto.tipoApoyo}" />
+			</p:column>
+
+			<p:column headerText="Acciones" style="width:15%;text-align: center">
+				<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+					update="page:addInst" global="false" process="@this"
+					oncomplete="PF('dlgAddInst').show();">
+					<f:setPropertyActionListener value="#{dto}"
+						target="#{supportController.institucionApoyoDTO}" />
+				</p:commandButton>
+				<p:commandButton update=":page:inst" icon="ui-icon-trash"
+					partialSubmit="true" global="false" process="@this"
+					actionListener="#{supportController.deleteInstitucion(dto)}">
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+
+</ui:composition>

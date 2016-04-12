@@ -1,0 +1,17 @@
+package ec.gob.magap.web.controller;
+
+import javax.faces.bean.ManagedProperty;
+
+import ec.gob.magap.dto.PantallaDTO;
+import ec.gob.magap.web.controller.common.PageController;
+
+public class PantallaController {
+	@ManagedProperty(value = "#{pageController}")
+	private PageController pageController;
+	
+	PantallaDTO pantallaDTO;
+	
+	public void newPantalla() {
+		this.pageController.setPantallaDTO(new PantallaDTO());
+	}
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addProduct" header="Producto" widgetVar="dlgAddProduct"
+		modal="true" resizable="false" dynamic="true">
+		<h:form id="formAddPro">
+			<h:panelGroup style="width:100%;" layout="block">
+				<h:panelGrid columns="2">
+
+					<h:outputText value="Tipo producto: *" />
+					<p:selectOneMenu required="true"
+						requiredMessage="El campo Tipo producto es requerido"
+						value="#{producerController.addProductoDTO.idCatalogoTipoPro}">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{producerController.tipoProductDTOs}"
+							var="tipopro" itemLabel="#{tipopro.elementoCatalogo}"
+							itemValue="#{tipopro.idCatalogo}" />
+						<p:ajax event="change" process="@this" global="false" />
+					</p:selectOneMenu>
+
+
+					<h:outputText value="Rubro: *" />
+					<p:selectOneMenu
+						value="#{producerController.addProductoDTO.idCatalogoRubroPro}"
+						required="true" requiredMessage="El campo Rubro es requerido">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{producerController.rubroProductDTOs}"
+							var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+							itemValue="#{rubro.idCatalogo}" />
+						<p:ajax event="change" process="@this" global="false" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Producto: *" />
+					<p:selectOneMenu
+						value="#{producerController.addProductoDTO.idCatalogoProducto}"
+						required="true" requiredMessage="El campo Producto es requerido">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{producerController.productDTOs}"
+							var="prod" itemLabel="#{prod.elementoCatalogo}"
+							itemValue="#{prod.idCatalogo}" />
+						<p:ajax event="change" process="@this" global="false" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{producerController.addProductos}"
+							update="page:tblproduct"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form" />
+						<p:resetInput target="formAddPro" />
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddProduct').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+						<p:resetInput target="formAddPro" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddProduct').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddProduct').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

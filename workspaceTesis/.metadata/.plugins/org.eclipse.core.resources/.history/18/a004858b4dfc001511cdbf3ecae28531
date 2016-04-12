@@ -1,0 +1,666 @@
+package ec.gob.magap.gestor.impl;
+
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.FetchMode;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import ec.gob.magap.common.util.Encrypt;
+import ec.gob.magap.common.util.MagapLogger;
+import ec.gob.magap.common.util.Parameter;
+import ec.gob.magap.dao.GenericDAOImpl;
+import ec.gob.magap.dto.CantonDTO;
+import ec.gob.magap.dto.CatalogoDTO;
+import ec.gob.magap.dto.CialcoDTO;
+import ec.gob.magap.dto.DestinoIngresoDTO;
+import ec.gob.magap.dto.DestinoProduccionDTO;
+import ec.gob.magap.dto.FuenteIngresoDTO;
+import ec.gob.magap.dto.InstitucionApoyoDTO;
+import ec.gob.magap.dto.MenuDTO;
+import ec.gob.magap.dto.OrganizacionDTO;
+import ec.gob.magap.dto.PantallaDTO;
+import ec.gob.magap.dto.ParroquiaDTO;
+import ec.gob.magap.dto.PersonaCialcoDTO;
+import ec.gob.magap.dto.PersonaDTO;
+import ec.gob.magap.dto.PracticaProductivaDTO;
+import ec.gob.magap.dto.ProductoProductorDTO;
+import ec.gob.magap.dto.ProductorDTO;
+import ec.gob.magap.dto.ProveedorDTO;
+import ec.gob.magap.dto.ProvinciaDTO;
+import ec.gob.magap.dto.UbicacionFincaDTO;
+import ec.gob.magap.dto.UsuarioDTO;
+import ec.gob.magap.dto.UsuarioPerfilDTO;
+import ec.gob.magap.exception.MagapException;
+import ec.gob.magap.gestor.IMagapGestor;
+import ec.gob.magap.vo.PantallaVO;
+import ec.gob.magap.vo.ProductorVO;
+
+public class MagapGestor implements IMagapGestor {
+
+	private GenericDAOImpl genericDAO;
+	private UsuarioPerfilDTO valor;
+	
+	public GenericDAOImpl getGenericDAO() {
+		return genericDAO;
+	}
+
+	public void setGenericDAO(GenericDAOImpl genericDAO) {
+		this.genericDAO = genericDAO;
+	}
+
+	@SuppressWarnings("unchecked")
+	public UsuarioDTO login(String userName, String password)
+			throws MagapException {
+
+		String passwE = Encrypt.getInstance().encryptBase64(password);
+		DetachedCriteria criteriaUsuario = DetachedCriteria
+				.forClass(UsuarioDTO.class);
+		criteriaUsuario.add(Restrictions.eq("nombreUsuario", userName));
+		criteriaUsuario.add(Restrictions.eq("contrasena", passwE));
+		criteriaUsuario.add(Restrictions.eq("estado", Parameter.ESTADO_ACTIVO));
+		criteriaUsuario.setFetchMode("personaDTO", FetchMode.JOIN);
+		criteriaUsuario.setFetchMode("perfilDTO", FetchMode.JOIN);
+		//criteriaUsuario.add(Restrictions.eq("perfilDTO.estado",
+		//		Parameter.ESTADO_ACTIVO));
+
+		List<UsuarioDTO> usuarioDTOs = (List<UsuarioDTO>) this.genericDAO
+				.findCriteria(criteriaUsuario);
+
+		if (usuarioDTOs != null && !usuarioDTOs.isEmpty()) {
+			UsuarioDTO usuarioDTO = usuarioDTOs.iterator().next();
+			
+			//Verifico si tienen perfiles
+			if (usuarioDTO.getUsuarioPerfilDTOs() != null){
+				//Recorro los perfiles del usuario
+				for(Iterator<UsuarioPerfilDTO> it = usuarioDTO.getUsuarioPerfilDTOs().iterator();it.hasNext();){
+					valor = it.next();
+				}
+				List<MenuDTO> menuDTOs = findMenu(valor.getPerfilDTO().getIdMenu());
+				valor.getPerfilDTO().setMenuDTOs(menuDTOs);
+			}
+/*
+			if (usuarioDTO.getPerfilDTO() != null) {
+				List<MenuDTO> menuDTOs = findMenu(usuarioDTO.getPerfilDTO()
+						.getIdMenu());
+				usuarioDTO.getPerfilDTO().setMenuDTOs(menuDTOs);
+			}
+*/
+			return usuarioDTO;
+		}
+		return null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<CatalogoDTO> findCatalogByType(Integer type, Integer status)
+			throws MagapException {
+		DetachedCriteria criteriaCatalog = DetachedCriteria
+				.forClass(CatalogoDTO.class);
+		criteriaCatalog.add(Restrictions.eq("tipoCatalogo", type));
+		criteriaCatalog.add(Restrictions.eq("estado", status));
+		criteriaCatalog.addOrder(Order.asc("elementoCatalogo"));
+
+		return (List<CatalogoDTO>) this.genericDAO
+				.findCriteria(criteriaCatalog);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ProvinciaDTO> findProvincias() throws MagapException {
+		DetachedCriteria criteriaProv = DetachedCriteria
+				.forClass(ProvinciaDTO.class);
+		criteriaProv.addOrder(Order.asc("nombreProvincia"));
+		return (List<ProvinciaDTO>) this.genericDAO.findCriteria(criteriaProv);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<CantonDTO> findCantones(Integer idProvincia)
+			throws MagapException {
+		DetachedCriteria criteriaCanton = DetachedCriteria
+				.forClass(CantonDTO.class);
+		criteriaCanton.add(Restrictions.eq("idProvincia", idProvincia));
+		criteriaCanton.addOrder(Order.asc("nombreCanton"));
+		return (List<CantonDTO>) this.genericDAO.findCriteria(criteriaCanton);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ParroquiaDTO> findParroquias(Integer idCanton)
+			throws MagapException {
+		DetachedCriteria criteriaP = DetachedCriteria
+				.forClass(ParroquiaDTO.class);
+		criteriaP.add(Restrictions.eq("idCanton", idCanton));
+		criteriaP.addOrder(Order.asc("nombreParroquia"));
+		return (List<ParroquiaDTO>) this.genericDAO.findCriteria(criteriaP);
+	}
+
+	public PersonaDTO findPersonaByCedula(Long cedula) throws MagapException {
+		DetachedCriteria criteriaPesona = DetachedCriteria
+				.forClass(PersonaDTO.class);
+		criteriaPesona.add(Restrictions.eq("cedulaPersona", cedula));
+		return (PersonaDTO) this.genericDAO.findUnique(criteriaPesona);
+	}
+	
+	public PantallaDTO findPantallaByDescripcion(String nombrePantalla) throws MagapException{
+		DetachedCriteria criteriaPantalla = DetachedCriteria.forClass(PantallaDTO.class);
+		criteriaPantalla.add(Restrictions.eq("nombrePantalla", nombrePantalla));
+		return (PantallaDTO) this.genericDAO.findUnique(criteriaPantalla);
+	}
+	
+	public void transSaveProductor(ProductorVO productorVO)
+			throws MagapException {
+		try {
+			Long idUsuario = productorVO.getPersonaDTO().getIdUsuarioCreacion();
+			Long idPersona = guardarPersona(productorVO.getPersonaDTO());
+			Long idProductor = guardarProductor(productorVO.getProductorDTO(),
+					idPersona, idUsuario);
+
+			guardarFuentesIngresos(productorVO.getIdFuentes(), idProductor,
+					idUsuario);
+
+			guardarUbicacionFinca(productorVO.getUbicacionFincaDTO(),
+					idProductor, idUsuario);
+
+			/*
+			 * guardarPracticasProductivas(productorVO.getPracticaOrgaDTO(),
+			 * productorVO.getPracticaAgroDTO(), productorVO.getIdPracticas(),
+			 * idProductor, idUsuario);
+			 */
+
+			guardarApoyoProduccion(productorVO.getIdApoyoPro(), null,
+					idProductor, idUsuario);
+
+			guardarDatosOrganizacion(productorVO.getOrganizacionDTOs(),
+					productorVO.getDeleteOrganizacionDTOs(), idProductor,
+					idUsuario);
+
+			guardarDestinosProduccion(productorVO.getIdDestComer(),
+					productorVO.getCialcoDTOs(), idProductor, idUsuario);
+
+			guardarDestinoIngresos(productorVO.getIdDestIng(), idProductor,
+					idUsuario);
+
+			guardarInstitucionesApoyo(productorVO.getInstitucionApoyoDTOs(),
+					productorVO.getDeleteInstitucionApoyoDTOs(), idProductor,
+					idUsuario);
+
+			guardarProductosProductor(
+					productorVO.getAddProductoProductorDTOs(), idProductor,
+					idUsuario);
+
+		} catch (MagapException e) {
+			MagapLogger.log.error("saveProductor ", e);
+			throw new MagapException(e);
+		}
+
+	}
+
+	public void transSavePantalla(PantallaVO pantallaVO)
+			throws MagapException {
+		try {
+			PantallaDTO pantallaDTO = pantallaVO.getPantallaDTO();
+			this.genericDAO.save(pantallaDTO);
+			
+		} catch (MagapException e) {
+			MagapLogger.log.error("saveProductor ", e);
+			throw new MagapException(e);
+		}
+
+	}
+
+	
+	private Long guardarPersona(PersonaDTO personaDTO) throws MagapException {
+		try {
+			if (personaDTO.getIdPersona() == null) {
+				personaDTO
+						.setFechaCreacion(new Timestamp(new Date().getTime()));
+				personaDTO.setEstado(Parameter.ESTADO_ACTIVO);
+				this.genericDAO.save(personaDTO);
+			} else {
+				personaDTO.setFechaModificacion(new Timestamp(new Date()
+						.getTime()));
+				this.genericDAO.update(personaDTO);
+			}
+			return personaDTO.getIdPersona();
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarPersona ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private Long guardarProductor(ProductorDTO productorDTO, Long idPersona,
+			Long idUsuario) throws MagapException {
+		try {
+			if (productorDTO == null || productorDTO.getIdProductor() == null) {
+				ProductorDTO productor = new ProductorDTO();
+				productor.setIdPersona(idPersona);
+				productor.setIdUsuarioCreacion(idUsuario);
+				productor.setFechaCreacion(new Timestamp(new Date().getTime()));
+				productor.setEstado(Parameter.ESTADO_ACTIVO);
+				this.genericDAO.save(productor);
+				return productor.getIdProductor();
+			} else {
+				productorDTO.setFechaModificacion(new Timestamp(new Date()
+						.getTime()));
+				this.genericDAO.update(productorDTO);
+				return productorDTO.getIdProductor();
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarProductor ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarFuentesIngresos(List<String> idFuentes,
+			Long idProductor, Long idUsuario) throws MagapException {
+		try {
+			if (idFuentes != null && !idFuentes.isEmpty()) {
+				FuenteIngresoDTO fuenteDTO = new FuenteIngresoDTO();
+				fuenteDTO.setIdProductor(idProductor);
+				this.genericDAO.delete(fuenteDTO);
+				for (String id : idFuentes) {
+					FuenteIngresoDTO fuenteIngresoDTO = new FuenteIngresoDTO();
+					fuenteIngresoDTO.setIdCatalogoTipoFuente(Integer
+							.valueOf(id));
+					fuenteIngresoDTO.setIdProductor(idProductor);
+					fuenteIngresoDTO.setIdUsuarioCreacion(idUsuario);
+					fuenteIngresoDTO.setFechaCreacion(new Timestamp(new Date()
+							.getTime()));
+					fuenteIngresoDTO.setEstado(Parameter.ESTADO_ACTIVO);
+					this.genericDAO.save(fuenteIngresoDTO);
+				}
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarFuentesIngresos ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarUbicacionFinca(UbicacionFincaDTO ubicacionFincaDTO,
+			Long idProductor, Long idUsuario) throws MagapException {
+		try {
+			if (ubicacionFincaDTO != null) {
+				if (ubicacionFincaDTO.getIdUbicacionFinca() == null) {
+					ubicacionFincaDTO.setIdUsuarioCreacion(idUsuario);
+					ubicacionFincaDTO.setIdProductor(idProductor);
+					ubicacionFincaDTO.setFechaCreacion(new Timestamp(new Date()
+							.getTime()));
+					ubicacionFincaDTO.setEstado(Parameter.ESTADO_ACTIVO);
+					this.genericDAO.save(ubicacionFincaDTO);
+				} else {
+					ubicacionFincaDTO.setFechaModificacion(new Timestamp(
+							new Date().getTime()));
+					this.genericDAO.update(ubicacionFincaDTO);
+				}
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarUbicacionFinca ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	public void guardarPracticasProductivas(PracticaProductivaDTO orga,
+			PracticaProductivaDTO agro, List<String> idPracticas,
+			Long idProductor, Long idUsuario) throws MagapException {
+		try {
+			if (idPracticas != null && !idPracticas.isEmpty()) {
+				for (String id : idPracticas) {
+					switch (id) {
+					case "31":
+						orga.setIdProductor(idProductor);
+						orga.setIdUsuarioCreacion(idUsuario);
+						orga.setFechaCreacion(new Timestamp(new Date()
+								.getTime()));
+						orga.setEstado(Parameter.ESTADO_ACTIVO);
+						this.genericDAO.save(orga);
+						break;
+
+					case "32":
+						agro.setIdProductor(idProductor);
+						agro.setIdUsuarioCreacion(idUsuario);
+						agro.setFechaCreacion(new Timestamp(new Date()
+								.getTime()));
+						agro.setEstado(Parameter.ESTADO_ACTIVO);
+						this.genericDAO.save(agro);
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarPracticasProductivas ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarApoyoProduccion(List<String> idApoyoPro,
+			List<PersonaDTO> proveedores, Long idProductor, Long idUsuario)
+			throws MagapException {
+		// TODO implementar el guardar
+	}
+
+	private void guardarDatosOrganizacion(
+			List<OrganizacionDTO> organizacionDTOs,
+			List<OrganizacionDTO> deleteOrganizacionDTOs, Long idProductor,
+			Long idUsuario) throws MagapException {
+		try {
+			if (organizacionDTOs != null && !organizacionDTOs.isEmpty()) {
+				for (OrganizacionDTO organizacionDTO : organizacionDTOs) {
+					if (organizacionDTO.getIdOrganizacion() == null) {
+						organizacionDTO.setIdProductor(idProductor);
+						organizacionDTO.setIdUsuarioCreacion(idUsuario);
+						organizacionDTO.setFechaCreacion(new Timestamp(
+								new Date().getTime()));
+						organizacionDTO.setEstado(Parameter.ESTADO_ACTIVO);
+						this.genericDAO.save(organizacionDTO);
+					} else {
+						organizacionDTO.setFechaModificacion(new Timestamp(
+								new Date().getTime()));
+						this.genericDAO.update(organizacionDTO);
+					}
+				}
+			}
+			if (deleteOrganizacionDTOs != null
+					&& !deleteOrganizacionDTOs.isEmpty()) {
+				for (OrganizacionDTO deleteDTO : deleteOrganizacionDTOs) {
+					this.genericDAO.delete(deleteDTO);
+				}
+			}
+
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarDatosOrganizacion ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarDestinosProduccion(List<String> idDestinos,
+			List<CialcoDTO> cialcoDTOs, Long idProductor, Long idUsuario)
+			throws MagapException {
+		try {
+			if (idDestinos != null && !idDestinos.isEmpty()) {
+				DestinoProduccionDTO deleteDTO = new DestinoProduccionDTO();
+				deleteDTO.setIdProductor(idProductor);
+				this.genericDAO.delete(deleteDTO);
+
+				for (String id : idDestinos) {
+					DestinoProduccionDTO destinoProDTO = new DestinoProduccionDTO();
+					destinoProDTO.setIdCatalogoTipoDestino(Integer.valueOf(id));
+					destinoProDTO.setIdProductor(idProductor);
+					destinoProDTO.setIdUsuarioCreacion(idUsuario);
+					destinoProDTO.setFechaCreacion(new Timestamp(new Date()
+							.getTime()));
+					destinoProDTO.setEstado(Parameter.ESTADO_ACTIVO);
+					this.genericDAO.save(destinoProDTO);
+				}
+				guardarCialcos(cialcoDTOs, idProductor, idUsuario);
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarDatosOrganizacion ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarCialcos(List<CialcoDTO> cialcoDTOs, Long idProductor,
+			Long idUsuario) throws MagapException {
+		try {
+			if (cialcoDTOs != null && !cialcoDTOs.isEmpty()) {
+				for (CialcoDTO cialcoDTO : cialcoDTOs) {
+
+					if (cialcoDTO.getIdCialco() == null) {
+						this.genericDAO.save(cialcoDTO);
+					} else {
+						this.genericDAO.update(cialcoDTO);
+					}
+
+					if (cialcoDTO.getPersonaDTOs() != null
+							&& !cialcoDTO.getPersonaDTOs().isEmpty()) {
+						for (PersonaDTO personaDTO : cialcoDTO.getPersonaDTOs()) {
+							PersonaDTO existPersonDTO = findPersonaByCedula(personaDTO
+									.getCedulaPersona());
+
+							if (existPersonDTO == null) {
+								personaDTO.setIdUsuarioCreacion(idUsuario);
+								Long idPersona = guardarPersona(personaDTO);
+								guardarRelacionPersonasCialcos(idPersona,
+										cialcoDTO.getIdCialco());
+							} else {
+								guardarRelacionPersonasCialcos(
+										existPersonDTO.getIdPersona(),
+										cialcoDTO.getIdCialco());
+							}
+						}
+					}
+				}
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarDatosOrganizacion ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarRelacionPersonasCialcos(Long idPersona, Long idCialco)
+			throws MagapException {
+		try {
+			PersonaCialcoDTO personaCialcoDTO = new PersonaCialcoDTO();
+			personaCialcoDTO.setIdPersona(idPersona);
+			personaCialcoDTO.setIdCialco(idCialco);
+			this.genericDAO.save(personaCialcoDTO);
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarParticipantesCialco ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarDestinoIngresos(List<String> idDestIng,
+			Long idProductor, Long idUsuario) throws MagapException {
+		try {
+			if (idDestIng != null && !idDestIng.isEmpty()) {
+				DestinoIngresoDTO deleteDTO = new DestinoIngresoDTO();
+				deleteDTO.setIdProductor(idProductor);
+				this.genericDAO.delete(deleteDTO);
+				for (String id : idDestIng) {
+					DestinoIngresoDTO destinoIngresoDTO = new DestinoIngresoDTO();
+					destinoIngresoDTO.setIdCatalogoDestino(Integer.valueOf(id));
+					destinoIngresoDTO.setIdProductor(idProductor);
+					destinoIngresoDTO.setIdUsuarioCreacion(idUsuario);
+					destinoIngresoDTO.setFechaCreacion(new Timestamp(new Date()
+							.getTime()));
+					destinoIngresoDTO.setEstado(Parameter.ESTADO_ACTIVO);
+					this.genericDAO.save(destinoIngresoDTO);
+				}
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarDestinoIngresos ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarInstitucionesApoyo(
+			List<InstitucionApoyoDTO> institucionApoyoDTOs,
+			List<InstitucionApoyoDTO> deleteInstitucionApoyoDTOs,
+			Long idProductor, Long idUsuario) throws MagapException {
+		try {
+			if (institucionApoyoDTOs != null && !institucionApoyoDTOs.isEmpty()) {
+				for (InstitucionApoyoDTO institucionApoyoDTO : institucionApoyoDTOs) {
+					if (institucionApoyoDTO.getIdInstitucionApoyo() == null) {
+						institucionApoyoDTO.setIdProductor(idProductor);
+						institucionApoyoDTO.setIdUsuarioCreacion(idUsuario);
+						institucionApoyoDTO.setFechaCreacion(new Timestamp(
+								new Date().getTime()));
+						institucionApoyoDTO.setEstado(Parameter.ESTADO_ACTIVO);
+						this.genericDAO.save(institucionApoyoDTO);
+					} else {
+						institucionApoyoDTO.setFechaModificacion(new Timestamp(
+								new Date().getTime()));
+						this.genericDAO.update(institucionApoyoDTO);
+					}
+				}
+			}
+
+			if (deleteInstitucionApoyoDTOs != null
+					&& !deleteInstitucionApoyoDTOs.isEmpty()) {
+				for (InstitucionApoyoDTO institucionApoyoDTO : deleteInstitucionApoyoDTOs) {
+					this.genericDAO.delete(institucionApoyoDTO);
+				}
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarInstitucionApoyo ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarProductosProductor(
+			List<ProductoProductorDTO> productosDTOs, Long idProductor,
+			Long idUsuario) throws MagapException {
+		try {
+			if (productosDTOs != null && !productosDTOs.isEmpty()) {
+				for (ProductoProductorDTO proDTO : productosDTOs) {
+					if (proDTO.getIdProductoPro() == null) {
+						proDTO.setIdProductor(idProductor);
+						proDTO.setIdUsuarioCreacion(idUsuario);
+						proDTO.setFechaCreacion(new Timestamp(new Date()
+								.getTime()));
+						proDTO.setEstado(Parameter.ESTADO_ACTIVO);
+						this.genericDAO.save(proDTO);
+					} else {
+						proDTO.setFechaModificacion(new Timestamp(new Date()
+								.getTime()));
+						this.genericDAO.update(proDTO);
+					}
+				}
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarProductosProveedor ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	public void transSaveCialco(CialcoDTO cialcoDTO) throws MagapException {
+		try {
+			if (cialcoDTO.getIdCialco() == null) {
+				this.genericDAO.save(cialcoDTO);
+				guardarProveedor(cialcoDTO.getProveedorDTOs(),
+						cialcoDTO.getIdCialco());
+				// guardarPersona(personaDTO)
+			} else {
+				this.genericDAO.update(cialcoDTO);
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("transSaveCialco ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	private void guardarProveedor(List<ProveedorDTO> proveedorDTOs,
+			Long idCialco) throws MagapException {
+		try {
+			if (proveedorDTOs != null && !proveedorDTOs.isEmpty()) {
+				for (ProveedorDTO proveedorDTO : proveedorDTOs) {
+					proveedorDTO.setIdCialco(idCialco);
+					proveedorDTO.setFechaCreacion(new Timestamp(new Date()
+							.getTime()));
+					proveedorDTO.setEstado(Parameter.ESTADO_ACTIVO);
+					this.genericDAO.save(proveedorDTO);
+				}
+			}
+		} catch (MagapException e) {
+			MagapLogger.log.error("guardarProveedor ", e);
+			throw new MagapException(e);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PersonaDTO> findProductor(PersonaDTO personaDTO)
+			throws MagapException {
+
+		DetachedCriteria criteriaPersona = DetachedCriteria
+				.forClass(PersonaDTO.class);
+		if (personaDTO.getCedulaPersona() != null) {
+			criteriaPersona.add(Restrictions.eq("cedulaPersona",
+					personaDTO.getCedulaPersona()));
+		}
+
+		if (personaDTO.getEstado() != null) {
+			criteriaPersona.add(Restrictions.eq("estado",
+					personaDTO.getEstado()));
+		}
+		criteriaPersona.setFetchMode("productorDTO", FetchMode.JOIN);
+
+		List<PersonaDTO> personaDTOs = (List<PersonaDTO>) this.genericDAO
+				.findCriteria(criteriaPersona);
+
+		return personaDTOs;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PantallaDTO> findPantallaDTO(PantallaDTO pantallaDTO) throws MagapException{
+		DetachedCriteria criteriaPantalla = DetachedCriteria.forClass(PantallaDTO.class);
+		
+		if (pantallaDTO.getUrl() != null) {
+			criteriaPantalla.add(Restrictions.eq("URLPantalla",
+					pantallaDTO.getUrl()));
+		}
+
+		List<PantallaDTO> pantallaDTOs = (List<PantallaDTO>) this.genericDAO
+				.findCriteria(criteriaPantalla);
+
+		return pantallaDTOs;
+	}
+	
+	public ProductorVO findDatosProductor(PersonaDTO personaDTO)
+			throws MagapException {
+		ProductorVO productorVO = new ProductorVO();
+		productorVO
+				.setProductorDTO(findProductorDTO(personaDTO.getIdPersona()));
+
+		return null;
+	}
+
+	private ProductorDTO findProductorDTO(Long idPersona) {
+		DetachedCriteria criteria = DetachedCriteria
+				.forClass(ProductorDTO.class);
+		criteria.add(Restrictions.eq("idPersona", idPersona));
+		return (ProductorDTO) this.genericDAO.findUnique(criteria);
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<MenuDTO> findMenu(Long idMenu) {
+		DetachedCriteria criteriaMenu = DetachedCriteria
+				.forClass(MenuDTO.class);
+		criteriaMenu.add(Restrictions.eq("idMenu", idMenu));
+		criteriaMenu.add(Restrictions.eq("estado", Parameter.ESTADO_ACTIVO));
+		List<MenuDTO> menuDTOs = (List<MenuDTO>) this.genericDAO
+				.findCriteria(criteriaMenu);
+
+		if (menuDTOs != null && !menuDTOs.isEmpty()) {
+			for (MenuDTO menuDTO : menuDTOs) {
+				List<MenuDTO> menuHijaDTOs = findMenuHijas(menuDTO.getIdMenu());
+				menuDTO.setMenuHijaDTOs(menuHijaDTOs);
+			}
+		}
+		return menuDTOs;
+	}
+
+	@SuppressWarnings("unchecked")
+	private List<MenuDTO> findMenuHijas(Long idMenuPadre) {
+		DetachedCriteria criteriaMenuHija = DetachedCriteria
+				.forClass(MenuDTO.class);
+		criteriaMenuHija.add(Restrictions.eq("idMenuPadre", idMenuPadre));
+		criteriaMenuHija.add(Restrictions.eq("estado", Parameter.ESTADO_ACTIVO));
+		List<MenuDTO> menuDTOs = (List<MenuDTO>) this.genericDAO
+				.findCriteria(criteriaMenuHija);
+
+		if (menuDTOs != null && !menuDTOs.isEmpty()) {
+			for (MenuDTO menuDTO : menuDTOs) {
+				List<MenuDTO> menuHijaDTOs = findMenuHijas(menuDTO.getIdMenu());
+				menuDTO.setMenuHijaDTOs(menuHijaDTOs);
+			}
+		}
+
+		return menuDTOs;
+	}
+
+}

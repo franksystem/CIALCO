@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addProve" header="Proveedor" widgetVar="dlgAddProve"
+		modal="true" resizable="false" dynamic="true">
+		<h:form id="formprove">
+			<h:panelGroup style="width:100%;" layout="block">
+				<h:panelGrid columns="2">
+
+					<h:outputText value="Nombre proveedor: *" />
+					<p:inputText required="true"
+						requiredMessage="El campo Nombre proveedor es requerido"
+						value="#{storeController.proveedorDTO.nombreProveedor}"
+						maxlength="100">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Tel&#233;fono movil:" />
+					<p:inputMask value="#{storeController.proveedorDTO.telefonoMovil}"
+						maxlength="10" mask="(99) 99-999-999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Tel&#233;fono fijo:" />
+					<p:inputMask value="#{storeController.proveedorDTO.telefonoFijo}"
+						maxlength="9" mask="(99) 999-999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Correo:" />
+					<p:inputText id="promail" maxlength="20"
+						validatorMessage="El mail ingresado es inv&#225;lido"
+						value="#{storeController.proveedorDTO.correo}">
+						<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+						<f:validator validatorId="emailValidator" />
+						<p:ajax event="blur" update="promail" global="false" />
+					</p:inputText>
+				</h:panelGrid>
+
+				<p:spacer width="5px"></p:spacer>
+				<p:fieldset legend="Rubros que ofrece: *" style="margin-bottom:20px">
+					<p:selectManyCheckbox required="true"
+						requiredMessage="Debe seleccionar al menos un rubro que ofrece"
+						value="#{storeController.proveedorDTO.idRubrosOfrece}"
+						layout="responsive" columns="1">
+						<f:selectItems value="#{storeController.rubroDTOs}" var="rubro"
+							itemLabel="#{rubro.elementoCatalogo}"
+							itemValue="#{rubro.idCatalogo}" />
+					</p:selectManyCheckbox>
+				</p:fieldset>
+
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{storeController.addProveedor}"
+							update="page:provee"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form" />
+						<p:resetInput target="formprove" />
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddProve').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+						<p:resetInput target="formprove" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddProve').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddProve').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

@@ -1,0 +1,98 @@
+package ec.gob.magap.web.controller.common;
+
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import ec.gob.magap.common.util.Parameter;
+import ec.gob.magap.dto.CatalogoDTO;
+import ec.gob.magap.dto.PersonaDTO;
+import ec.gob.magap.factory.MagapFactory;
+
+@ManagedBean(name = "personController")
+@ViewScoped
+public class PersonController {
+
+	private PersonaDTO personaDTO;
+	private List<CatalogoDTO> generoDTOs;
+	private List<CatalogoDTO> etniaDTOs;
+	private List<CatalogoDTO> escolaridadDTOs;
+
+	@PostConstruct
+	public void init() {
+		if (this.personaDTO == null) {
+			this.personaDTO = new PersonaDTO();
+		}
+		findGenero();
+		findEtnia();
+		findEscolaridad();
+	}
+
+	public void resetForm() {
+		this.personaDTO = new PersonaDTO();
+	}
+
+	private void findGenero() {
+		if (this.generoDTOs == null || this.generoDTOs.isEmpty()) {
+			this.generoDTOs = MagapFactory
+					.getInstance()
+					.getIMagapService()
+					.findCatalogByType(Parameter.GENERO,
+							Parameter.ESTADO_ACTIVO);
+		}
+	}
+
+	private void findEtnia() {
+		if (this.etniaDTOs == null || this.etniaDTOs.isEmpty()) {
+			this.etniaDTOs = MagapFactory
+					.getInstance()
+					.getIMagapService()
+					.findCatalogByType(Parameter.ETNIA, Parameter.ESTADO_ACTIVO);
+		}
+	}
+
+	private void findEscolaridad() {
+		if (this.escolaridadDTOs == null || this.escolaridadDTOs.isEmpty()) {
+			this.escolaridadDTOs = MagapFactory
+					.getInstance()
+					.getIMagapService()
+					.findCatalogByType(Parameter.ESCOLARIDAD,
+							Parameter.ESTADO_ACTIVO);
+		}
+	}
+
+	public PersonaDTO getPersonaDTO() {
+		return personaDTO;
+	}
+
+	public void setPersonaDTO(PersonaDTO personaDTO) {
+		this.personaDTO = personaDTO;
+	}
+
+	public List<CatalogoDTO> getGeneroDTOs() {
+		return generoDTOs;
+	}
+
+	public void setGeneroDTOs(List<CatalogoDTO> generoDTOs) {
+		this.generoDTOs = generoDTOs;
+	}
+
+	public List<CatalogoDTO> getEtniaDTOs() {
+		return etniaDTOs;
+	}
+
+	public void setEtniaDTOs(List<CatalogoDTO> etniaDTOs) {
+		this.etniaDTOs = etniaDTOs;
+	}
+
+	public List<CatalogoDTO> getEscolaridadDTOs() {
+		return escolaridadDTOs;
+	}
+
+	public void setEscolaridadDTOs(List<CatalogoDTO> escolaridadDTOs) {
+		this.escolaridadDTOs = escolaridadDTOs;
+	}
+
+}

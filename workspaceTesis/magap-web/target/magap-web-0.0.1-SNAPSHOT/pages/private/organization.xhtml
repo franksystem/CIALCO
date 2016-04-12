@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Organizaci&#243;n" style="margin-bottom:20px">
+
+		<p:panel header="Datos generales" style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="Grado: *" />
+				<p:selectOneMenu required="true"
+					requiredMessage="El campo Grado es requerido"
+					value="#{organizationController.organizacionDTO.idcatalogoGrado}"
+					style="width:125px">
+					<f:selectItem itemLabel="Seleccione" itemValue="" />
+					<f:selectItem itemLabel="1" itemValue="1" />
+					<f:selectItem itemLabel="2" itemValue="2" />
+					<f:selectItem itemLabel="3" itemValue="3" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="@this" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Tipo documento:" />
+				<p:selectOneRadio id="console"
+					value="#{organizationController.tipoDocumento}">
+					<f:selectItem itemLabel="C&#233;dula" itemValue="1" />
+					<f:selectItem itemLabel="Ruc" itemValue="2" />
+					<p:ajax event="change" execute="@this" update="idced"
+						global="false" />
+				</p:selectOneRadio>
+
+				<h:outputText value="N&#250;mero de documento: *" />
+				<h:panelGroup id="idced" layout="block">
+					<p:inputText required="true"
+						rendered="#{organizationController.tipoDocumento eq '1'}"
+						requiredMessage="El campo N&#250;mero de documento es requerido"
+						validatorMessage="N&#250;mero de documento invalido"
+						value="#{organizationController.organizacionDTO.ruc}"
+						maxlength="10">
+						<pe:keyFilter regEx="/[\d\-]/" />
+						<f:validateLength minimum="10" />
+						<f:validator validatorId="cedulaValidator" />
+						<p:ajax event="blur" update="idced" global="false" />
+					</p:inputText>
+					<p:inputText required="true"
+						rendered="#{organizationController.tipoDocumento eq '2'}"
+						requiredMessage="El campo N&#250;mero de documento es requerido"
+						validatorMessage="N&#250;mero de documento invalido"
+						value="#{organizationController.organizacionDTO.ruc}"
+						maxlength="13">
+						<pe:keyFilter regEx="/[\d\-]/" />
+						<f:validateLength minimum="13" />
+						<p:ajax event="blur" update="idced" global="false" />
+					</p:inputText>
+				</h:panelGroup>
+
+				<h:outputText value="Nombre de la organizaci&#243;n: *" />
+				<p:inputText maxlength="50"
+					value="#{organizationController.organizacionDTO.nombreOrganizacion}">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Nombre del representante: *" />
+				<p:inputText required="true" maxlength="50"
+					requiredMessage="El campo Nombre del representante es requerido"
+					value="#{organizationController.organizacionDTO.nombreRepresentante}">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Tel&#233;fono movil:" />
+				<p:inputMask
+					value="#{organizationController.organizacionDTO.telefonoRepresentante}"
+					maxlength="10" mask="(99) 99-999-999">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputMask>
+
+				<h:outputText value="Tel&#233;fono fijo:" />
+				<p:inputMask
+					value="#{organizationController.organizacionDTO.telefonoRepresentante}"
+					maxlength="9" mask="(99) 999-9999">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputMask>
+
+				<h:outputText value="Correo:" />
+				<p:inputText id="orgCanmail" maxlength="20"
+					validatorMessage="El mail ingresado es inv&#225;lido"
+					value="#{organizationController.organizacionDTO.mailRepresentante}">
+					<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+					<f:validator validatorId="emailValidator" />
+					<p:ajax event="blur" update="orgCanmail" global="false" />
+				</p:inputText>
+
+				<h:outputText value="Fecha SEPS:" />
+				<p:calendar
+					value="#{organizationController.organizacionDTO.fechaSeps}"
+					showOn="button" />
+
+				<h:outputText value="C&#243;digo SEPS:" />
+				<p:inputText maxlength="20"
+					value="#{organizationController.organizacionDTO.codigoSeps}">
+					<pe:keyFilter regEx="/[a-z0-9_]/i" />
+				</p:inputText>
+
+				<h:outputText value="Fecha MAGAP:" />
+				<p:calendar
+					value="#{organizationController.organizacionDTO.fechaMagap}"
+					showOn="button" />
+
+				<h:outputText value="C&#243;digo MAGAP:" />
+				<p:inputText maxlength="20"
+					value="#{organizationController.organizacionDTO.codigoMagap}">
+					<pe:keyFilter regEx="/[a-z0-9_]/i" />
+				</p:inputText>
+
+				<h:outputText
+					value="N&#250;mero de productores total de la organizacion:" />
+				<p:inputText maxlength="10"
+					value="#{organizationController.organizacionDTO.numeroProductores}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="N&#250;mero de productores que participan:" />
+				<p:inputText maxlength="13"
+					value="#{organizationController.organizacionDTO.numeroParticipantes}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+			</h:panelGrid>
+			<br />
+			<p:fieldset legend="Contacto" style="margin-bottom:20px">
+				<h:panelGrid columns="2">
+					<h:outputText value="Nombre del contacto: *" />
+					<p:inputText required="true" maxlength="50"
+						requiredMessage="El campo Nombre del contacto es requerido"
+						value="#{organizationController.organizacionDTO.nombreContacto}">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Tel&#233;fono movil del contacto:" />
+					<p:inputMask
+						value="#{organizationController.organizacionDTO.telefonoContacto}"
+						maxlength="10" mask="(99) 99-999-999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Tel&#233;fono fijo del contacto:" />
+					<p:inputMask
+						value="#{organizationController.organizacionDTO.telefonoContacto}"
+						maxlength="9" mask="(99) 999-9999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Correo del contacto:" />
+					<p:inputText id="orgConmail" maxlength="20"
+						validatorMessage="El mail ingresado es inv&#225;lido"
+						value="#{organizationController.organizacionDTO.mailContacto}">
+						<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+						<f:validator validatorId="emailValidator" />
+						<p:ajax event="blur" update="orgConmail" global="false" />
+					</p:inputText>
+				</h:panelGrid>
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel header="Productos ofertados" style="margin-bottom:20px">
+			<p:fieldset legend="Productos ofertados" style="margin-bottom:20px">
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un producto"
+					value="#{organizationController.idProducts}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{organizationController.productDTOs}"
+						var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+						itemValue="#{rubro.idCatalogo}" />
+				</p:selectManyCheckbox>
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel
+			header="Datos productivos de los socios de la organizaci&#243;n"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="Superficie total en producci&#243;n: *" />
+				<p:inputText required="true" maxlength="50"
+					requiredMessage="El campo sperficie total en producci&#243;n es requerido"
+					value="#{organizationController.organizacionDTO.superficieOrg}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+			</h:panelGrid>
+
+
+			<p:fieldset legend="Productos ofertados" style="margin-bottom:20px">
+
+				<p:commandButton value="Agregar producto" icon="ui-icon-plus"
+					actionListener="#{organizationController.newSocioProductos}"
+					oncomplete="PF('dlgAddProSoc').show();" partialSubmit="true"
+					process="@this" update="addProSoc" />
+
+				<h:panelGroup id="tblOfert">
+					<p:dataTable rowIndexVar="rowNum" style="width:100%;"
+						paginatorPosition="top" paginator="true" pageLinks="2"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="pagina {currentPage} de {totalPages}"
+						emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+						value="#{organizationController.productoSocioVOs}" var="product">
+						<f:facet name="header">Productos</f:facet>
+						<p:column style="width:10%;text-align:center;" headerText="Nro">
+							<h:outputLabel value="#{rowNum+1}" />
+						</p:column>
+						<p:column headerText="Nombres">
+							<h:outputText value="#{product.selectedPersonaDTO.nombrePersona}" />
+						</p:column>
+						<p:column headerText="Apellidos">
+							<h:outputText
+								value="#{product.selectedPersonaDTO.apellidoPersona}" />
+						</p:column>
+						<p:column headerText="Cedula">
+							<h:outputText value="#{product.selectedPersonaDTO.cedulaPersona}" />
+						</p:column>
+
+						<p:column headerText="Acciones" style="text-align: center">
+							<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+								global="false" process="@this" update="page:addProSoc"
+								oncomplete="PF('dlgAddProSoc').show();">
+								<f:setPropertyActionListener value="#{product}"
+									target="#{organizationController.productoSocioVO}" />
+							</p:commandButton>
+							<p:commandButton update="page:tblOfert" icon="ui-icon-trash"
+								partialSubmit="true" global="false" process="@this"
+								actionListener="#{organizationController.deleteProdSocio(product)}">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel header="Tipo de sistema" style="margin-bottom:20px">
+			<p:selectManyCheckbox required="true"
+				requiredMessage="Debe seleccionar al menos un Tipo de sistema"
+				value="#{organizationController.idTipoSistema}" layout="responsive"
+				columns="1">
+				<f:selectItems value="#{organizationController.tipoSistemaDTOs}"
+					var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+					itemValue="#{rubro.idCatalogo}" />
+			</p:selectManyCheckbox>
+		</p:panel>
+
+		<p:panel header="Destinos de la producci&#243;n"
+			style="margin-bottom:20px">
+			<p:selectManyCheckbox required="true"
+				requiredMessage="Debe seleccionar al menos un Destino de la producci&#243;n"
+				value="#{organizationController.idDestinosPro}" layout="responsive"
+				columns="1">
+				<f:selectItems value="#{organizationController.destinoProDTOs}"
+					var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+					itemValue="#{rubro.idCatalogo}" />
+			</p:selectManyCheckbox>
+		</p:panel>
+
+		<p:panel header="Datos de la infraestructura de la organizaci&#243;n"
+			style="margin-bottom:20px">
+
+			<p:fieldset legend="Sede de la organizaci&#243;n"
+				style="margin-bottom:20px">
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos una sede de la organizaci&#243;n"
+					value="#{organizationController.idCedes}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{organizationController.cedeDTOs}"
+						var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+						itemValue="#{rubro.idCatalogo}" />
+				</p:selectManyCheckbox>
+			</p:fieldset>
+
+			<p:fieldset legend="Centro de acopio" style="margin-bottom:20px">
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un centro de acopio"
+					value="#{organizationController.idCentros}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{organizationController.centroDTOs}"
+						var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+						itemValue="#{rubro.idCatalogo}" />
+				</p:selectManyCheckbox>
+			</p:fieldset>
+
+			<p:fieldset legend="Equipamiento para procesamiento"
+				style="margin-bottom:20px">
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un equipamiento para procesamiento"
+					value="#{organizationController.idEquipamientos}"
+					layout="responsive" columns="1">
+					<f:selectItems value="#{organizationController.equipamientoDTOs}"
+						var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+						itemValue="#{rubro.idCatalogo}" />
+				</p:selectManyCheckbox>
+			</p:fieldset>
+
+		</p:panel>
+
+		<p:panel header="Certificaci&#243;n de la producci&#243;n"
+			style="margin-bottom:20px">
+			<p:fieldset legend="Buenas practicas agricolas"
+				style="margin-bottom:20px">
+
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos una buena practica agricola"
+					value="#{organizationController.idPracticas}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{organizationController.productDTOs}"
+						var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+						itemValue="#{rubro.idCatalogo}" />
+				</p:selectManyCheckbox>
+
+			</p:fieldset>
+
+			<p:fieldset legend="Organica" style="margin-bottom:20px">
+
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos una rganica"
+					value="#{organizationController.idOrganica}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{organizationController.productDTOs}"
+						var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+						itemValue="#{rubro.idCatalogo}" />
+				</p:selectManyCheckbox>
+
+			</p:fieldset>
+
+		</p:panel>
+
+
+	</p:panel>
+
+	<h:panelGroup layout="block" style="text-align: center">
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form"
+			actionListener="#{organizationController.guardarOrganizacion}">
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

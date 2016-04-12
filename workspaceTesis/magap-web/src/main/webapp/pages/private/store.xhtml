@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Tienda" style="margin-bottom:20px">
+
+		<p:panel header="Datos generales" style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="Nombre tienda: *" />
+				<p:inputText required="true"
+					requiredMessage="El campo Nombre tienda es requerido"
+					value="#{storeController.cialcoDTO.nombreCialco}" maxlength="100">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+
+				<h:outputText value="Provincia: *" />
+				<p:selectOneMenu value="#{storeController.cialcoDTO.idProvincia}"
+					required="true" requiredMessage="El campo Provicia es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{storeController.provinciaDTOs}" var="prov"
+						itemLabel="#{prov.nombreProvincia}"
+						itemValue="#{prov.idProvincia}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="comboCan @this" listener="#{storeController.findCantones}"
+						global="false" />
+				</p:selectOneMenu>
+
+
+				<h:outputText value="Canton: *" />
+				<p:selectOneMenu id="comboCan"
+					value="#{storeController.cialcoDTO.idCanton}" required="true"
+					requiredMessage="El campo Canton es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{storeController.cantonDTOs}" var="can"
+						itemLabel="#{can.nombreCanton}" itemValue="#{can.idCanton}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="comboPa @this"
+						listener="#{storeController.findParroquias}" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Parroquia: *" />
+				<p:selectOneMenu id="comboPa"
+					value="#{storeController.cialcoDTO.idParroquia}">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{storeController.parroquiaDTOs}" var="par"
+						itemLabel="#{par.nombreParroquia}" itemValue="#{par.idParroquia}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="@this" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Localidad:" />
+				<p:inputText maxlength="99"
+					value="#{storeController.cialcoDTO.localidad}">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada x:" />
+				<p:inputText maxlength="20"
+					value="#{storeController.cialcoDTO.cordenadaX}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada y:" />
+				<p:inputText maxlength="20"
+					value="#{storeController.cialcoDTO.cordenadaY}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada z:" />
+				<p:inputText maxlength="20"
+					value="#{storeController.cialcoDTO.cordenadaZ}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+
+				<h:outputText value="Nombre representante: *" />
+				<p:inputText required="true" maxlength="50"
+					requiredMessage="El campo Nombre representante es reuqerido"
+					value="#{storeController.cialcoDTO.nombreRepresentanteCialco}">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Tel&#233;fono fijo:" />
+				<p:inputMask
+					value="#{storeController.cialcoDTO.telefonoFijo}"
+					maxlength="9" mask="(99) 9999-999">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputMask>
+
+				<h:outputText value="Mail:" />
+				<p:inputText id="pmail"
+					validatorMessage="El mail ingresado es inv&#225;lido"
+					value="#{storeController.cialcoDTO.correo}">
+					<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+					<f:validator validatorId="emailValidator" />
+					<p:ajax event="blur" update="pmail" global="false" />
+				</p:inputText>
+
+				<h:outputText value="Frecuencia: *" />
+				<p:selectOneMenu id="comboFre"
+					value="#{storeController.cialcoDTO.idCatalogoFrecuencia}"
+					required="true" requiredMessage="El campo Frecuencia es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{storeController.frecuenciaDTOs}" var="fre"
+						itemLabel="#{fre.elementoCatalogo}" itemValue="#{fre.idCatalogo}" />
+				</p:selectOneMenu>
+			</h:panelGrid>
+
+			<p:spacer width="5px"></p:spacer>
+			<p:fieldset legend="Dias de funcionamiento"
+				style="margin-bottom:20px">
+
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un dia de funcionamiento"
+					value="#{storeController.cialcoDTO.idDias}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{storeController.diaVOs}" var="dest"
+						itemLabel="#{dest.nombre}" itemValue="#{dest.id}" />
+
+				</p:selectManyCheckbox>
+			</p:fieldset>
+
+			<p:fieldset legend="Horario de funcionamiento"
+				style="margin-bottom:20px">
+				<h:panelGrid columns="2">
+					<h:outputText value="Hora de inicio: *" />
+					<pe:timePicker mode="spinner" showNowButton="false"
+						value="#{storeController.cialcoDTO.fechaIni}">
+					</pe:timePicker>
+
+					<h:outputText value="Hora de fin: *" />
+					<pe:timePicker mode="spinner"
+						value="#{storeController.cialcoDTO.fechaFin}">
+					</pe:timePicker>
+
+				</h:panelGrid>
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel header="Datos sobre productos ofertados"
+			style="margin-bottom:20px">
+			<p:fieldset legend="Productos rubro" style="margin-bottom:20px">
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un rubro"
+					value="#{storeController.idRubros}" layout="responsive" columns="1">
+					<f:selectItems value="#{storeController.rubroDTOs}" var="rubro"
+						itemLabel="#{rubro.elementoCatalogo}"
+						itemValue="#{rubro.idCatalogo}" />
+				</p:selectManyCheckbox>
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel header="Datos sobre los proveedores"
+			style="margin-bottom:20px">
+
+			<p:commandButton value="Agregar proveedor" icon="ui-icon-plus"
+				actionListener="#{storeController.newProveedor}"
+				oncomplete="PF('dlgAddProve').show();" partialSubmit="true"
+				process="@this" update="addProve" />
+
+
+			<p:dataTable id="provee" rowIndexVar="rowNum" style="width:100%;"
+				paginatorPosition="top" paginator="true" pageLinks="2"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+				emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+				value="#{storeController.proveedorDTOs}" var="org">
+				<f:facet name="header">Proveedores</f:facet>
+				<p:column style="width:10%;text-align:center;" headerText="Nro">
+					<h:outputLabel value="#{rowNum+1}" />
+				</p:column>
+				<p:column headerText="Nombre proveedor">
+					<h:outputText value="#{org.nombreProveedor}" />
+				</p:column>
+				<p:column headerText="Telefono movil">
+					<h:outputText value="#{org.telefonoMovil}" />
+				</p:column>
+				<p:column headerText="correo">
+					<h:outputText value="#{org.correo}" />
+				</p:column>
+
+				<p:column headerText="Acciones" style="text-align: center">
+					<p:commandButton icon="ui-icon-pencil" update="page:addProve"
+						partialSubmit="true" global="false" process="@this"
+						oncomplete="PF('dlgAddProve').show();">
+						<f:setPropertyActionListener value="#{org}"
+							target="#{storeController.proveedorDTO}" />
+					</p:commandButton>
+					<p:commandButton update=":page:provee" icon="ui-icon-trash"
+						partialSubmit="true" global="false" process="@this"
+						actionListener="#{storeController.deleteProveedor(org)}">
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+		</p:panel>
+		<p:panel header="Datos sobre el monto de compra / venta"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="Monto compras / mes: *" />
+				<p:spinner value="#{storeController.cialcoDTO.montoCompras}"
+					prefix="$" min="0" />
+
+				<h:outputText value="Monto ventas / mes: *" />
+				<p:spinner value="#{storeController.cialcoDTO.montoVentas}"
+					prefix="$" min="0" />
+
+			</h:panelGrid>
+		</p:panel>
+
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/consumer.xhtml" />
+		</h:panelGroup>
+	</p:panel>
+
+	<h:panelGroup layout="block" style="text-align: center">
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form"
+			actionListener="#{storeController.guardarCialco}">
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

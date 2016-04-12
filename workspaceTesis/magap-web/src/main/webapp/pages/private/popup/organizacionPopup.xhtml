@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addOrg" header="Organizacion" widgetVar="dlgAddOrg"
+		modal="true" resizable="false" dynamic="true">
+		<h:form id="formOrg">
+			<h:panelGroup style="width:100%;" layout="block">
+				<h:panelGrid columns="2">
+					<h:outputText value="Grado: *" />
+					<p:selectOneMenu required="true"
+						requiredMessage="El campo Grado es requerido"
+						value="#{producerController.organizacionDTO.idcatalogoGrado}"
+						style="width:125px">
+						<f:selectItem itemLabel="Seleccione" itemValue="" />
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
+						<p:ajax event="change" partialSubmit="true" process="@this"
+							update="@this" global="false" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Nombre de la organizaci&#243;n: *" />
+					<p:inputText maxlength="50"
+						value="#{producerController.organizacionDTO.nombreOrganizacion}">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Nombre del representante: *" />
+					<p:inputText required="true" maxlength="50"
+						requiredMessage="El campo Nombre del representante es requerido"
+						value="#{producerController.organizacionDTO.nombreRepresentante}">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Tel&#233;fono movil:" />
+					<p:inputMask
+						value="#{producerController.organizacionDTO.telefonoRepresentante}"
+						maxlength="10" mask="(99) 99-999-999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Correo:" />
+					<p:inputText id="orgmail" maxlength="20"
+						validatorMessage="El mail ingresado es inv&#225;lido"
+						value="#{producerController.organizacionDTO.mailRepresentante}">
+						<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+						<f:validator validatorId="emailValidator" />
+						<p:ajax event="blur" update="orgmail" global="false" />
+					</p:inputText>
+
+					<h:outputText
+						value="N&#250;mero de socios de la organizaci&#243;n: *" />
+					<p:inputText required="true" maxlength="3"
+						requiredMessage="El campo N&#250;mero de socios es requerido"
+						value="#{producerController.organizacionDTO.numeroDSocios}">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputText>
+				</h:panelGrid>
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{producerController.addOrg}" update="page:orgs"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form" />
+						<p:resetInput target="formOrg" />
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddOrg').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+						<p:resetInput target="formOrg" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddOrg').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddOrg').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

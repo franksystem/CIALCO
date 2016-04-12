@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addOrgCan" header="Organizaci&#243;n"
+		widgetVar="dlgAddOrgCan" modal="true" resizable="false" dynamic="true"
+		height="450" responsive="true">
+		<h:form id="formOrgCan">
+			<h:panelGroup style="width:100%;" layout="block">
+				<h:panelGrid columns="2">
+					<h:outputText value="Grado: *" />
+					<p:selectOneMenu required="true"
+						requiredMessage="El campo Grado es requerido"
+						value="#{orgController.organizacionDTO.idcatalogoGrado}"
+						style="width:125px">
+						<f:selectItem itemLabel="Seleccione" itemValue="" />
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
+						<p:ajax event="change" partialSubmit="true" process="@this"
+							update="@this" global="false" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Tipo documento:" />
+					<p:selectOneRadio id="console"
+						value="#{orgController.tipoDocumento}">
+						<f:selectItem itemLabel="C&#233;dula" itemValue="1" />
+						<f:selectItem itemLabel="Ruc" itemValue="2" />
+						<p:ajax event="change" execute="@this" update="idced"
+							global="false" />
+					</p:selectOneRadio>
+
+					<h:outputText value="N&#250;mero de documento: *" />
+					<h:panelGroup id="idced" layout="block">
+						<p:inputText required="true"
+							rendered="#{orgController.tipoDocumento eq '1'}"
+							requiredMessage="El campo N&#250;mero de documento es requerido"
+							validatorMessage="N&#250;mero de documento invalido"
+							value="#{orgController.organizacionDTO.ruc}" maxlength="10">
+							<pe:keyFilter regEx="/[\d\-]/" />
+							<f:validateLength minimum="10" />
+							<f:validator validatorId="cedulaValidator" />
+							<p:ajax event="blur" update="idced" global="false" />
+						</p:inputText>
+						<p:inputText required="true"
+							rendered="#{orgController.tipoDocumento eq '2'}"
+							requiredMessage="El campo N&#250;mero de documento es requerido"
+							validatorMessage="N&#250;mero de documento invalido"
+							value="#{orgController.organizacionDTO.ruc}" maxlength="13">
+							<pe:keyFilter regEx="/[\d\-]/" />
+							<f:validateLength minimum="13" />
+							<p:ajax event="blur" update="idced" global="false" />
+						</p:inputText>
+					</h:panelGroup>
+
+					<h:outputText value="Nombre de la organizaci&#243;n: *" />
+					<p:inputText maxlength="50"
+						value="#{orgController.organizacionDTO.nombreOrganizacion}">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Nombre del representante: *" />
+					<p:inputText required="true" maxlength="50"
+						requiredMessage="El campo Nombre del representante es requerido"
+						value="#{orgController.organizacionDTO.nombreRepresentante}">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Tel&#233;fono movil:" />
+					<p:inputMask
+						value="#{orgController.organizacionDTO.telefonoRepresentante}"
+						maxlength="10" mask="(99) 99-999-999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Tel&#233;fono fijo:" />
+					<p:inputMask
+						value="#{orgController.organizacionDTO.telefonoRepresentante}"
+						maxlength="9" mask="(99) 999-9999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Correo:" />
+					<p:inputText id="orgCanmail" maxlength="20"
+						validatorMessage="El mail ingresado es inv&#225;lido"
+						value="#{orgController.organizacionDTO.mailRepresentante}">
+						<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+						<f:validator validatorId="emailValidator" />
+						<p:ajax event="blur" update="orgCanmail" global="false" />
+					</p:inputText>
+
+					<h:outputText value="Fecha SEPS:" />
+					<p:calendar value="#{orgController.organizacionDTO.fechaSeps}"
+						showOn="button" />
+
+					<h:outputText value="C&#243;digo SEPS:" />
+					<p:inputText maxlength="20"
+						value="#{orgController.organizacionDTO.codigoSeps}">
+						<pe:keyFilter regEx="/[a-z0-9_]/i" />
+					</p:inputText>
+
+					<h:outputText value="Fecha MAGAP:" />
+					<p:calendar value="#{orgController.organizacionDTO.fechaMagap}"
+						showOn="button" />
+
+					<h:outputText value="C&#243;digo MAGAP:" />
+					<p:inputText maxlength="20"
+						value="#{orgController.organizacionDTO.codigoMagap}">
+						<pe:keyFilter regEx="/[a-z0-9_]/i" />
+					</p:inputText>
+
+					<h:outputText
+						value="N&#250;mero de productores total de la organizacion:" />
+					<p:inputText maxlength="10"
+						value="#{orgController.organizacionDTO.numeroProductores}">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputText>
+
+					<h:outputText value="N&#250;mero de productores que participan:" />
+					<p:inputText maxlength="13"
+						value="#{orgController.organizacionDTO.numeroParticipantes}">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputText>
+
+				</h:panelGrid>
+
+				<p:fieldset legend="Contacto" style="margin-bottom:20px">
+					<h:panelGrid columns="2">
+						<h:outputText value="Nombre del contacto: *" />
+						<p:inputText required="true" maxlength="50"
+							requiredMessage="El campo Nombre del contacto es requerido"
+							value="#{orgController.organizacionDTO.nombreContacto}">
+							<pe:keyFilter regEx="/[a-z_\s]/i" />
+						</p:inputText>
+
+						<h:outputText value="Tel&#233;fono movil del contacto:" />
+						<p:inputMask
+							value="#{orgController.organizacionDTO.telefonoContacto}"
+							maxlength="10" mask="(99) 99-999-999">
+							<pe:keyFilter regEx="/[\d\-]/" />
+						</p:inputMask>
+
+						<h:outputText value="Tel&#233;fono fijo del contacto:" />
+						<p:inputMask
+							value="#{orgController.organizacionDTO.telefonoContacto}"
+							maxlength="9" mask="(99) 999-9999">
+							<pe:keyFilter regEx="/[\d\-]/" />
+						</p:inputMask>
+
+						<h:outputText value="Correo del contacto:" />
+						<p:inputText id="orgConmail" maxlength="20"
+							validatorMessage="El mail ingresado es inv&#225;lido"
+							value="#{orgController.organizacionDTO.mailContacto}">
+							<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+							<f:validator validatorId="emailValidator" />
+							<p:ajax event="blur" update="orgConmail" global="false" />
+						</p:inputText>
+					</h:panelGrid>
+				</p:fieldset>
+
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{orgController.addOrg}" update="page:canorgs"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form"
+							resetValues="true" />
+						<p:resetInput target="page:formOrgCan" />
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddOrgCan').hide();" global="false"
+							immediate="true" process="@this" resetValues="true">
+						</p:ajax>
+						<p:resetInput target="page:formOrgCan" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddOrgCan').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddOrgCan').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

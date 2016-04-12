@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+	<p:menubar>
+		<p:menuitem value="Nuevo" title="Nueva pantalla"
+			actionListener="#{indexPantallaController.newPantalla}"
+			icon="ui-icon-document" update="@form" process="@this"
+			partialSubmit="true" />
+
+		<f:facet name="options">
+			<p:menuButton value="#{commonController.nombreApellido}">
+				<p:menuitem value="Salir"
+					actionListener="#{commonController.logout}" icon="ui-icon-extlink" />
+			</p:menuButton>
+		</f:facet>
+	</p:menubar>
+	<br />
+
+	<p:panel header="Listado de pantalla" style="margin-bottom:20px;">
+		<p:dataTable var="car" value="#{indexPantallaController.pantallaDTOs}"
+			widgetVar="carsTable"
+			emptyMessage="No se encontr&#243; ning&#250;n resultado"
+			filteredValue="#{indexPantallaController.filteredPantallaDTOs}">
+
+			<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="Filtro global:" />
+					<p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()"
+						style="width:200px" placeholder="Enter keyword" />
+					<p:commandButton value="Buscar" id="ajax" update="growl"
+						actionListener="#{indexPantallaController.findPantalla()}"
+						styleClass="ui-priority-primary" />
+				</p:outputPanel>
+			</f:facet>
+
+			<p:column filterBy="#{car.idPantalla}" headerText="Id"
+				footerText="contains" filterMatchMode="contains">
+				<h:outputText value="#{car.idPantalla}" />
+			</p:column>
+
+			<p:column filterBy="#{car.nombrePantalla}"
+				headerText="Descripci&#243;n" footerText="contains"
+				filterMatchMode="contains">
+				<h:outputText value="#{car.nombrePantalla}" />
+			</p:column>
+
+			<p:column filterBy="#{car.url}" headerText="URL" footerText="exact"
+				filterMatchMode="exact">
+				<f:facet name="filter">
+					<p:selectOneMenu onchange="PF('carsTable').filter()">
+						<f:selectItem itemLabel="Select One" itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItems value="#{indexPantallaController.findPantalla()}" />
+					</p:selectOneMenu>
+				</f:facet>
+				<h:outputText value="#{car.url}" />
+			</p:column>
+
+		</p:dataTable>
+	</p:panel>
+</ui:composition>

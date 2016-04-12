@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+	
+	<!-- Procedimiento para el tratamiento de transacciones del proyecto -->
+	<tx:advice id="txAdvice" transaction-manager="magapTransactionManager">
+		<tx:attributes>
+			<!-- Las busquedas hacen acceso a la base con transacciones en modo lectura -->
+			<tx:method name="*" read-only="true" rollback-for="Throwable"/>
+			<!-- Todos los demas metodos son transaccionales en modo lectura/escritura -->
+			<tx:method name="trans*" rollback-for="Throwable"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<!-- Se intercepta todos los metodos de la capa de servicio excepto los métodos de los servicios que tengan la anotación NoTransaction -->
+		<aop:pointcut  id="pointcutServiceMethods" expression="within(ec.gob.magap.service.impl..*)"/>	
+			<!-- Se intercepta todos los metodos del bean dataService del DAO--> 
+		<aop:pointcut id="pointcutDataServiceMethods" expression="bean(dataService)"/>		
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcutServiceMethods"/>		
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointcutDataServiceMethods"/>
+	
+		 
+	</aop:config>
+	
+</beans>

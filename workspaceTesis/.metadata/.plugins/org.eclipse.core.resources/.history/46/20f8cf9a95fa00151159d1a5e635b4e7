@@ -1,0 +1,6 @@
+package ec.gob.magap.vo;
+
+public class PantallaVO {
+	private PantallaDTO pantallaDTO;
+	
+}

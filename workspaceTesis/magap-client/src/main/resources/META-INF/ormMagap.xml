@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd">
+	<persistence-unit-metadata>
+		<persistence-unit-defaults>
+			<access>FIELD</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+
+	<mapped-superclass class="ec.gob.magap.dto.AuditoriaDTO">
+	</mapped-superclass>
+
+	<!-- DTO -->
+	<entity class="ec.gob.magap.dto.UsuarioDTO" />
+	<entity class="ec.gob.magap.dto.UsuarioPerfilDTO" />
+	<entity class="ec.gob.magap.dto.PerfilDTO" />
+	<entity class="ec.gob.magap.dto.MenuDTO" />
+	<entity class="ec.gob.magap.dto.PantallaDTO" />
+	
+	<entity class="ec.gob.magap.dto.PersonaDTO" />
+	<entity class="ec.gob.magap.dto.CantonDTO" />
+	<entity class="ec.gob.magap.dto.CatalogoDTO" />
+	<entity class="ec.gob.magap.dto.CialcoDTO" />
+	<entity class="ec.gob.magap.dto.DestinoProduccionDTO" />
+	<entity class="ec.gob.magap.dto.FuenteIngresoDTO" />
+	<entity class="ec.gob.magap.dto.InstitucionApoyoDTO" />
+	<entity class="ec.gob.magap.dto.OrganizacionDTO" />
+	<entity class="ec.gob.magap.dto.ParroquiaDTO" />
+	<entity class="ec.gob.magap.dto.PracticaProductivaDTO" />
+	
+	<!-- <entity class="ec.gob.magap.dto.ProductoDTO" /> -->
+	<entity class="ec.gob.magap.dto.ProductoProductorDTO" />
+	<entity class="ec.gob.magap.dto.ProductorDTO" />
+	<entity class="ec.gob.magap.dto.ProductorOrganizacionDTO" />
+	<entity class="ec.gob.magap.dto.ProvinciaDTO" />
+	<entity class="ec.gob.magap.dto.UbicacionFincaDTO" />
+	<entity class="ec.gob.magap.dto.ProductoCialcoDTO" />
+	<entity class="ec.gob.magap.dto.DestinoIngresoDTO" />
+	<entity class="ec.gob.magap.dto.PersonaCialcoDTO" />
+	<entity class="ec.gob.magap.dto.ProveedorDTO" />
+	<entity class="ec.gob.magap.dto.PresentacionProductoDTO" />
+
+	<entity class="ec.gob.magap.dto.CanastaDTO" />
+	<entity class="ec.gob.magap.dto.EntregaCanastaDTO" />
+	<entity class="ec.gob.magap.dto.LugarEntregaCanastaDTO" />
+	
+
+</entity-mappings>

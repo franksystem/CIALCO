@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addInst" header="Instituci&#243;n" widgetVar="dlgAddInst"
+		modal="true" resizable="false" dynamic="true">
+		<h:form id="formInst">
+			<h:panelGroup style="width:100%;" layout="block">
+				<h:panelGrid columns="2">
+
+					<h:outputText value="Nombre instituci&#243;n: *" />
+					<p:inputText required="true"
+						requiredMessage="El campo Nombre instituci&#243;n es requerido"
+						value="#{supportController.institucionApoyoDTO.nombreInstitucionApoyo}"
+						maxlength="100">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Tipo de apoyo: *" />
+					<p:inputText required="true"
+						requiredMessage="El campo tipo de apoyo es requerido"
+						value="#{supportController.institucionApoyoDTO.tipoApoyo}"
+						maxlength="100">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+				</h:panelGrid>
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{supportController.addInstitucion}"
+							update="page:inst page:formInst"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form" />
+						<p:resetInput target="formInst" />
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddInst').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+						<p:resetInput target="formInst" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddInst').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddInst').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<f:view contentType="text/html">
+		<h:head>
+			<meta charset="utf-8" />
+			<meta name="description" content="Magap" />
+			<title>Magap</title>
+			<h:outputStylesheet library="css" name="login.css" />
+		</h:head>
+		<h:body>
+			<h:form id="login">
+				<div id="container">
+					<p:growl id="growl" showDetail="true" autoUpdate="true"
+						showSummary="false" />
+					<p:ajaxStatus onstart="PF('statusDialog').show();"
+						onsuccess="PF('statusDialog').hide();" />
+
+					<p:dialog modal="true" widgetVar="statusDialog" header="Espere..."
+						draggable="false" closable="false" resizable="false"
+						showHeader="false">
+						<p:graphicImage value="#{resource['images/loading.gif']}" />
+					</p:dialog>
+
+					<div class="login">Iniciar sesion:</div>
+					<div class="username-text">Usuario:</div>
+					<div class="password-text">Contraseña:</div>
+					<div class="username-field">
+						<h:inputText maxlength="70" value="#{loginController.userName}"
+							required="true" requiredMessage="El campo usuario es requerido" />
+					</div>
+					<div class="password-field">
+						<h:inputSecret maxlength="70" value="#{loginController.password}"
+							required="true"
+							requiredMessage="El campo contraseña es requerido" />
+					</div>
+					<h:panelGroup layout="block" styleClass="link">
+						<p:commandLink styleClass="linkGo" value="Entrar"
+							actionListener="#{loginController.loginUser}"
+							update="@form,growl" />
+					</h:panelGroup>
+				</div>
+				<div id="footer">""</div>
+			</h:form>
+		</h:body>
+	</f:view>
+</ui:composition>

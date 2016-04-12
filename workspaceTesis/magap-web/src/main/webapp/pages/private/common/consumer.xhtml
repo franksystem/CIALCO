@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Datos sobre consumidores" style="margin-bottom:20px">
+		<p:commandButton value="Agregar consumidor" icon="ui-icon-plus"
+			actionListener="#{consumerController.newConsumer}"
+			oncomplete="PF('dlgAddConsu').show();" partialSubmit="true"
+			process="@this" update="addConsu" />
+
+		<p:dataTable id="consu" rowIndexVar="rowNum" style="width:100%;"
+			paginatorPosition="top" paginator="true" pageLinks="2"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			currentPageReportTemplate="pagina {currentPage} de {totalPages}"
+			emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+			value="#{consumerController.personaDTOs}" var="consumer" >
+			<f:facet name="header">Consumidores</f:facet>
+			<p:column style="width:10%;text-align:center;" headerText="Nro">
+				<h:outputLabel value="#{rowNum+1}" />
+			</p:column>
+			<p:column headerText="Nombres">
+				<h:outputText value="#{consumer.nombrePersona}" />
+			</p:column>
+			<p:column headerText="Apellidos">
+				<h:outputText value="#{consumer.apellidoPersona}" />
+			</p:column>
+			<p:column headerText="Correo">
+				<h:outputText value="#{consumer.mailPersona}" />
+			</p:column>
+			<p:column headerText="Acciones" style="width:15%;text-align: center">
+				<p:commandButton update=":page:addConsu" icon="ui-icon-pencil"
+					partialSubmit="true" global="false" process="@this"
+					oncomplete="PF('dlgAddConsu').show();" title="Editar">
+					<f:setPropertyActionListener value="#{consumer}"
+						target="#{consumerController.personaDTO}" />
+				</p:commandButton>
+				<p:commandButton update="page:consu" icon="ui-icon-trash"
+					partialSubmit="true" global="false" process="@this"
+					actionListener="#{consumerController.deleteConsumer(consumer)}" title="Eliminar">
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</p:panel>
+
+</ui:composition>

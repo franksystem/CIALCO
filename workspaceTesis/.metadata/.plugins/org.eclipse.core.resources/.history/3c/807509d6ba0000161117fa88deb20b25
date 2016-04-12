@@ -1,0 +1,33 @@
+package ec.gob.magap.web.controller;
+
+
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import ec.gob.magap.dto.MenuDTO;
+
+@ManagedBean(name = "indexMenuController")
+@ViewScoped
+public class IndexMenuController {
+	private List<MenuDTO> menuDTOs;
+	private List<MenuDTO> filteredMenuDTOs;
+
+	public List<MenuDTO> getMenuDTOs() {
+		return menuDTOs;
+	}
+
+	public void setMenuDTOs(List<MenuDTO> menuDTOs) {
+		this.menuDTOs = menuDTOs;
+	}
+
+	public List<MenuDTO> getFilteredMenuDTOs() {
+		return filteredMenuDTOs;
+	}
+
+	public void setFilteredMenuDTOs(List<MenuDTO> filteredMenuDTOs) {
+		this.filteredMenuDTOs = filteredMenuDTOs;
+	}
+	
+}

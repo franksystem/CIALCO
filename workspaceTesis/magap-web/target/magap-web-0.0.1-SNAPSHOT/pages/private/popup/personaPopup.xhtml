@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addPerson" header="Persona" widgetVar="dlgAddPerson"
+		modal="true" resizable="false" dynamic="true">
+		<h:form id="formAdd">
+			<h:panelGroup style="width:100%;" layout="block">
+				<h:panelGrid columns="2">
+					<h:outputText value="C&#233;dula: " />
+					<p:inputText id="idcedula"
+						value="#{producerController.addPersonaDTO.cedulaPersona}"
+						maxlength="10">
+						<pe:keyFilter regEx="/[\d\-]/" />
+						<f:validateLength minimum="10" />
+					</p:inputText>
+
+					<h:outputText value="Nombres: *" />
+					<p:inputText required="true"
+						requiredMessage="El campo Nombres es requerido"
+						value="#{producerController.addPersonaDTO.nombrePersona}"
+						maxlength="100">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Apellidos: *" />
+					<p:inputText required="true"
+						requiredMessage="El campo Apellidos es requerido"
+						value="#{producerController.addPersonaDTO.apellidoPersona}"
+						maxlength="100">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Edad:" />
+					<p:inputText
+						value="#{producerController.addPersonaDTO.edadPersona}"
+						maxlength="3">
+						<pe:keyFilter regEx="/[\d\-]/" />
+						<f:validateLength minimum="1" />
+					</p:inputText>
+
+					<h:outputText value="Parentesco: *" />
+					<p:selectOneMenu
+						value="#{producerController.addPersonaDTO.idCatalogoParentesco}"
+						required="true" requiredMessage="El campo parentesco es requerido">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{producerController.parentescoDTOs}"
+							var="genero" itemLabel="#{genero.elementoCatalogo}"
+							itemValue="#{genero.idCatalogo}" />
+						<p:ajax event="change" process="@this" global="false" />
+					</p:selectOneMenu>
+
+					<h:outputText value="G&#233;nero: *" />
+					<p:selectOneMenu required="true"
+						requiredMessage="El campo G&#233;nero es requerido"
+						value="#{producerController.addPersonaDTO.idCatalogoGenero}">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems
+							value="#{producerController.personController.generoDTOs}"
+							var="genero" itemLabel="#{genero.elementoCatalogo}"
+							itemValue="#{genero.idCatalogo}" />
+						<p:ajax event="change" process="@this" global="false" />
+					</p:selectOneMenu>
+
+
+					<h:outputText value="Mail:" />
+					<p:inputText id="permail" maxlength="20"
+						validatorMessage="El mail ingresado es inv&#225;lido"
+						value="#{producerController.addPersonaDTO.mailPersona}">
+						<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+						<f:validator validatorId="emailValidator" />
+						<p:ajax event="blur" update="permail" global="false" />
+					</p:inputText>
+
+					<h:outputText value="Tel&#233;fono movil:" />
+					<p:inputMask
+						value="#{producerController.addPersonaDTO.telefonoMovil}"
+						mask="(99) 99-999-999" maxlength="10">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Tel&#233;fono fijo:" />
+					<p:inputMask
+						value="#{producerController.addPersonaDTO.telefonoFijo}"
+						maxlength="9" mask="(99) 9999-999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+
+
+
+					<!-- 					<h:outputText value="Etnia: *" /> -->
+					<!-- 					<p:selectOneMenu -->
+					<!-- 						value="#{producerController.addPersonaDTO.idCatalogoEtnia}" -->
+					<!-- 						required="true" requiredMessage="El campo Etnia es requerido"> -->
+					<!-- 						<f:selectItem itemLabel="Seleccione" /> -->
+					<!-- 						<f:selectItems value="#{producerController.etniaDTOs}" -->
+					<!-- 							var="genero" itemLabel="#{genero.elementoCatalogo}" -->
+					<!-- 							itemValue="#{genero.idCatalogo}" /> -->
+					<!-- 						<p:ajax event="change" process="@this" global="false" /> -->
+					<!-- 					</p:selectOneMenu> -->
+
+					<!-- 					<h:outputText value="Escolaridad: *" /> -->
+					<!-- 					<p:selectOneMenu -->
+					<!-- 						value="#{producerController.addPersonaDTO.idCatalogoEscolaridad}" -->
+					<!-- 						required="true" -->
+					<!-- 						requiredMessage="El campo Escolaridad es requerido"> -->
+					<!-- 						<f:selectItem itemLabel="Seleccione" /> -->
+					<!-- 						<f:selectItems value="#{producerController.escolaridadDTOs}" -->
+					<!-- 							var="genero" itemLabel="#{genero.elementoCatalogo}" -->
+					<!-- 							itemValue="#{genero.idCatalogo}" /> -->
+					<!-- 						<p:ajax event="change" process="@this" global="false" /> -->
+					<!-- 					</p:selectOneMenu> -->
+
+					<h:outputText value="Actividad:" />
+					<p:inputText maxlength="150"
+						value="#{producerController.addPersonaDTO.actividadPersona}">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+				</h:panelGrid>
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{producerController.addPersona}"
+							update="page:contenttbl page:lbnum"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form" />
+						<p:resetInput target="formAdd" />
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddPerson').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+						<p:resetInput target="formAdd" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddPerson').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddPerson').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

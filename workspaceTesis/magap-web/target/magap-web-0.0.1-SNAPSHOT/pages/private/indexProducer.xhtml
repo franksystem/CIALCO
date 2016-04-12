@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+	<p:menubar>
+		<p:menuitem value="Nuevo" title="Nuevo productor"
+			actionListener="#{indexProducerController.newProducer}"
+			icon="ui-icon-document" update="@form" process="@this"
+			partialSubmit="true" />
+
+
+		<f:facet name="options">
+			<p:menuButton value="#{commonController.nombreApellido}">
+				<p:menuitem value="Salir"
+					actionListener="#{commonController.logout}"
+					icon="ui-icon-extlink" />
+			</p:menuButton>
+		</f:facet>
+	</p:menubar>
+	<br />
+	<p:panel header="Filtro productor" style="margin-bottom:20px;">
+		<h:panelGrid id="filter" columns="2">
+			<h:outputText value="C&#233;dula: " />
+			<p:inputText id="fced"
+				value="#{indexProducerController.personaDTO.cedulaPersona}"
+				maxlength="10">
+				<pe:keyFilter regEx="/[\d\-]/" />
+				<f:validateLength minimum="10" />
+			</p:inputText>
+
+		</h:panelGrid>
+		<br />
+		<h:panelGroup layout="block">
+			<p:commandButton value="Buscar" styleClass="ui-confirmdialog-no"
+				icon="ui-icon-search" process="@form" update="page:tblresult"
+				actionListener="#{indexProducerController.findProducer}">
+			</p:commandButton>
+		</h:panelGroup>
+		<br />
+		<p:dataTable id="tblresult" rowIndexVar="rowNum" style="width:100%;"
+			paginatorPosition="top" paginator="true" pageLinks="2"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+			emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+			value="#{indexProducerController.personaDTOs}" var="dto">
+			
+			<f:facet name="header">Productores</f:facet>
+			<p:column style="width:10%;text-align:center;" headerText="Nro">
+				<h:outputLabel value="#{rowNum+1}" />
+			</p:column>
+			<p:column headerText="C&#233;dula">
+				<h:outputText value="#{dto.cedulaPersona}" />
+			</p:column>
+			<p:column headerText="Nombres">
+				<h:outputText value="#{dto.nombrePersona}" />
+			</p:column>
+			<p:column headerText="Apellidos">
+				<h:outputText value="#{dto.apellidoPersona}" />
+			</p:column>
+			<p:column headerText="Correo">
+				<h:outputText value="#{dto.mailPersona}" />
+			</p:column>
+
+			<p:column headerText="Acciones" style="text-align: center">
+				<p:commandButton update="@form" icon="ui-icon-trash" title="Editar productor"
+					partialSubmit="true" process="@this"
+					actionListener="#{indexProducerController.editProducer(dto)}">
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+
+	</p:panel>
+</ui:composition>

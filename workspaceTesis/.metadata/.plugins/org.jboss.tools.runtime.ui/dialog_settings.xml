@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="true" key="deleteOnExit"/>
+	<item value="C:\jboss-6.1.0.Final" key="defaultDialogPath"/>
+	<item value="C:\Users\FRANCI~1\AppData\Local\Temp\" key="defaultDestinationPath"/>
+	<section name="downloadRuntimeSection">
+		<item value="true" key="jbosseap610runtime"/>
+	</section>
+</section>

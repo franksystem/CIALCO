@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+	<p:menubar>
+		<p:menuitem value="Nuevo" title="Nueva pantalla"
+			actionListener="#{indexPantallaController.newPantalla}"
+			icon="ui-icon-document" update="@form" process="@this"
+			partialSubmit="true" />
+
+		<f:facet name="options">
+			<p:menuButton value="#{commonController.nombreApellido}">
+				<p:menuitem value="Salir"
+					actionListener="#{commonController.logout}" icon="ui-icon-extlink" />
+			</p:menuButton>
+		</f:facet>
+	</p:menubar>
+	<br />
+
+	<p:panel header="Listado de pantalla" style="margin-bottom:20px;">
+	
+			</p:panel>
+</ui:composition>

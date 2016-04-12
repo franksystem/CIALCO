@@ -1,0 +1,10 @@
+package ec.gob.magap.web.controller;
+
+import javax.annotation.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+@ManagedBean(name = "indexMenuController")
+@ViewScoped
+public class IndexMenuController {
+	
+}

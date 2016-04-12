@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addConsu" header="Consumidor" widgetVar="dlgAddConsu"
+		modal="true" resizable="false" dynamic="true">
+		<h:form id="formConsu">
+			<h:panelGroup style="width:100%;" layout="block">
+				<h:panelGrid columns="2">
+
+					<h:outputText value="C&#233;dula: *" />
+					<p:inputText id="idced" required="true"
+						requiredMessage="El campo C&#233;dula es requerido"
+						validatorMessage="Numero de c&#233;dula invalida"
+						value="#{consumerController.personaDTO.cedulaPersona}"
+						maxlength="10">
+						<pe:keyFilter regEx="/[\d\-]/" />
+						<f:validateLength minimum="10" />
+						<f:validator validatorId="cedulaValidator" />
+						<p:ajax event="blur" update="idced" global="false" />
+					</p:inputText>
+
+					<h:outputText value="Nombres: *" />
+					<p:inputText required="true"
+						requiredMessage="El campo Nombres es requerido"
+						value="#{consumerController.personaDTO.nombrePersona}"
+						maxlength="100">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Apellidos: *" />
+					<p:inputText required="true"
+						requiredMessage="El campo Apellidos es requerido"
+						value="#{consumerController.personaDTO.apellidoPersona}"
+						maxlength="100">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+
+					<h:outputText value="Mail:" />
+					<p:inputText id="permail" maxlength="20"
+						validatorMessage="El mail ingresado es inv&#225;lido"
+						value="#{consumerController.personaDTO.mailPersona}">
+						<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+						<f:validator validatorId="emailValidator" />
+						<p:ajax event="blur" update="permail" global="false" />
+					</p:inputText>
+
+					<h:outputText value="Tel&#233;fono movil:" />
+					<p:inputMask value="#{consumerController.personaDTO.telefonoMovil}"
+						mask="(99) 99-999-999" maxlength="10">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+					<h:outputText value="Tel&#233;fono fijo:" />
+					<p:inputMask value="#{consumerController.personaDTO.telefonoFijo}"
+						maxlength="9" mask="(99) 9999-999">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputMask>
+
+				</h:panelGrid>
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{consumerController.addConsumidor}"
+							update="page:consu page:formConsu"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form" />
+						<p:resetInput target="formConsu" />
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddConsu').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+						<p:resetInput target="formConsu" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddConsu').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddConsu').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

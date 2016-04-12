@@ -1,0 +1,17 @@
+package ec.gob.magap.web.controller;
+
+import javax.faces.bean.ManagedProperty;
+
+import ec.gob.magap.dto.PersonaDTO;
+import ec.gob.magap.dto.UbicacionFincaDTO;
+import ec.gob.magap.web.controller.common.PersonController;
+
+public class PantallaController {
+	@ManagedProperty(value = "#{pantallaController}")
+	private PantallaController pantallaController;
+	
+	public void newProductor() {
+		this.personController.setPersonaDTO(new PersonaDTO());
+		this.setUbicacionFincaDTO(new UbicacionFincaDTO());
+	}
+}

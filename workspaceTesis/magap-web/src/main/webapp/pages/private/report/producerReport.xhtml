@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+	<p:menubar>
+		<p:menuitem value="Nuevo" title="Nuevo productor"
+			actionListener="#{producerReportController.newProducer}"
+			icon="ui-icon-document" update="@form" process="@this"
+			partialSubmit="true" />
+
+
+		<f:facet name="options">
+			<p:menuButton value="#{commonController.nombreApellido}">
+				<p:menuitem value="Salir"
+					actionListener="#{commonController.logout}" icon="ui-icon-extlink" />
+			</p:menuButton>
+		</f:facet>
+	</p:menubar>
+	<br />
+	<p:panel header="Reporte productor" style="margin-bottom:20px;">
+		<h:panelGrid columns="2">
+			<h:outputText value="C&#233;dula: " />
+			<p:inputText
+				value="#{producerReportController.personaDTO.cedulaPersona}"
+				maxlength="10">
+				<pe:keyFilter regEx="/[\d\-]/" />
+				<f:validateLength minimum="10" />
+			</p:inputText>
+
+
+			<h:outputText value="Estado: " />
+			<p:selectOneMenu
+				value="#{producerReportController.personaDTO.estado}"
+				required="true" requiredMessage="El campo Estado es requerido">
+				<f:selectItem itemLabel="ACTIVO" itemValue="1" />
+				<f:selectItem itemLabel="INACTIVO" itemValue="0" />
+			</p:selectOneMenu>
+
+		</h:panelGrid>
+		<br />
+		<h:panelGroup layout="block">
+			<p:commandButton value="Generar reporte"
+				styleClass="ui-confirmdialog-no" icon="ui-icon-search" ajax="false"
+				actionListener="#{producerReportController.findProducer}">
+			</p:commandButton>
+		</h:panelGroup>
+
+	</p:panel>
+</ui:composition>

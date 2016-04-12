@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Datos generales" style="margin-bottom:20px">
+		<h:panelGrid columns="2">
+			<h:outputText value="#{nombreCialco}: *" />
+			<p:inputText required="true"
+				requiredMessage="El campo Nombre es requerido"
+				value="#{cialcoController.cialcoDTO.nombreCialco}" maxlength="100">
+				<pe:keyFilter regEx="/[a-z_\s]/i" />
+			</p:inputText>
+
+			<h:outputText value="Provincia: *" />
+			<p:selectOneMenu value="#{cialcoController.cialcoDTO.idProvincia}"
+				required="true" requiredMessage="El campo Provicia es requerido">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{cialcoController.provinciaDTOs}" var="prov"
+					itemLabel="#{prov.nombreProvincia}" itemValue="#{prov.idProvincia}" />
+				<p:ajax event="change" partialSubmit="true" process="@this"
+					update="comboCan @this" listener="#{cialcoController.findCantones}"
+					global="false" />
+			</p:selectOneMenu>
+
+			<h:outputText value="Cant&#243;n: *" />
+			<p:selectOneMenu id="comboCan"
+				value="#{cialcoController.cialcoDTO.idCanton}" required="true"
+				requiredMessage="El campo Cant&#243;n es requerido">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{cialcoController.cantonDTOs}" var="can"
+					itemLabel="#{can.nombreCanton}" itemValue="#{can.idCanton}" />
+				<p:ajax event="change" partialSubmit="true" process="@this"
+					update="comboPa @this"
+					listener="#{cialcoController.findParroquias}" global="false" />
+			</p:selectOneMenu>
+
+			<h:outputText value="Parroquia: *" />
+			<p:selectOneMenu id="comboPa"
+				value="#{cialcoController.cialcoDTO.idParroquia}">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{cialcoController.parroquiaDTOs}" var="par"
+					itemLabel="#{par.nombreParroquia}" itemValue="#{par.idParroquia}" />
+				<p:ajax event="change" partialSubmit="true" process="@this"
+					update="@this" global="false" />
+			</p:selectOneMenu>
+
+			<h:outputText value="Localidad:" />
+			<p:inputText maxlength="99"
+				value="#{cialcoController.cialcoDTO.localidad}">
+				<pe:keyFilter regEx="/[a-z_\s]/i" />
+			</p:inputText>
+
+			<h:outputText value="Coordenada x:" />
+			<p:inputText maxlength="20"
+				value="#{cialcoController.cialcoDTO.cordenadaX}">
+				<pe:keyFilter regEx="/[\d\-]/" />
+			</p:inputText>
+
+			<h:outputText value="Coordenada y:" />
+			<p:inputText maxlength="20"
+				value="#{cialcoController.cialcoDTO.cordenadaY}">
+				<pe:keyFilter regEx="/[\d\-]/" />
+			</p:inputText>
+
+			<h:outputText value="Coordenada z:" />
+			<p:inputText maxlength="20"
+				value="#{cialcoController.cialcoDTO.cordenadaZ}">
+				<pe:keyFilter regEx="/[\d\-]/" />
+			</p:inputText>
+
+			<h:outputText value="Nombre representante: *" />
+			<p:inputText required="true" maxlength="50"
+				requiredMessage="El campo Nombre representante es reuqerido"
+				value="#{cialcoController.cialcoDTO.nombreRepresentanteCialco}">
+				<pe:keyFilter regEx="/[a-z_\s]/i" />
+			</p:inputText>
+
+			<h:outputText value="Tel&#233;fono fijo:" />
+			<p:inputMask value="#{cialcoController.cialcoDTO.telefonoFijo}"
+				maxlength="9" mask="(99) 9999-999">
+				<pe:keyFilter regEx="/[\d\-]/" />
+			</p:inputMask>
+
+			<h:outputText value="Tel&#233;fono movil:" />
+			<p:inputMask value="#{cialcoController.cialcoDTO.telefonoMovil}"
+				mask="(99) 99-999-999" maxlength="10">
+				<pe:keyFilter regEx="/[\d\-]/" />
+			</p:inputMask>
+
+			<h:outputText value="Mail:" />
+			<p:inputText id="pmail"
+				validatorMessage="El mail ingresado es inv&#225;lido"
+				value="#{cialcoController.cialcoDTO.correo}">
+				<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+				<f:validator validatorId="emailValidator" />
+				<p:ajax event="blur" update="pmail" global="false" />
+			</p:inputText>
+
+			<h:outputText value="Frecuencia: *" />
+			<p:selectOneMenu id="comboFre"
+				value="#{cialcoController.cialcoDTO.idCatalogoFrecuencia}"
+				required="true" requiredMessage="El campo Frecuencia es requerido">
+				<f:selectItem itemLabel="Seleccione" />
+				<f:selectItems value="#{cialcoController.frecuenciaDTOs}" var="fre"
+					itemLabel="#{fre.elementoCatalogo}" itemValue="#{fre.idCatalogo}" />
+			</p:selectOneMenu>
+
+		</h:panelGrid>
+
+		<p:spacer width="5px"></p:spacer>
+		<p:fieldset legend="Dias de funcionamiento" style="margin-bottom:20px"
+			rendered="#{showDays}">
+			<p:selectManyCheckbox required="true"
+				requiredMessage="Debe seleccionar al menos un d&#237;a de funcionamiento"
+				value="#{cialcoController.cialcoDTO.idDias}" layout="responsive"
+				columns="1">
+				<f:selectItems value="#{cialcoController.diaVOs}" var="dest"
+					itemLabel="#{dest.nombre}" itemValue="#{dest.id}" />
+			</p:selectManyCheckbox>
+		</p:fieldset>
+
+		<p:fieldset legend="Horario de funcionamiento"
+			style="margin-bottom:20px" rendered="#{showWorking}">
+			<h:panelGrid columns="2">
+				<h:outputText value="Hora de inicio: *" />
+				<pe:timePicker mode="spinner" showNowButton="false"
+					value="#{cialcoController.cialcoDTO.fechaIni}">
+				</pe:timePicker>
+
+				<h:outputText value="Hora de fin: *" />
+				<pe:timePicker mode="spinner"
+					value="#{cialcoController.cialcoDTO.fechaFin}">
+				</pe:timePicker>
+
+			</h:panelGrid>
+		</p:fieldset>
+	</p:panel>
+
+</ui:composition>

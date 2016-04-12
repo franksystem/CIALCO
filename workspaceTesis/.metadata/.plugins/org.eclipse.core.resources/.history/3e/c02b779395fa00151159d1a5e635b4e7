@@ -1,0 +1,5 @@
+package ec.gob.magap.vo;
+
+public class PantallaVO {
+
+}

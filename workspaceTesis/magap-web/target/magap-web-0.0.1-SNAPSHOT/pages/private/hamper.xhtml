@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Canasta" style="margin-bottom:20px">
+
+		<p:panel header="Datos generales" style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="Nombre canasta: *" />
+				<p:inputText required="true"
+					requiredMessage="Nombre canasta es requerido"
+					value="#{hamperController.cialcoDTO.nombreCialco}" maxlength="100">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Provincia: *" />
+				<p:selectOneMenu value="#{hamperController.cialcoDTO.idProvincia}"
+					required="true" requiredMessage="El campo Provicia es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{hamperController.provinciaDTOs}" var="prov"
+						itemLabel="#{prov.nombreProvincia}"
+						itemValue="#{prov.idProvincia}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="comboCan @this"
+						listener="#{hamperController.findCantones}" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Cant&#243;n: *" />
+				<p:selectOneMenu id="comboCan"
+					value="#{hamperController.cialcoDTO.idCanton}" required="true"
+					requiredMessage="El campo Canton es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{hamperController.cantonDTOs}" var="can"
+						itemLabel="#{can.nombreCanton}" itemValue="#{can.idCanton}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="comboPa @this"
+						listener="#{hamperController.findParroquias}" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Parroquia: *" />
+				<p:selectOneMenu id="comboPa"
+					value="#{hamperController.cialcoDTO.idParroquia}">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{hamperController.parroquiaDTOs}" var="par"
+						itemLabel="#{par.nombreParroquia}" itemValue="#{par.idParroquia}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="@this" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Localidad:" />
+				<p:inputText maxlength="99"
+					value="#{hamperController.cialcoDTO.localidad}">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada x:" />
+				<p:inputText maxlength="20"
+					value="#{hamperController.cialcoDTO.cordenadaX}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada y:" />
+				<p:inputText maxlength="20"
+					value="#{hamperController.cialcoDTO.cordenadaY}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada z:" />
+				<p:inputText maxlength="20"
+					value="#{hamperController.cialcoDTO.cordenadaZ}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+			</h:panelGrid>
+
+		</p:panel>
+
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/organization.xhtml" />
+		</h:panelGroup>
+
+		<p:panel header="Datos del encargado de la canasta"
+			style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="C&#233;dula: *" />
+				<p:inputText id="idced" required="true"
+					requiredMessage="El campo C&#233;dula es requerido"
+					validatorMessage="Numero de c&#233;dula invalida"
+					value="#{hamperController.personaDTO.cedulaPersona}" maxlength="10">
+					<pe:keyFilter regEx="/[\d\-]/" />
+					<f:validateLength minimum="10" />
+					<f:validator validatorId="cedulaValidator" />
+					<p:ajax event="blur" update="idced" global="false"
+						listener="#{hamperController.valitadePersonaDTO}" />
+				</p:inputText>
+
+				<h:outputText value="Nombres: *" />
+				<p:inputText required="true"
+					requiredMessage="El campo Nombres es requerido"
+					value="#{hamperController.personaDTO.nombrePersona}"
+					maxlength="100">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Apellidos: *" />
+				<p:inputText required="true"
+					requiredMessage="El campo Apellidos es requerido"
+					value="#{hamperController.personaDTO.apellidoPersona}"
+					maxlength="100">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Edad:" />
+				<p:inputText value="#{hamperController.personaDTO.edadPersona}"
+					maxlength="3">
+					<pe:keyFilter regEx="/[\d\-]/" />
+					<f:validateLength minimum="1" />
+				</p:inputText>
+
+				<h:outputText value="Correo:" />
+				<p:inputText id="pmail"
+					validatorMessage="El mail ingresado es inv&#225;lido"
+					value="#{hamperController.personaDTO.mailPersona}">
+					<pe:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+					<f:validator validatorId="emailValidator" />
+					<p:ajax event="blur" update="pmail" global="false" />
+				</p:inputText>
+
+				<h:outputText value="Tel&#233;fono movil:" />
+				<p:inputMask value="#{hamperController.personaDTO.telefonoMovil}"
+					mask="(99) 999-999-999" maxlength="10">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputMask>
+
+				<h:outputText value="Tel&#233;fono fijo:" />
+				<p:inputMask value="#{hamperController.personaDTO.telefonoFijo}"
+					maxlength="9" mask="(99) 9999-999">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputMask>
+			</h:panelGrid>
+		</p:panel>
+
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/support.xhtml" />
+		</h:panelGroup>
+
+		<p:panel header="Datos de la entrega canasta"
+			style="margin-bottom:20px">
+
+			<p:commandButton value="Agregar punto de entrega" icon="ui-icon-plus"
+				actionListener="#{hamperController.newLugar}"
+				oncomplete="PF('dlgLugCan').show();" partialSubmit="true"
+				process="@this" update="addLugCan" />
+
+			<p:dataTable id="tblLugar" rowIndexVar="rowNum" style="width:100%;"
+				paginatorPosition="top" paginator="true" pageLinks="2"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+				emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+				value="#{hamperController.lugarEntregaCanastaDTOs}" var="org">
+				<f:facet name="header">Puntos de entrega</f:facet>
+				<p:column style="width:10%;text-align:center;" headerText="Nro">
+					<h:outputLabel value="#{rowNum+1}" />
+				</p:column>
+				<p:column headerText="Lugar">
+					<h:outputText value="#{org.lugar}" />
+				</p:column>
+				<p:column headerText="Frecuencia">
+					<h:outputText value="#{org.nameFrecuencia}" />
+				</p:column>
+				<!-- 							<p:column headerText="Dias"> -->
+				<!-- 								<h:outputText value="#{org.nameDias}" /> -->
+				<!-- 							</p:column> -->
+
+				<p:column headerText="Acciones" style="text-align: center">
+					<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+						update="page:addLugCan" global="false" process="@this"
+						oncomplete="PF('dlgLugCan').show();">
+						<f:setPropertyActionListener value="#{org}"
+							target="#{hamperController.lugarEntregaCanastaDTO}" />
+					</p:commandButton>
+					<p:commandButton update=":page:tblLugar" icon="ui-icon-trash"
+						partialSubmit="true" global="false" process="@this"
+						actionListener="#{hamperController.deleteLugar(org)}">
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+
+
+			<h:panelGrid columns="2">
+				<h:outputText value="Tipo de canasta: *" />
+				<p:selectOneMenu required="true"
+					requiredMessage="El campo tipo canasta es requerido"
+					value="#{hamperController.cialcoDTO.tipo}" style="width: 125px;">
+					<f:selectItem itemLabel="Seleccione" itemValue="" />
+					<f:selectItem itemLabel="A" itemValue="1" />
+					<f:selectItem itemLabel="B" itemValue="2" />
+				</p:selectOneMenu>
+
+
+			</h:panelGrid>
+
+
+		</p:panel>
+
+
+
+		<p:panel header="Datos de venta canasta" style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="Monto venta / entrega: *" />
+				<p:spinner value="#{hamperController.cialcoDTO.montoVentas}"
+					prefix="$" min="0" maxlength="6" />
+
+				<!-- 				<h:outputText value="Monto ventas / mes: *" /> -->
+				<!-- 				<p:spinner value="#{hamperController.cialcoDTO.montoVentas}" -->
+				<!-- 					prefix="$" min="0" /> -->
+
+			</h:panelGrid>
+		</p:panel>
+
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/consumer.xhtml" />
+		</h:panelGroup>
+	</p:panel>
+
+	<h:panelGroup layout="block" style="text-align: center">
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form"
+			actionListener="#{hamperController.guardarCialco}">
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

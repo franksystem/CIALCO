@@ -1,0 +1,6 @@
+1459786704298	Delete element
+1459795002867	Encapsulate field 'nombrePantalla'
+1459795009332	Encapsulate field 'url'
+1459803256003	Convert local variable 'pantallaDTO' to field
+1459956756665	Encapsulate field 'filteredPantallaDTOs'
+1459971389142	Encapsulate field 'idPantalla'

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addLugCan" header="Lugar" widgetVar="dlgLugCan"
+		modal="true" resizable="false" dynamic="true" height="450"
+		responsive="true">
+		<h:form id="formLugCan">
+			<h:panelGroup style="width:100%;" layout="block">
+				<h:panelGrid columns="2">
+
+					<h:outputText value="Nombre canasta: *" />
+					<p:inputText maxlength="50"
+						value="#{hamperController.lugarEntregaCanastaDTO.nombreCanasta}">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+					<h:outputText value="Lugar: *" />
+					<p:inputText maxlength="50"
+						value="#{hamperController.lugarEntregaCanastaDTO.lugar}">
+						<pe:keyFilter regEx="/[a-z_\s]/i" />
+					</p:inputText>
+					<h:outputText value="Frecuencia: *" />
+					<p:selectOneMenu
+						value="#{hamperController.lugarEntregaCanastaDTO.idcatalogoFrecuencia}"
+						required="true" requiredMessage="El campo Frecuencia es requerido">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{hamperController.frecuenciaDTOs}"
+							var="fre" itemLabel="#{fre.elementoCatalogo}"
+							itemValue="#{fre.idCatalogo}" />
+					</p:selectOneMenu>
+					<h:outputText value="Numero de canasta de entrega: " />
+					<p:inputText maxlength="10"
+						value="#{hamperController.lugarEntregaCanastaDTO.numeroCanasta}">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputText>
+					<h:outputText value="Precio canasta: *" />
+					<p:spinner
+						value="#{hamperController.lugarEntregaCanastaDTO.precio}"
+						prefix="$" min="0" maxlength="6" />
+
+				</h:panelGrid>
+				<br />
+				<p:fieldset legend="Dias" style="margin-bottom:20px">
+					<p:selectManyCheckbox required="true"
+						requiredMessage="Debe seleccionar al menos un dia"
+						value="#{hamperController.lugarEntregaCanastaDTO.idDias}"
+						layout="responsive" columns="1">
+						<f:selectItems value="#{hamperController.diaVOs}" var="dest"
+							itemLabel="#{dest.nombre}" itemValue="#{dest.id}" />
+
+					</p:selectManyCheckbox>
+				</p:fieldset>
+				<p:fieldset legend="Productos: *" style="margin-bottom:20px">
+					<p:selectManyCheckbox required="true"
+						requiredMessage="Debe seleccionar al menos un producto"
+						value="#{hamperController.lugarEntregaCanastaDTO.idRubros}"
+						layout="responsive" columns="1">
+						<f:selectItems value="#{hamperController.productoDTOs}"
+							var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+							itemValue="#{rubro.idCatalogo}" />
+					</p:selectManyCheckbox>
+				</p:fieldset>
+
+				<br />
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk">
+						<p:ajax listener="#{hamperController.addLugar}"
+							update="page:tblLugar"
+							oncomplete="handleSaveRequest(xhr, status, args)" process="@form"
+							resetValues="true" />
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close" resetValues="true">
+						<p:ajax oncomplete="PF('dlgLugCan').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+						<p:resetInput target="formLugCan" />
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgLugCan').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgLugCan').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

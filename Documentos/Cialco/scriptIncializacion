@@ -1,0 +1,745 @@
+﻿create sequence ID_USUARIO_SEQ start with 1 increment by 1;
+create sequence ID_PERFIL_SEQ start with 1 increment by 1;
+create sequence ID_PERSONA_SEQ start with 1 increment by 1;
+create sequence ID_CATALOGO_SEQ start with 1 increment by 1;
+create sequence ID_CANTON_SEQ start with 1 increment by 1;
+create sequence ID_CIALCO_SEQ start with 1 increment by 1;
+create sequence ID_DESTINOPRODUCCION start with 1 increment by 1;
+create sequence ID_FUENTEINGRESO_SEQ start with 1 increment by 1;
+create sequence ID_INSTITUCIONAPOYO_SEQ start with 1 increment by 1;
+create sequence ID_ORGANIZACION_SEQ start with 1 increment by 1;
+create sequence ID_PARROQUIA_SEQ start with 1 increment by 1;
+create sequence ID_PRACTICAPRODUCTIVA_SEQ start with 1 increment by 1;
+create sequence ID_PRODUCTO_SEQ start with 1 increment by 1;
+create sequence ID_PRODUCTOR_SEQ start with 1 increment by 1;
+create sequence ID_PROVINCIA_SEQ start with 1 increment by 1;
+create sequence ID_TELEFONO_SEQ start with 1 increment by 1;
+create sequence ID_UBICACIONFINCA_SEQ start with 1 increment by 1;
+create sequence ID_DESTINOINGRESO_SEQ start with 1 increment by 1;
+create sequence ID_PRODUCTORORG_SEQ start with 1 increment by 1;
+create sequence ID_PRODUCTPRO_SEQ start with 1 increment by 1;
+create sequence ID_PERSONACIALCO_SEQ start with 1 increment by 1;
+create sequence ID_DESTINOPRODUCCION_SEQ start with 1 increment by 1;
+create sequence ID_PROVEEDOR_SEQ start with 1 increment by 1;
+create sequence ID_PRESENTACIONPRODUCTO_SEQ start with 1 increment by 1;
+create sequence ID_CANASTA_SEQ start with 1 increment by 1;
+create sequence ID_ENTREGACANASTA_SEQ start with 1 increment by 1;
+create sequence ID_LUGARENTREGACANASTA_SEQ start with 1 increment by 1;
+create sequence ID_MENU_SEQ start with 1 increment by 1;
+create sequence ID_PANTALLA_SEQ start with 1 increment by 1;
+create sequence ID_USUARIOPERFIL_SEQ start with 1 increment by 1;
+
+/*Inicialización de pantallas*/
+/*Pantallas de mantenimientos*/
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/indexPantalla.xhtml','Mantenimiento de URLs',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/indexMenu.xhtml','Mantenimiento de Menús',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/indexProducer.xhtml','Mantenimiento Productores',1,current_date,1);
+
+/*Estas pantallas son temporales hasta que se realisen las pantallas de mantenimiento de los formularios*/
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'url','Principal',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/store.xhtml','Formulario de Tienda',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/footPage.xhtml','Formulario Pie de Finca',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/hamper.xhtml','Formulario de Canasta',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/fair.xhtml','Formulario de Feria',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/organization.xhtml','Formulario de Organización',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/report/producerReport.xhtml','Reporte de Productor',1,current_date,1);
+
+
+/*Inicialización del menú*/
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'),null,1,'Magap',null,1,current_date,1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 1, 2, 'Productor', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 1, 1, 'Cialco', null, 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 3, 3, 'Tienda', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 3, 4, 'Pie de finca', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 3, 5, 'Canasta', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 3, 6, 'Feria', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 3, 7, 'Organización', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 1, 1, 'Reportes', null, 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 9, 8, 'Productores', 'ui-icon-star', 1, current_date, 1);	
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 9, 9, 'Pantallas', 'ui-icon-star', 1, current_date, 1);
+
+/*Creación del perfil de administrador*/		
+INSERT INTO PERFIL_TBL (id_Perfil, id_menu, nombrePerfil, descripcionPerfil, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_PERFIL_SEQ'),1,'Administrator','Administrador el sistema', 1, current_date, 1);
+
+/*Creacion del Usuario Administrador*/
+INSERT INTO usuario_tbl( id_usuario, id_persona, nombreusuario, contrasena, estado, fechacreacion) 
+VALUES (nextval('ID_USUARIO_SEQ'), null, 'admin', 'wB0ZHjsTys0=', 1, current_date);
+
+INSERT INTO persona_tbl(
+            id_persona, nombrepersona, apellidopersona, cedulapersona, edadpersona, 
+            mailpersona, actividadpersona, id_catalogoescolaridad, id_catalogoetnia, 
+            id_catalogogenero, telefonofijo, telefonomovil, estado, id_usuariocreacion, 
+            fechacreacion, id_usuariomodificacion, fechamodificacion, id_catalogoparentesco)
+    VALUES (nextval('ID_PERSONA_SEQ'), 'Administrador', 'Magap', '9999999999', null, 
+            'panasfrank@hotmail.com', null, 1, 1, 
+            1, null, null, 1, 1, 
+            current_date, null, null, null);
+
+UPDATE usuario_tbl SET  id_persona=1 WHERE ID_USUARIO = 1;
+
+/*asignacion del perfil al usuario*/
+INSERT INTO usuarioperfil_tbl(id_usuarioPerfil, id_perfil, id_usuario, fechacaducidad, crearpermiso, editarpermiso, consultapermiso, eliminarpermiso, fechaCreacion, id_usuarioCreacion, estado)
+VALUES(nextval('ID_USUARIOPERFIL_SEQ'),1, 1, null, TRUE, TRUE, TRUE, TRUE, current_date,1,1);
+
+/*
+INSERT INTO MENU_TBL (ID_MENU, NOMBRE, URL, ICONO, ESTADO, ID_MENUPADRE) VALUES (nextval('ID_MENU_SEQ'), 'Magap', 'url', null, 1, null);
+INSERT INTO MENU_TBL (ID_MENU, NOMBRE, URL, ICONO, ESTADO, ID_MENUPADRE) VALUES (nextval('ID_MENU_SEQ'), 'Productor', '/pages/private/indexProducer.xhtml', 'ui-icon-star', 1, 11);
+INSERT INTO MENU_TBL (ID_MENU, NOMBRE, URL, ICONO, ESTADO, ID_MENUPADRE) VALUES (nextval('ID_MENU_SEQ'), 'Cialco', 'url', null, 1, 11);
+
+INSERT INTO MENU_TBL (ID_MENU, NOMBRE, URL, ICONO, ESTADO, ID_MENUPADRE) VALUES (nextval('ID_MENU_SEQ'), 'Tienda', '/pages/private/store.xhtml', 'ui-icon-star', 1, 13);
+INSERT INTO MENU_TBL (ID_MENU, NOMBRE, URL, ICONO, ESTADO, ID_MENUPADRE) VALUES (nextval('ID_MENU_SEQ'), 'Pie de finca', '/pages/private/footPage.xhtml', 'ui-icon-star', 1, 13);
+
+			
+INSERT INTO PERFIL_TBL ( ID_PERFIL,ID_MENU,NOMBREPERFIL,DESCRIPCIONPERFIL,ESTADO,FECHACREACION) VALUES (nextval('ID_PERFIL_SEQ'),11,'Digitador','Cuenta ingreso de datos',1,current_date);
+INSERT INTO usuario_tbl( id_usuario, id_perfil, id_persona, nombreusuario, contrasena, estado, fechacreacion) VALUES (nextval('ID_USUARIO_SEQ'), 2, null, 'mvivanco', 'wB0ZHjsTys0=',1,current_date);
+
+INSERT INTO persona_tbl(
+            id_persona, nombrepersona, apellidopersona, cedulapersona, edadpersona, 
+            mailpersona, actividadpersona, id_catalogoescolaridad, id_catalogoetnia, 
+            id_catalogogenero, telefonofijo, telefonomovil, estado, id_usuariocreacion, 
+            fechacreacion, id_usuariomodificacion, fechamodificacion, id_catalogoparentesco)
+    VALUES (nextval('ID_PERSONA_SEQ'), 'Majo', 'Vivanco', '1718915349', null, 
+            'alex_max2010@hotmail.com', null, 1, 1, 
+            1, null, null, 1, 1, 
+            current_date, null, null, null);
+
+UPDATE usuario_tbl SET  id_persona=2 WHERE ID_USUARIO = 2;
+*/
+
+
+
+
+
+/*inicialización del catalogo*/
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),1,'AFROECUATORIANO','ETNIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),1,'BLANCO','ETNIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),1,'INDIGENA','ETNIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),1,'MESTIZO','ETNIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),1,'MONTUBIO','ETNIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),2,'ALFABETIZACION','ESCOLARIDAD',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),2,'PRIMARIA','ESCOLARIDAD',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),2,'PRIMARIA COMPLETA','ESCOLARIDAD',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),2,'SECUNDARIA','ESCOLARIDAD',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),2,'SECUANDARIA COMPLETA','ESCOLARIDAD',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),2,'UNIVERSIDAD','ESCOLARIDAD',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),2,'UNIVERSIDAD COMPLETA','ESCOLARIDAD',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),2,'NINGUNA','ESCOLARIDAD',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'ACTIVIDADES AGRÍCOLAS EN SU PARCELA','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'ACTIVIDADES PECUARIAS EN SU PARCELA','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'ELABORACIÓN Y VENTA DE PRODUCTOS PROCESADOS A PARTIR DE PRODUCTOS DE ORIGEN AGROPECUARIO','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'PESCA','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'RECOLECCIÓN','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'TURISMO COMUNITARIO','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'JORNALERO AGRÍCOLA ASALARIADO','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'ELABORACIÓN Y VENTA DE ARTESANÍAS','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'VENTA DE PRODUCTOS AGROPECUARIOS DE TERCEROS','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'ACTIVIDADES NO AGROPECUARIAS','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),3,'COMERCIANTE DE PRODUCTOS NO AGROPECUARIOS','FUENTES INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),4,'PROPIA','POSESION TIERRA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),4,'ARRENDADA','POSESION TIERRA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),4,'COMUNITARIA','POSESION TIERRA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),4,'COMODATO','POSESION TIERRA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),4,'OTRA','POSESION TIERRA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),5,'CONVENCIONAL','PRACTICAS PRODUCTIVAS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),5,'ORGÁNICA','PRACTICAS PRODUCTIVAS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),5,'AGROECOLÓGICA','PRACTICAS PRODUCTIVAS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),5,'OTRA','PRACTICAS PRODUCTIVAS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),5,'EN TRANSICION A ORGÁNICA','PRACTICAS PRODUCTIVAS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),5,'EN TRANSICION A AGROECOLÓGICO','PRACTICAS PRODUCTIVAS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),6,'CUENTA CON ASISTENCIA TECNICA','APOYO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),6,'TIENE ACCESO A CRÉDITO','APOYO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),6,'POSEE SEGURO AGRÍCOLA EN ALGÚN CULTIVO','APOYO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),6,'ACCESO A RIEGO','APOYO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'MERCADO MUNICIPAL','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'SUPERMERCADO','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'INTERMEDIRARIOS','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'TIENDA DE BARRIO','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'MICROMERCADO','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'RESTAURANTES / COMEDOR','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'CATERING','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'EMPRESAS PRIVADAS','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'AUTOCONSUMO','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'TRUEQUE','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'UNIDAD NACIONAL DE ALMACENAMIENTO','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'PIE DE FINCA','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'FERIA DE PRODUCTORES','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'CANASTA','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'TIENDA DE PRODUCTOS CAMPESINOS','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'EXPORTACIÓN CAMPESINA','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'COMPRA PUBLICA','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),7,'OTRA','DESTINO PRODUCCION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),8,'QUINCENAL','FRECUENCIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),8,'MENSUAL','FRECUENCIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),8,'DIARIO','FRECUENCIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),8,'FINES DE SEMANA','FRECUENCIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),9,'HIJO/A','PARENTEZCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),9,'ESPOSO/A','PARENTEZCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),9,'CUÑADO/A','PARENTEZCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),9,'HERMANO/A','PARENTEZCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),9,'PRIMO/A','PARENTEZCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),9,'PAPA','PARENTEZCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),9,'MAMA','PARENTEZCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),9,'TIO/A','PARENTEZCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),10,'LIBRAS','UNIDAD MEDIDA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),10,'KILOS','UNIDAD MEDIDA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),10,'GRAMOS','UNIDAD MEDIDA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),10,'LITROS','UNIDAD MEDIDA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),10,'QUINTAL','UNIDAD MEDIDA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),10,'ARROBAS','UNIDAD MEDIDA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'HORTALIZAS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'FRUTAS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'GRANOS FRESCOS Y SECOS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'LÁCTEOS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'CARNICOS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'PESCADOS Y MARISCOS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'CEREALES','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'ALIMENTOS PROCESADS DE MANERA ARTESANAL','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'ALIMENTOS INDUSTRIALIZADOS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'PRODUDCTOS DE LIMPIEZA Y CUIDADO PERSONAL ARTESANALES','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'PRODUDCTOS DE LIMPIEZA Y CUIDADO PERSONAL INDUSTRIALIZADOS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'MIEL Y DERIVADOS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'HUEVOS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'ARTESANIAS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),11,'OTROS','RUBROS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'ACELGA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CHOCHAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'AGUACATE','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'AJI','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'APIO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'ARVEJA_TIERNA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'BABACO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'BARRAGETE','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'BERRO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'LECHUGA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'LIMONES','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'MANZANAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'MELLOCO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'MORA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'BROCOLI','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CAMOTE','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CEBOLLA_BLANCA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CEBOLLA_PAITEÑA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CEBOLLIN','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CHAMBURO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CHIRIMOYA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CHULPI','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'NABO_CHINO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'NABO_DE_CAMPO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'OCAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CHOCHOS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'OREGANO ','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PAPA_NABO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PAPAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PASTO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PEPAS DE SAMBO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PEPINILLO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PEREJIL','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CIRUELOS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'COLA DE CABALLO ','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'COL BROCELA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'COL MORADA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'COL VERDE','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'COLIFLOR','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CULANTRO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'ESPINACA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'CANARIO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'FREJOL TIERNO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'GRANADILLAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PIMIENTOS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PLANTAS ORNAMENTALES','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PLANTAS MEDICINALES','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'PLANTAS FRUTALES','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'QUINUA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'RABANO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'REMOLACHA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'ROMANESCO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'SAMBO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'TAXO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'HABAS SECAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'HABAS TIERNAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'HIGO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'JICAMA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'TOMATE ARBOL','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'VAINITAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'UVILLAS','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'ZANAHORIA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'ZANAHORIA BLANCA','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'ZUQUINI','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'ZAPALLO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'FREJOL SECO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'FREJOL SECO CHOLO','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),12,'TOMATE RIÑON','PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),13,'AGRICOLAS','TIPO PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),13,'PECUARIOS','TIPO PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),13,'PROCESADOS','TIPO PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),13,'INSUMOS','TIPO PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),13,'OTROS','TIPO PRODUCTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'ALIMENTACION','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'SALUD','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'EDUCACION','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'PRODUCCION','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'VESTIMENTA','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'VIVIENDA','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'PAGO DE DEUDAS','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'RECREACION','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),14,'OTROS','DESTINO INGRESOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),15,'MASCULINO','GENERO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),15,'FEMENINO','GENERO',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),16,'CIALCO TIENDA','CIALCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),16,'CIALCO PIE FINCA','CIALCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),16,'CIALCO CANASTA','CIALCO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),16,'CIALCO FERIA','CIALCO',1,1,current_date);
+
+
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),17,'FUNDAS','PRESENTACION DE PRODUCTOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),17,'BOTELLAS','PRESENTACION DE PRODUCTOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),17,'ATADOS','PRESENTACION DE PRODUCTOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),17,'CAJAS','PRESENTACION DE PRODUCTOS',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'CARPAS','EQUIPAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'MESAS','EQUIPAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'SILLAS','EQUIPAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'TECHO FIJO','EQUIPAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'PISO DE CEMENTO','EQUIPAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'TACHOS DE BASURA','EQUIPAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'ROTULACION DE PRECIOS','EQUIPAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'BALANZAS','EQUIPAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),18,'UNIFORME','EQUIPAMIENTO',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),19,'DISPERSA','TIPO ENTREGA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),19,'CONCENTRADA','TIPO ENTREGA',1,1,current_date);
+
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'CARPAS','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'MESAS','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'SILLAS','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'TECHO FIJO','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'PISO DE CEMENTO','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'TACHOS DE BASURA','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'ROTULACION DE PRECIOS','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'BALANZAS','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'UNIFORME','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'BAÑOS','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'GAVETAS','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'HIELERAS/COOLERS','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'AGUA POTABLE','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'ALCANTARILLADO','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'LUZ ELECTRICA','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'SEGURIDAD','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),20,'RECOLECCION DE BASURA','EQUIPAMIENTO DISPONIBLE',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),21,'MEDIOS MASIVOS','DIFUSION FERIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),21,'PUBLICIDAD IMPRESA','DIFUSION FERIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),21,'INTERNET Y REDES SOCIALES','DIFUSION FERIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),21,'PERIFONEO','DIFUSION FERIA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),21,'OTROS','DIFUSION FERIA',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),22,'APORTE PARA LA PARTICIPACION','FUNCIONAMIENTO DE LOS CIALCOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),22,'TIENEN REGLAMENTO','FUNCIONAMIENTO DE LOS CIALCOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),22,'CUENTAN CON SISTEMA PARTICIPATIVO DE GARANTIA O AFINES','FUNCIONAMIENTO DE LOS CIALCOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),22,'EXISTE UNA DIRECTIVA','FUNCIONAMIENTO DE LOS CIALCOS',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),22,'MANTIENEN UN SISTEMA DE REGISTRO DE PRODUCTORES Y VENTAS','FUNCIONAMIENTO DE LOS CIALCOS',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),23,'PRODUCTORES AGROPECUARIOS','PARTICIPANTES ACTUALES',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),23,'PESCADORES','PARTICIPANTES ACTUALES',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),23,'COMERCIANTES AGROPECUARIOS','PARTICIPANTES ACTUALES',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),23,'COMERCIANTES OTROS RUBROS','PARTICIPANTES ACTUALES',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),23,'ARTESANOS','PARTICIPANTES ACTUALES',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),23,'OTROS','PARTICIPANTES ACTUALES',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),24,'ORGANICO','TIPO DE SISTEMA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),24,'CONVENCIONAL','TIPO DE SISTEMA',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),24,'AGROECOLOGICO','TIPO DE SISTEMA',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),25,'VIVERO','SEDE DE LA ORGANIZACION',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),25,'TENDALES','SEDE DE LA ORGANIZACION',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),26,'PROPIO','CENTRO DE ACOPIO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),26,'ALQUILADO','CENTRO DE ACOPIO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),26,'PRESTADO','CENTRO DE ACOPIO',1,1,current_date);
+
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),27,'LAVADO','EQUIPAMIENTO PARA PROCESAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),27,'CLASIFICADO','EQUIPAMIENTO PARA PROCESAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),27,'PELADO','EQUIPAMIENTO PARA PROCESAMIENTO',1,1,current_date);
+INSERT INTO CATALOGO_TBL (id_catalogo,tipoCatalogo,elementoCatalogo,descripcionCatalogo,estado,id_usuarioCreacion,fechaCreacion) VALUES (nextval('ID_CATALOGO_SEQ'),27,'EMPACADO','EQUIPAMIENTO PARA PROCESAMIENTO',1,1,current_date);
+
+
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (1,'Esmeraldas');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (2,'Manabí');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (3,'Rios');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (4,'Guayas');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (5,'Santa Elena');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (6,'El Oro');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (7,'Carchi');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (8,'Imbabura');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (9,'Pichincha');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (10,'Santo Domingo');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (11,'Cotopaxi');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (12,'Tungurahua');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (13,'Bolivar');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (14,'Chimborazo');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (15,'Cañar');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (16,'Azuay');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (17,'Loja');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (18,'Sucumbíos');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (19,'Napo');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (20,'Orellana');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (21,'Pastaza');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (22,'Morona Santiago');
+INSERT INTO PROVINCIA_TBL (id_provincia,nombreProvincia) VALUES (23,'Zamora Chinchipe');
+
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (1,1,'Esmeraldas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (2,1,'Valdez');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (3,1,'Muisne');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (4,1,'Rosa Zárate');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (5,1,'San Lorenzo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (6,1,'Atacames');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (7,1,'Rioverde');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (8,2,'Portoviejo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (9,2,'Calceta');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (10,2,'Chone');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (11,2,'El Carmen');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (12,2,'Flavio Alfaro');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (13,2,'Jipijapa');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (14,2,'Puerto López');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (15,2,'Junín');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (16,2,'Manta');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (17,2,'Montecristi');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (18,2,'Paján');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (19,2,'Pichincha');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (20,2,'Rocafuerte');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (21,2,'Santa Ana');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (22,2,'Olmedo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (23,2,'Bahía de Caráquez');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (24,2,'Tosagua');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (25,2,'Sucre');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (26,2,'Pedernales');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (27,2,'Jama');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (28,2,'Jaramijó');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (29,2,'San Vicente');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (30,3,'Babahoyo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (31,3,'Baba');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (32,3,'Montalvo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (33,3,'Puebloviejo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (34,3,'Quinsaloma');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (35,3,'Quevedo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (36,3,'Catarama');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (37,3,'Ventanas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (38,3,'Vinces');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (39,3,'Palenque');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (40,3,'San Jacinto de Buena Fe');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (41,3,'Valencia');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (42,3,'Mocache');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (43,4,'Guayaquil');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (44,4,'Baquerizo Moreno');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (45,4,'Balao');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (46,4,'Balzar');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (47,4,'Colimes');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (48,4,'Daule');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (49,4,'Eloy Alfaro');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (50,4,'Velasco Ibarra');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (51,4,'El Triunfo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (52,4,'Antonio Elizalde');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (53,4,'Isidro Ayora');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (54,4,'Lomas de Sargentillo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (55,4,'Marcelino Maridueña');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (56,4,'Milagro');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (57,4,'Palestina');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (58,4,'Pedro Carbo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (59,4,'General Villamil');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (60,4,'Samborondón');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (61,4,'Santa Lucía');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (62,4,'Simón Bolívar');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (63,4,'El Salitre');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (64,4,'San Jacinto de Yaguachi');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (65,5,'Santa Elena');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (66,5,'Salinas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (67,5,'La Libertad');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (68,6,'Machala');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (69,6,'Arenillas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (70,6,'Paccha');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (71,6,'Balsas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (72,6,'Chilla');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (73,6,'El Guabo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (74,6,'Huaquillas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (75,6,'La Victoria');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (76,6,'Marcabelí');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (77,6,'Pasaje');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (78,6,'Piñas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (79,6,'Portovelo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (80,6,'Santa Rosa');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (81,6,'Zaruma');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (82,7,'Tulcán');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (83,7,'San Pedro de Huaca');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (84,7,'San Miguel');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (85,7,'Bolívar');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (86,7,'El Ángel');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (87,7,'Mira');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (88,8,'Ibarra');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (89,8,'Otavalo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (90,8,'Cotacachi');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (91,8,'Atuntaqui');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (92,8,'Pimampiro');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (93,8,'Urcuquí');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (94,9,'Quito');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (95,9,'Cayambe');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (96,9,'Machachi');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (97,9,'Tabacundo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (98,9,'Pedro Vicente Maldonado');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (99,9,'Puerto Quito');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (100,9,'Sangolquí');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (101,9,'Los Bancos');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (102,10,'Santo Domingo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (103,10,'La Concordia');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (104,11,'Latacunga');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (105,11,'La Maná');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (106,11,'El Corazón');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (107,11,'Pujilí');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (108,11,'San Miguel');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (109,11,'Saquisilí');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (110,11,'Sigchos');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (111,12,'Ambato');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (112,12,'Baños de Agua Santa');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (113,12,'Cevallos');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (114,12,'Mocha');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (115,12,'Patate');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (116,12,'Quero');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (117,12,'Pelileo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (118,12,'Píllaro');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (119,12,'Tisaleo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (120,13,'Guaranda');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (121,13,'Caluma');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (122,13,'Chillanes');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (123,13,'Chimbo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (124,13,'Echeandía');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (125,13,'Las Naves');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (126,13,'San Miguel');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (127,14,'Riobamba');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (128,14,'Alausí');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (129,14,'Villa La Unión');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (130,14,'Cumandá');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (131,14,'Chambo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (132,14,'Chunchi');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (133,14,'Guamote');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (134,14,'Guano');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (135,14,'Pallatanga');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (136,14,'Penipe');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (137,15,'Azogues');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (138,15,'Biblián');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (139,15,'Cañar');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (140,15,'Déleg');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (141,15,'El Tambo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (142,15,'La troncal');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (143,15,'Suscal');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (144,16,'Cuenca');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (145,16,'Camilo Ponce Enríquez');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (146,16,'Chordeleg');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (147,16,'El Pan');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (148,16,'Girón');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (149,16,'Gualaceo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (150,16,'Nabón');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (151,16,'Oña');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (152,16,'Paute');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (153,16,'Pucará');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (154,16,'San Fernando');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (155,16,'Santa Isabel');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (156,16,'Sevilla de Oro');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (157,16,'Sígsig ');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (158,16,'Guachapala');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (159,17,'Loja');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (160,17,'Cariamanga');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (161,17,'Catamayo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (162,17,'Celica');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (163,17,'Chaguarpamba');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (164,17,'Amaluza');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (165,17,'Gonzanamá');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (166,17,'Macará');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (167,17,'Olmedo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (168,17,'Catacocha');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (169,17,'Pindal');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (170,17,'Alamor');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (171,17,'Quilanga');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (172,17,'Saraguro');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (173,17,'Sozoranga');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (174,17,'Zapotillo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (175,18,'Nueva Loja');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (176,18,'El Dorado de Cascales');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (177,18,'Trapoa');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (178,18,'Lumbaqui');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (179,18,'Puerto El Carmen');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (180,18,'Shushufindi');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (181,18,'La Bonita');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (182,19,'Archidona');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (183,19,'Arosemena Tola');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (184,19,'El Chaco');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (185,19,'Baeza');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (186,19,'Tena');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (187,20,'Francisco de Orellana');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (188,20,'Nuevo Rocafuerte');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (189,20,'La Joya de los Sachas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (190,20,'Loreto');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (191,21,'Puyo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (192,21,'Arajuno');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (193,21,'Mena');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (194,21,'Santa Clara');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (195,22,'Macas');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (196,22,'Gualaquiza');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (197,22,'Huamboya');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (198,22,'Plaza Gutiérrez');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (199,22,'Logroño');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (200,22,'Pablo Sexto');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (201,22,'Palora');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (202,22,'San Juan Bosco');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (203,22,'Santiago de Méndez');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (204,22,'Sucúa');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (205,22,'Taisha');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (206,22,'Santiago');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (207,23,'Zamora');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (208,23,'Zumbi');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (209,23,'Zumba');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (210,23,'El Pangui');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (211,23,'Guayzini');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (212,23,'Palanda');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (213,23,'Paquisha');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (214,23,'28 de Mayo');
+INSERT INTO CANTON_TBL (id_canton,id_provincia,nombreCanton) VALUES (215,23,'Yantzaza');
+
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (1,94,'Alangasí');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (2,94,'Amaguaña');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (3,94,' Atahualpa');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (4,94,' Calacalí');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (5,94,' Calderón');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (6,94,' Conocoto');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (7,94,' Cumbayá');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (8,94,' Chavezpamba');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (9,94,' Checa');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (10,94,' El Quinche');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (11,94,' Gualea');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (12,94,' Guangopolo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (13,94,' Guayllabamba');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (14,94,' La Merced');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (15,94,'Llano Chico');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (16,94,' Lloa');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (17,94,' Nanegal');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (18,94,' Nanegalito');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (19,94,' Nayón');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (20,94,' Nono');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (21,94,' Pacto');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (22,94,' Perucho');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (23,94,' Pifo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (24,94,' Píntag');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (25,94,' Pomasqui');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (26,94,' Puéllaro');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (27,94,' Puembo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (28,94,' San Antonio');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (29,94,' San José de Minas');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (30,94,' Tababela');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (31,94,' Tumbaco');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (32,94,' Yaruquí');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (33,94,' Zámbiza');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (34,94,' Quevedo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (35,94,' Carcelén');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (36,94,' Centro Histórico');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (37,94,' Cochapamba');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (38,94,' Comité del Pueblo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (39,94,' Cotocollao');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (40,94,' Chilibulo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (41,94,' Chillogallo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (42,94,' Chimbacalle');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (43,94,' El Condado');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (44,94,' Guamaní');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (45,94,' Iñaquito');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (46,94,' Itchimbia');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (47,94,' Jipijapa');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (48,94,' Kennedy');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (49,94,' La Argelia');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (50,94,' La Concepción');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (51,94,' La Ecuatoriana');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (52,94,' La Ferroviaria');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (53,94,' La Libertad');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (54,94,' La Magdalena');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (55,94,' La Mena');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (56,94,' Mariscal Sucre');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (57,94,' Ponceano');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (58,94,' Puengasí');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (59,94,' Quitumbe');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (60,94,' Rumipamba');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (61,94,' San Bartolo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (62,94,' San Isidro del Inca');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (63,94,' San Juan');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (64,94,' Solanda');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (65,94,' Turubamba');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (66,95,'Ascázubi');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (67,95,' Cangahua');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (68,95,' Olmedo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (69,95,' Otón');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (70,95,' Santa Rosa de Cuzubamba');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (71,95,' San José de Ayora');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (72,95,' Cayambe');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (73,95,' Juan Montalvo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (74,96,' Alóag');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (75,96,' Aloasi');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (76,96,' Cutuglahua');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (77,96,' El Chaupi');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (78,96,' Manuel Cornejo Astorga');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (79,96,' Tambillo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (80,96,' Uyumbicho');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (81,96,' Machachi');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (82,97,'La Esperanza');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (83,97,' Malchinguí');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (84,97,' Tocachi');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (85,97,' Tupigachi');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (86,97,' Tabacundo');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (87,98,'Pedro Vicente Maldonado');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (88,99,'Puerto Quito');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (89,100,'Cotogchoa');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (90,100,' Rumipamba');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (91,100,' Rumiñahui');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (92,100,' Sangolquí');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (93,100,' San Pedro de Taboada');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (94,100,' San Rafael');
+INSERT INTO Parroquia_tbl (id_parroquia,id_canton,nombreParroquia) VALUES (95,101,'San Miguel de los Bancos');
+commit;
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Pie de finca" style="margin-bottom:20px">
+
+		<p:panel header="Datos generales" style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="Ano que inicia la actividad la finca: *" />
+				<p:inputText required="true"
+					requiredMessage="El campo Ano que inicia la actividad la finca es requerido"
+					value="#{footPageController.cialcoDTO.nombreCialco}" maxlength="5">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Provincia: *" />
+				<p:selectOneMenu value="#{footPageController.cialcoDTO.idProvincia}"
+					required="true" requiredMessage="El campo Provicia es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{footPageController.provinciaDTOs}"
+						var="prov" itemLabel="#{prov.nombreProvincia}"
+						itemValue="#{prov.idProvincia}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="comboCan @this"
+						listener="#{footPageController.findCantones}" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Cant&#243;n: *" />
+				<p:selectOneMenu id="comboCan"
+					value="#{footPageController.cialcoDTO.idCanton}" required="true"
+					requiredMessage="El campo Canton es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{footPageController.cantonDTOs}" var="can"
+						itemLabel="#{can.nombreCanton}" itemValue="#{can.idCanton}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="comboPa @this"
+						listener="#{footPageController.findParroquias}" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Parroquia: *" />
+				<p:selectOneMenu id="comboPa"
+					value="#{footPageController.cialcoDTO.idParroquia}">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{footPageController.parroquiaDTOs}"
+						var="par" itemLabel="#{par.nombreParroquia}"
+						itemValue="#{par.idParroquia}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="@this" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Localidad:" />
+				<p:inputText maxlength="99"
+					value="#{footPageController.cialcoDTO.localidad}">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada x:" />
+				<p:inputText maxlength="20"
+					value="#{footPageController.cialcoDTO.cordenadaX}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada y:" />
+				<p:inputText maxlength="20"
+					value="#{footPageController.cialcoDTO.cordenadaY}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada z:" />
+				<p:inputText maxlength="20"
+					value="#{footPageController.cialcoDTO.cordenadaZ}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+			</h:panelGrid>
+
+		</p:panel>
+
+		<p:panel header="Datos de comercializaci&#243;n"
+			style="margin-bottom:20px">
+			<ui:param name="titleProduct" value="Presentaci&#243;n producto" />
+			<p:fieldset legend="Productos que oferta" style="margin-bottom:20px">
+				<p:fieldset legend="Datos de venta" style="margin-bottom:20px">
+					<h:panelGrid columns="2" id="idMonto">
+						<h:outputText value="Monto promedio de venta / mes:" />
+						<h:outputText
+							value="#{footPageController.productosController.montoTotal}" />
+					</h:panelGrid>
+				</p:fieldset>
+
+				<p:commandButton value="Agregar producto" icon="ui-icon-plus"
+					actionListener="#{footPageController.productosController.newProductos(false)}"
+					oncomplete="PF('dlgAddProductPresent').show();"
+					partialSubmit="true" process="@this" update="addProductPresent">
+				</p:commandButton>
+
+				<p:dataTable id="tblpre" rowIndexVar="rowNum" style="width:100%;"
+					paginatorPosition="top" paginator="true" pageLinks="2"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+					emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+					value="#{footPageController.productosController.presentacionProductoDTOs}"
+					var="org">
+					<f:facet name="header">Productos</f:facet>
+					<p:column style="width:10%;text-align:center;" headerText="Nro">
+						<h:outputLabel value="#{rowNum+1}" />
+					</p:column>
+					<p:column headerText="Producto">
+						<h:outputText value="#{org.nombreProducto}" />
+					</p:column>
+					<p:column headerText="Presentaci&#243;n">
+						<h:outputText value="#{org.nombrePresentacion}" />
+					</p:column>
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{org.cantidad}" />
+					</p:column>
+					<p:column headerText="Unidad">
+						<h:outputText value="#{org.nombreUnidad}" />
+					</p:column>
+					<p:column headerText="Precio">
+						<h:outputText value="#{org.precio}" />
+					</p:column>
+					<p:column headerText="Monto de venta / mes">
+						<h:outputText value="#{org.montoMes}" />
+					</p:column>
+
+					<p:column headerText="Acciones" style="text-align: center">
+						<p:commandButton icon="ui-icon-pencil"
+							update="page:addProductPresent" partialSubmit="true"
+							global="false" process="@this"
+							oncomplete="PF('dlgAddProductPresent').show();">
+							<f:setPropertyActionListener value="#{org}"
+								target="#{footPageController.productosController.presentacionProductoDTO}" />
+						</p:commandButton>
+						<p:commandButton update=":page:tblpre" icon="ui-icon-trash"
+							partialSubmit="true" global="false" process="@this"
+							actionListener="#{footPageController.productosController.deleteProductPresent(org)}">
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+
+
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel header="Equipamiendo disponible en la finca"
+			style="margin-bottom:20px">
+			<p:selectManyCheckbox required="true"
+				requiredMessage="Debe seleccionar al menos un equipamiento"
+				value="#{footPageController.idEquipamientos}" layout="responsive"
+				columns="1">
+				<f:selectItems value="#{footPageController.equipamientoDTOs}"
+					var="dest" itemLabel="#{dest.elementoCatalogo}"
+					itemValue="#{dest.idCatalogo}" />
+
+			</p:selectManyCheckbox>
+		</p:panel>
+
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/consumer.xhtml" />
+		</h:panelGroup>
+
+	</p:panel>
+	<h:panelGroup layout="block" style="text-align: center">
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form"
+			actionListener="#{footPageController.guardarCialco}">
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

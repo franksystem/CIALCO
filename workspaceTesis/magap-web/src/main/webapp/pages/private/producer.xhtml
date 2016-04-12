@@ -1,0 +1,566 @@
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Productor" style="margin-bottom:20px">
+
+		<ui:param name="personTitle" value="Datos generales del productor" />
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/person.xhtml" />
+		</h:panelGroup>
+
+		<p:panel header="Fuentes de sus ingresos" style="margin-bottom:20px">
+			<p:selectManyCheckbox required="true"
+				requiredMessage="Debe seleccionar al menos una fuente de ingreso"
+				value="#{producerController.idFuentes}" layout="responsive"
+				columns="1">
+				<f:selectItems value="#{producerController.fuenteIngresosDTOs}"
+					var="fuente" itemLabel="#{fuente.elementoCatalogo}"
+					itemValue="#{fuente.idCatalogo}" />
+			</p:selectManyCheckbox>
+		</p:panel>
+
+		<p:panel header="Datos de la finca" style="margin-bottom:20px">
+			<h:panelGrid columns="2">
+				<h:outputText value="Provincia: *" />
+				<p:selectOneMenu
+					value="#{producerController.ubicacionFincaDTO.idProvincia}"
+					required="true" requiredMessage="El campo Provicia es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{producerController.provinciaDTOs}"
+						var="prov" itemLabel="#{prov.nombreProvincia}"
+						itemValue="#{prov.idProvincia}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="comboCan @this"
+						listener="#{producerController.findCantones}" global="false" />
+				</p:selectOneMenu>
+
+
+				<h:outputText value="Canton: *" />
+				<p:selectOneMenu id="comboCan"
+					value="#{producerController.ubicacionFincaDTO.idCanton}"
+					required="true" requiredMessage="El campo Canton es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{producerController.cantonDTOs}" var="can"
+						itemLabel="#{can.nombreCanton}" itemValue="#{can.idCanton}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="comboPa @this"
+						listener="#{producerController.findParroquias}" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Parroquia: *" />
+				<p:selectOneMenu id="comboPa"
+					value="#{producerController.ubicacionFincaDTO.idParroquia}">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{producerController.parroquiaDTOs}"
+						var="par" itemLabel="#{par.nombreParroquia}"
+						itemValue="#{par.idParroquia}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="@this" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Localidad:" />
+				<p:inputText maxlength="99"
+					value="#{producerController.ubicacionFincaDTO.localidadFinca}">
+					<pe:keyFilter regEx="/[a-z_\s]/i" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada x:" />
+				<p:inputText maxlength="20"
+					value="#{producerController.ubicacionFincaDTO.cordenadaX}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada y:" />
+				<p:inputText maxlength="20"
+					value="#{producerController.ubicacionFincaDTO.cordenadaY}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Coordenada z:" />
+				<p:inputText maxlength="20"
+					value="#{producerController.ubicacionFincaDTO.cordenadaZ}">
+					<pe:keyFilter regEx="/[\d\-]/" />
+				</p:inputText>
+
+				<h:outputText value="Posesi&#243;n de la tierra: *" />
+				<p:selectOneMenu
+					value="#{producerController.ubicacionFincaDTO.idCatalogoPosesion}"
+					required="true"
+					requiredMessage="El campo Posesi&#243;n es requerido">
+					<f:selectItem itemLabel="Seleccione" />
+					<f:selectItems value="#{producerController.posesionDTOs}" var="pos"
+						itemLabel="#{pos.elementoCatalogo}" itemValue="#{pos.idCatalogo}" />
+					<p:ajax event="change" partialSubmit="true" process="@this"
+						update="@this" global="false" />
+				</p:selectOneMenu>
+
+				<h:outputText value="Superficie de la finca:" />
+				<h:panelGrid columns="2">
+					<p:inputText
+						value="#{producerController.ubicacionFincaDTO.superficieFinca}">
+						<pe:keyFilter regEx="/[\d\-]/" />
+					</p:inputText>
+
+					<p:selectOneMenu
+						value="#{producerController.ubicacionFincaDTO.simbolo}">
+						<f:selectItem itemLabel="m2" itemValue="m2" />
+						<f:selectItem itemLabel="ha" itemValue="ha" />
+
+						<p:ajax event="change" partialSubmit="true" process="@this"
+							update="@this" global="false" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel header="Datos de la producci&#243;n"
+			style="margin-bottom:20px">
+			<p:fieldset legend="Practicas productivas" style="margin-bottom:20px">
+
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos una practica productiva"
+					value="#{producerController.idPracticas}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{producerController.practicasDTOs}"
+						var="prac" itemLabel="#{prac.elementoCatalogo}"
+						itemValue="#{prac.idCatalogo}" />
+					<p:ajax update="cert"
+						listener="#{producerController.selectedPracticas}" global="false"
+						process="@this" />
+				</p:selectManyCheckbox>
+				<br />
+				<h:panelGroup id="cert">
+					<p:fieldset legend="#{producerController.labelCheckOrgnica}"
+						style="margin-bottom:20px"
+						rendered="#{producerController.organica}">
+
+						<h:panelGrid columns="2">
+							<h:panelGrid columns="2">
+								<h:outputText value="Certificaci&#243;n: *" />
+								<p:selectOneMenu required="true"
+									requiredMessage="El campo Certificaci&#243;n es requerido"
+									value="#{producerController.practicaOrgaDTO.idCatalogoCertificacion}"
+									style="width: 125px;">
+									<f:selectItem itemLabel="Seleccione" itemValue="" />
+									<f:selectItem itemLabel="Certifica1" itemValue="1" />
+									<f:selectItem itemLabel="Certifica2" itemValue="2" />
+									<f:selectItem itemLabel="Certifica3" itemValue="3" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+
+							<h:panelGrid columns="2">
+								<h:outputText value="Certificadora: *" />
+								<p:selectOneMenu required="true"
+									requiredMessage="El campo Certificadora es requerido"
+									value="#{producerController.practicaOrgaDTO.idCatalogoCertificadora}"
+									style="width:125px">
+									<f:selectItem itemLabel="Seleccione" itemValue="" />
+									<f:selectItem itemLabel="Certificadora1" itemValue="1" />
+									<f:selectItem itemLabel="Certificadora2" itemValue="2" />
+									<f:selectItem itemLabel="Certificadora3" itemValue="3" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</h:panelGrid>
+					</p:fieldset>
+
+					<p:fieldset legend="#{producerController.labelCheckAgro}"
+						style="margin-bottom:20px"
+						rendered="#{producerController.agroEcologic}">
+						<h:panelGrid columns="2">
+							<h:panelGrid columns="2">
+								<h:outputText value="Certificaci&#243;n: *" />
+								<p:selectOneMenu required="true"
+									requiredMessage="El campo Certificaci&#243;n es requerido"
+									value="#{producerController.practicaOrgaDTO.idCatalogoCertificacion}"
+									style="width:125px">
+									<f:selectItem itemLabel="Seleccione" itemValue="" />
+									<f:selectItem itemLabel="Certificadora1" itemValue="1" />
+									<f:selectItem itemLabel="Certificadora1" itemValue="2" />
+									<f:selectItem itemLabel="Certificadora1" itemValue="3" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+
+							<h:panelGrid columns="2">
+								<h:outputText value="Certificadora: *" />
+								<p:selectOneMenu required="true"
+									requiredMessage="El campo Certificadora es requerido"
+									value="#{producerController.practicaOrgaDTO.idCatalogoCertificadora}"
+									style="width:125px">
+									<f:selectItem itemLabel="Seleccione" itemValue="" />
+									<f:selectItem itemLabel="Certificadora1" itemValue="1" />
+									<f:selectItem itemLabel="Certificadora1" itemValue="2" />
+									<f:selectItem itemLabel="Certificadora1" itemValue="3" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGroup>
+			</p:fieldset>
+			<p:fieldset legend="Apoyo producci&#243;n" style="margin-bottom:20px">
+				<p:selectManyCheckbox value="#{producerController.idApoyoPro}"
+					layout="responsive" columns="1">
+					<f:selectItems value="#{producerController.apoyoProDTOs}" var="ap"
+						itemLabel="#{ap.elementoCatalogo}" itemValue="#{ap.idCatalogo}" />
+					<p:ajax listener="#{producerController.selectedApoyoPro}"
+						global="false" process="@this" />
+				</p:selectManyCheckbox>
+			</p:fieldset>
+		</p:panel>
+
+
+		<p:panel header="Datos de su organizaci&#243;n"
+			style="margin-bottom:20px">
+
+
+			<p:commandButton value="Agregar organizaci&#243;n"
+				icon="ui-icon-plus"
+				actionListener="#{producerController.newOrganizacion}"
+				oncomplete="PF('dlgAddOrg').show();" partialSubmit="true"
+				process="@this" update="addOrg" />
+
+
+			<p:dataTable id="orgs" rowIndexVar="rowNum" style="width:100%;"
+				paginatorPosition="top" paginator="true" pageLinks="2"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+				emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+				value="#{producerController.organizacionDTOs}" var="org">
+				<f:facet name="header">Organizaciones</f:facet>
+				<p:column style="width:10%;text-align:center;" headerText="Nro">
+					<h:outputLabel value="#{rowNum+1}" />
+				</p:column>
+				<p:column headerText="Nombre organizaci&#243;n">
+					<h:outputText value="#{org.nombreOrganizacion}" />
+				</p:column>
+				<p:column headerText="Grado">
+					<h:outputText value="#{org.idcatalogoGrado}" />
+				</p:column>
+				<p:column headerText="Nombre representante">
+					<h:outputText value="#{org.nombreRepresentante}" />
+				</p:column>
+				<p:column headerText="N&#250;mero de socios">
+					<h:outputText value="#{org.numeroDSocios}" />
+				</p:column>
+
+				<p:column headerText="Acciones" style="text-align: center">
+					<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+						global="false" process="@this"
+						oncomplete="PF('dlgAddOrg').show();">
+						<f:setPropertyActionListener value="#{org}"
+							target="#{producerController.organizacionDTO}" />
+					</p:commandButton>
+					<p:commandButton update=":page:orgs" icon="ui-icon-trash"
+						partialSubmit="true" global="false" process="@this"
+						actionListener="#{producerController.deleteOrg(org)}">
+					</p:commandButton>
+				</p:column>
+
+			</p:dataTable>
+		</p:panel>
+
+		<p:panel header="Datos de comercializaci&#243;n"
+			style="margin-bottom:20px">
+			<p:fieldset legend="Destinos de la producci&#243;n"
+				style="margin-bottom:20px">
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un destino de la producci&#243;n"
+					value="#{producerController.idDestComer}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{producerController.destComerDTOs}"
+						var="dest" itemLabel="#{dest.elementoCatalogo}"
+						itemValue="#{dest.idCatalogo}" />
+					<p:ajax update="dgc @this"
+						listener="#{producerController.selectedDestinosProduccion}"
+						global="false" />
+				</p:selectManyCheckbox>
+				<p:separator />
+				<h:panelGroup id="dgc">
+					<p:fieldset legend="#{producerController.labelCheckFeria}"
+						style="margin-bottom:20px"
+						rendered="#{producerController.checkFeria}">
+						<h:panelGrid columns="2">
+							<h:outputText value="Nombre cialco: *" />
+							<p:inputText maxlength="99"
+								value="#{producerController.cialcoFeriaDTO.nombreCialco}">
+								<pe:keyFilter regEx="/[a-z_\s]/i" />
+							</p:inputText>
+
+							<h:outputText value="Nombre representante: *" />
+							<p:inputText required="true" maxlength="50"
+								requiredMessage="El campo Nombre representante es reuqerido"
+								value="#{producerController.cialcoFeriaDTO.nombreRepresentanteCialco}">
+								<pe:keyFilter regEx="/[a-z_\s]/i" />
+							</p:inputText>
+
+							<h:outputText value="Tel&#233;fono fijo:" />
+							<p:inputMask value="#{producerController.cialcoFeriaDTO.telefonoFijo}"
+								maxlength="9" mask="(99) 9999-999">
+								<pe:keyFilter regEx="/[\d\-]/" />
+							</p:inputMask>
+
+							<h:outputText value="Tel&#233;fono movil:" />
+							<p:inputMask
+								value="#{producerController.cialcoFeriaDTO.telefonoMovil}"
+								mask="(99) 99-999-999" maxlength="10">
+								<pe:keyFilter regEx="/[\d\-]/" />
+							</p:inputMask>
+
+							<h:outputText value="Nombre organizaci&#243;n: *" />
+							<p:inputText required="true" maxlength="50"
+								requiredMessage="El campo Nombre organizaci&#243;n es requerido"
+								value="#{producerController.cialcoFeriaDTO.nombreOrganizacion}">
+								<pe:keyFilter regEx="/[a-z_\s]/i" />
+							</p:inputText>
+
+							<h:outputText value="Frecuencia: *" />
+							<p:selectOneMenu id="comboFre"
+								value="#{producerController.cialcoFeriaDTO.idCatalogoFrecuencia}"
+								required="true"
+								requiredMessage="El campo Frecuencia es requerido">
+								<f:selectItem itemLabel="Seleccione" />
+								<f:selectItems value="#{producerController.frecuenciaDTOs}"
+									var="fre" itemLabel="#{fre.elementoCatalogo}"
+									itemValue="#{fre.idCatalogo}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="N&#250;mero de familiares:" />
+							<p:inputText value="#{producerController.numeroFamiliares}"
+								disabled="true" id="lbnum" />
+						</h:panelGrid>
+
+						<p:separator />
+
+						<p:commandButton value="Agregar familiar" icon="ui-icon-plus"
+							actionListener="#{producerController.newPersona}"
+							oncomplete="PF('dlgAddPerson').show();" partialSubmit="true"
+							process="@this" update="addPerson" />
+
+						<h:panelGroup id="contenttbl">
+							<p:dataTable rowIndexVar="rowNum" style="width:100%;"
+								paginatorPosition="top" paginator="true" pageLinks="2"
+								paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+								currentPageReportTemplate="pagina {currentPage} de {totalPages}"
+								emptyMessage="No existen registros"
+								paginatorAlwaysVisible="false"
+								value="#{producerController.cialcoFeriaDTO.personaDTOs}" var="person">
+								<f:facet name="header">Familiares que participan</f:facet>
+								<p:column style="width:10%;text-align:center;" headerText="Nro">
+									<h:outputLabel value="#{rowNum+1}" />
+								</p:column>
+								<p:column headerText="Nombres">
+									<h:outputText value="#{person.nombrePersona}" />
+								</p:column>
+								<p:column headerText="Apellidos">
+									<h:outputText value="#{person.apellidoPersona}" />
+								</p:column>
+								<p:column headerText="Parentesco">
+									<h:outputText value="#{person.parentesco}" />
+								</p:column>
+								<p:column headerText="Acciones"
+									style="width:10%;text-align: center">
+									<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+										global="false" process="@this"
+										oncomplete="PF('dlgAddPerson').show();">
+										<f:setPropertyActionListener value="#{person}"
+											target="#{producerController.addPersonaDTO}" />
+									</p:commandButton>
+									<p:commandButton update="page:contenttbl page:lbnum"
+										icon="ui-icon-trash" partialSubmit="true" global="false"
+										process="@this"
+										actionListener="#{producerController.deleteAddPersona(person)}">
+									</p:commandButton>
+								</p:column>
+							</p:dataTable>
+						</h:panelGroup>
+					</p:fieldset>
+				</h:panelGroup>
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel header="Datos productos" style="margin-bottom:20px">
+
+			<h:panelGrid columns="2">
+				<h:outputText value="Monto promedio venta cialco / mes:" />
+				<p:inputText value="#{producerController.promCialcomes}">
+					<pe:keyFilter regEx="/[\d\.]/" />
+				</p:inputText>
+
+				<h:outputText value="Monto promedio / mes:" />
+				<p:inputText value="#{producerController.promMes}">
+					<pe:keyFilter regEx="/[\d\.]/" />
+				</p:inputText>
+			</h:panelGrid>
+			<br />
+			<p:fieldset legend="Cultivos que produce" style="margin-bottom:20px">
+
+				<p:commandButton value="Agregar producto" icon="ui-icon-plus"
+					actionListener="#{producerController.newProducto}"
+					oncomplete="PF('dlgAddProduct').show();" partialSubmit="true"
+					process="@this" update="addProduct" />
+
+				<h:panelGroup id="tblproduct">
+					<p:dataTable rowIndexVar="rowNum" style="width:100%;"
+						paginatorPosition="top" paginator="true" pageLinks="2"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="pagina {currentPage} de {totalPages}"
+						emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+						value="#{producerController.addProductoProductorDTOs}"
+						var="product">
+						<f:facet name="header">Productos</f:facet>
+						<p:column style="width:10%;text-align:center;" headerText="Nro">
+							<h:outputLabel value="#{rowNum+1}" />
+						</p:column>
+						<p:column headerText="Tipo producto">
+							<h:outputText value="#{product.nombreTipoPro}" />
+						</p:column>
+						<p:column headerText="Rubro">
+							<h:outputText value="#{product.nombreRubroPro}" />
+						</p:column>
+						<p:column headerText="Producto">
+							<h:outputText value="#{product.nombrePro}" />
+						</p:column>
+
+						<p:column headerText="Acciones" style="text-align: center">
+							<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+								global="false" process="@this"
+								oncomplete="PF('dlgAddProduct').show();">
+								<f:setPropertyActionListener value="#{product}"
+									target="#{producerController.addProductoDTO}" />
+							</p:commandButton>
+							<p:commandButton update="page:tblproduct" icon="ui-icon-trash"
+								partialSubmit="true" global="false" process="@this"
+								actionListener="#{producerController.deleteAddProductos(product)}">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</p:fieldset>
+
+			<p:fieldset legend="Productos procesados" style="margin-bottom:20px">
+
+				<p:commandButton value="Agregar producto" icon="ui-icon-plus"
+					actionListener="#{producerController.newProductProcess}"
+					oncomplete="PF('dlgAddProductProcess').show();"
+					partialSubmit="true" process="@this" update="addProductProcess" />
+
+				<h:panelGroup id="tblprocesado">
+					<p:dataTable rowIndexVar="rowNum" style="width:100%;"
+						paginatorPosition="top" paginator="true" pageLinks="2"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="pagina {currentPage} de {totalPages}"
+						emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+						value="#{producerController.addProducProcessDTOs}" var="product">
+						<f:facet name="header">Productos</f:facet>
+						<p:column style="width:10%;text-align:center;" headerText="Nro">
+							<h:outputLabel value="#{rowNum+1}" />
+						</p:column>
+						<p:column headerText="Tipo producto">
+							<h:outputText value="#{product.nombreTipoPro}" />
+						</p:column>
+						<p:column headerText="Rubro">
+							<h:outputText value="#{product.nombreRubroPro}" />
+						</p:column>
+						<p:column headerText="Producto">
+							<h:outputText value="#{product.nombrePro}" />
+						</p:column>
+
+						<p:column headerText="Acciones" style="text-align: center">
+							<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+								global="false" process="@this"
+								oncomplete="PF('dlgAddProductProcess').show();">
+								<f:setPropertyActionListener value="#{product}"
+									target="#{producerController.addProductoProcessDTO}" />
+							</p:commandButton>
+							<p:commandButton update="page:tblprocesado" icon="ui-icon-trash"
+								partialSubmit="true" global="false" process="@this"
+								actionListener="#{producerController.deleteAddProductProcess(product)}">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</p:fieldset>
+
+			<p:fieldset legend="Productos ofertados" style="margin-bottom:20px">
+
+				<p:commandButton value="Agregar producto" icon="ui-icon-plus"
+					actionListener="#{producerController.newProductOfert}"
+					oncomplete="PF('dlgAddProductProcess').show();"
+					partialSubmit="true" process="@this" update="addProductProcess" />
+
+				<h:panelGroup id="tblOfert">
+					<p:dataTable rowIndexVar="rowNum" style="width:100%;"
+						paginatorPosition="top" paginator="true" pageLinks="2"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						currentPageReportTemplate="pagina {currentPage} de {totalPages}"
+						emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+						value="#{producerController.addProducOfertDTOs}" var="product">
+						<f:facet name="header">Productos</f:facet>
+						<p:column style="width:10%;text-align:center;" headerText="Nro">
+							<h:outputLabel value="#{rowNum+1}" />
+						</p:column>
+						<p:column headerText="Tipo producto">
+							<h:outputText value="#{product.nombreTipoPro}" />
+						</p:column>
+						<p:column headerText="Rubro">
+							<h:outputText value="#{product.nombreRubroPro}" />
+						</p:column>
+						<p:column headerText="Producto">
+							<h:outputText value="#{product.nombrePro}" />
+						</p:column>
+
+						<p:column headerText="Acciones" style="text-align: center">
+							<p:commandButton icon="ui-icon-pencil" partialSubmit="true"
+								global="false" process="@this"
+								oncomplete="PF('dlgAddProductProcess').show();">
+								<f:setPropertyActionListener value="#{product}"
+									target="#{producerController.addProductoProcessDTO}" />
+							</p:commandButton>
+							<p:commandButton update="page:tblOfert" icon="ui-icon-trash"
+								partialSubmit="true" global="false" process="@this"
+								actionListener="#{producerController.deleteAddProductOfert(product)}">
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</p:fieldset>
+		</p:panel>
+
+		<p:panel header="Datos de sus ingresos" style="margin-bottom:20px">
+			<p:fieldset legend="Destino de los ingresos"
+				style="margin-bottom:20px">
+				<p:selectManyCheckbox required="true"
+					requiredMessage="Debe seleccionar al menos un destino de sus ingresos"
+					value="#{producerController.idDestIng}" layout="responsive"
+					columns="1">
+					<f:selectItems value="#{producerController.destinoIngDTOs}"
+						var="dest" itemLabel="#{dest.elementoCatalogo}"
+						itemValue="#{dest.idCatalogo}" />
+					<p:ajax update="@this" global="false" process="@this" />
+				</p:selectManyCheckbox>
+			</p:fieldset>
+		</p:panel>
+		<h:panelGroup layout="block">
+			<ui:include src="/pages/private/common/support.xhtml" />
+		</h:panelGroup>
+	</p:panel>
+
+	<h:panelGroup layout="block" style="text-align: center">
+
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form"
+			actionListener="#{producerController.guardarForm}">
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

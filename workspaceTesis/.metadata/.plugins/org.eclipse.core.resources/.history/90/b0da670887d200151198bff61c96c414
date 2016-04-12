@@ -1,0 +1,64 @@
+package ec.gob.magap.dto;
+
+import java.io.Serializable;
+//import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "PRODUCTOR_TBL")
+public class ProductorDTO extends AuditoriaDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8754259758031183648L;
+
+	@Id
+	@Column(name = "ID_PRODUCTOR", nullable = false, insertable = true, updatable = false, columnDefinition = "NUMBER")
+	@SequenceGenerator(name = "ID_PRODUCTOR_SEQ", sequenceName = "ID_PRODUCTOR_SEQ", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_PRODUCTOR_SEQ")
+	private Long idProductor;
+	
+	@Column(name = "ID_PERSONA")
+	private Long idPersona;
+
+	@OneToMany(cascade = CascadeType.ALL, 
+	        mappedBy = "ID_PRODUCTOR", orphanRemoval = true)
+	    private List<FuenteIngresoDTO> fuenteIngresoDTO;
+	    
+	
+	public Long getIdProductor() {
+		return idProductor;
+	}
+
+	public void setIdProductor(Long idProductor) {
+		this.idProductor = idProductor;
+	}
+
+	public Long getIdPersona() {
+		return idPersona;
+	}
+
+	public void setIdPersona(Long idPersona) {
+		this.idPersona = idPersona;
+	}
+	
+	public List<FuenteIngresoDTO> getFuenteIngresoDTO() {
+		return fuenteIngresoDTO;
+	}
+	
+
+	public void setFuenteIngresoDTO(List<FuenteIngresoDTO> fuenteIngresoDTO) {
+		this.fuenteIngresoDTO = fuenteIngresoDTO;
+	}
+}

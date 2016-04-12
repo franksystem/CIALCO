@@ -1,0 +1,7 @@
+//com.springsource.config.ui.prefs.activePageIndex\:/magap-client/src/main/resources/ec/gob/magap/spring/MagapBeanResolver.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/magap-client/src/main/resources/ec/gob/magap/spring/MagapDataSource.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/magap-client/src/main/resources/ec/gob/magap/spring/MagapGestorBeans.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/magap-client/src/main/resources/ec/gob/magap/spring/MagapServiceBeans.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/magap-client/src/main/resources/ec/gob/magap/spring/MagapSessionFactory.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/magap-client/src/main/resources/ec/gob/magap/spring/MagapTransactionBeans.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+eclipse.preferences.version=1

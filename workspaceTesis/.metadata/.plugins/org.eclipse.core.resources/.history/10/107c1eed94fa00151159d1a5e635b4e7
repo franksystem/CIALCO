@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Pantalla" style="margin-bottom:20px">
+
+		<ui:param name="personTitle" value="Datos de la pantalla" />
+		<p:panel header="Datos de pantalla" style="margin-bottom:20px">
+
+			<h:panelGrid columns="2">
+				<h:outputText value="Descripci&#243;n" />
+  				<p:inputText value="#{pantallaController.nombrePantalla}">
+  				</p:inputText>
+
+				<h:outputText value="URL:" />
+				<p:inputText value="#{pantallaController.url}">
+				</p:inputText>
+			</h:panelGrid>
+		</p:panel>
+	</p:panel>
+
+	<h:panelGroup layout="block" style="text-align: center">
+
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form">
+			<!-- actionListener="#{producerController.guardarForm}"> -->
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

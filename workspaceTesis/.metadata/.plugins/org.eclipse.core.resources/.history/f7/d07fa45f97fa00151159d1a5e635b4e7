@@ -1,0 +1,63 @@
+package ec.gob.magap.web.controller;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+
+import ec.gob.magap.dto.PantallaDTO;
+import ec.gob.magap.factory.MagapFactory;
+import ec.gob.magap.vo.PantallaVO;
+import ec.gob.magap.web.controller.common.PageController;
+
+public class PantallaController {
+	@ManagedProperty(value = "#{pageController}")
+	private PageController pageController;
+	
+	private String nombrePantalla;
+	private String url;
+	
+	PantallaDTO pantallaDTO;
+	
+	public void newPantalla() {
+		this.pageController.setPantallaDTO(new PantallaDTO());
+	}
+
+	public String getNombrePantalla() {
+		return nombrePantalla;
+	}
+
+	public void setNombrePantalla(String nombrePantalla) {
+		this.nombrePantalla = nombrePantalla;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	public void guardarForm(){
+		try {
+			PantallaVO pantallaVO = new PantallaVO();
+			pantallaVO.setPantallaDTO(this.pageController.getPantallaDTO());
+			
+			MagapFactory.getInstance().getIMagapService().transSavePantalla(pantallaVO);
+
+	FacesContext.getCurrentInstance().addMessage(
+			null,
+			new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+					"Pantalla guardada correctamente"));
+	resetForm();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	private void resetForm() {
+		// TODO Auto-generated method stub
+		
+	}
+}

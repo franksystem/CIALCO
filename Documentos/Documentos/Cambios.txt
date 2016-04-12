@@ -1,0 +1,16 @@
+PerfilDTO
+UsuarioDTO
+UsuarioPerfilDTO
+MagapGestor
+CommonController
+MenuDTO
+PantallaDTO
+IndexPantallaController
+PantallaController
+PageController
+page.xhtml
+PantallaVO
+IMagapService
+MagapService
+IMagapGestor
+

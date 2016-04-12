@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:dialog id="addProducer" header="Socio" widgetVar="dlgAddProducer"
+		modal="true" resizable="false" dynamic="true">
+		<h:form id="formAddProducer">
+			<h:panelGroup style="width:100%;" layout="block">
+
+				<p:dataTable rowIndexVar="rowNum" style="width:100%;"
+					paginatorPosition="top" paginator="true" pageLinks="2"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					currentPageReportTemplate="p&#225;gina {currentPage} de {totalPages}"
+					emptyMessage="No existen registros" paginatorAlwaysVisible="false"
+					value="#{organizationController.personaDTOs}" var="dto"
+					selection="#{organizationController.productoSocioVO.selectedPersonaDTO}"
+					selectionMode="single" rowKey="#{dto.idPersona}">
+					<f:facet name="header">Productores</f:facet>
+
+
+					<p:ajax event="rowSelect" update="page:formAddProducer:btnAction"
+						global="false" process="@this" />
+					<p:ajax event="rowUnselect" update="page:formAddProducer:btnAction"
+						global="false" process="@this" />
+
+
+					<p:column style="width:10%;text-align:center;" headerText="Nro">
+						<h:outputLabel value="#{rowNum+1}" />
+					</p:column>
+					<p:column headerText="C&#233;dula">
+						<h:outputText value="#{dto.cedulaPersona}" />
+					</p:column>
+					<p:column headerText="Nombres">
+						<h:outputText value="#{dto.nombrePersona}" />
+					</p:column>
+					<p:column headerText="Apellidos">
+						<h:outputText value="#{dto.apellidoPersona}" />
+					</p:column>
+					<p:column headerText="Correo">
+						<h:outputText value="#{dto.mailPersona}" />
+					</p:column>
+
+				</p:dataTable>
+
+				<br />
+				<h:panelGroup layout="block" style="text-align: center"
+					id="btnAction">
+					<p:commandButton value="Guardar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk"
+						rendered="#{organizationController.productoSocioVO.selectedPersonaDTO.idPersona != null }">
+						<p:ajax listener="#{organizationController.addSocio}"
+							update="page:formAddProSoc"
+							oncomplete="PF('dlgAddProducer').hide();" process="@form" />
+					</p:commandButton>
+
+					<p:commandButton value="GuardarNO" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-disk"
+						rendered="#{organizationController.productoSocioVO.selectedPersonaDTO.idPersona == null }">
+						<p:ajax listener="#{organizationController.addSocio}"
+							update="page:formAddProSoc" process="formAddProducer" />
+					</p:commandButton>
+
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-close">
+						<p:ajax oncomplete="PF('dlgAddProducer').hide();" global="false"
+							immediate="true" process="@this">
+						</p:ajax>
+					</p:commandButton>
+
+					<script type="text/javascript">
+    				function handleSaveRequest(xhr, status, args) {
+       				 		if(args.validationFailed) {
+            					PF('dlgAddProducer').jq.effect("shake", {times:5}, 100);
+        					}else {
+            						PF('dlgAddProducer').hide();
+        					}
+   					 	}
+				</script>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:form>
+	</p:dialog>
+</ui:composition>

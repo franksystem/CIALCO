@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<listener>
+		<listener-class>ec.gob.magap.web.listener.MagapListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>/WEB-INF/faces-config.xml</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.sun.faces.expressionFactory</param-name>
+		<param-value>com.sun.el.ExpressionFactoryImpl</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.FULL_STATE_SAVING_VIEW_IDS</param-name>
+		<param-value>/index.jsf</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<description>
+			Define the value returned by Application.getProjectStage(). Allowed values:
+			Production, Development,
+			UnitTest, SystemTest, Extension. Default value is Production.
+		</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Production</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	<filter>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>PrimeFaces FileUpload Filter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+	</filter-mapping>
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>bootstrap</param-value>
+	</context-param>
+	<listener>
+		<listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+	</listener>
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>120</session-timeout>
+	</session-config>
+	<mime-mapping>
+		<extension>ecss</extension>
+		<mime-type>text/css</mime-type>
+	</mime-mapping>
+	<welcome-file-list>
+		<welcome-file>index.jsf</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/index.jsf</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/index.jsf</location>
+	</error-page>
+	<context-param>
+		<param-name>org.primefaces.extensions.DELIVER_UNCOMPRESSED_RESOURCES</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.DEVELOPMENT</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.RECREATE_VALUE_EXPRESSION_ON_BUILD_BEFORE_RESTORE</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>facelets.BUILD_BEFORE_RESTORE</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.sun.faces.responseBufferSize</param-name>
+		<param-value>500000</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.sun.faces.verifyObjects</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>com.sun.faces.externalizeJavaScript</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	<filter>
+		<filter-name>gzipFilter</filter-name>
+		<filter-class>net.sf.ehcache.constructs.web.filter.GzipFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>gzipFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>gzipFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>gzipFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+</web-app>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;ec.gob.magap.vo.PantallaVO.pantallaDTO&apos; in &apos;ec.gob.magap.vo.PantallaVO&apos;&#x0D;&#x0A;- Original project: &apos;magap-client&apos;&#x0D;&#x0A;- Original element: &apos;ec.gob.magap.vo.PantallaVO.pantallaDTO&apos;&#x0D;&#x0A;- Getter method name: &apos;getPantallaDTO&apos;&#x0D;&#x0A;- Setter method name: &apos;setPantallaDTO&apos;&#x0D;&#x0A;- Field visibility: &apos;public&apos;&#x0D;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;pantallaDTO&apos;" flags="589830" getter="getPantallaDTO" id="org.eclipse.jdt.ui.self.encapsulate" input="/src\/main\/java&lt;ec.gob.magap.vo{PantallaVO.java[PantallaVO^pantallaDTO" insertion="-1" setter="setPantallaDTO" stamp="1459795613875" version="1.0" visibility="1"/>
+</session>
