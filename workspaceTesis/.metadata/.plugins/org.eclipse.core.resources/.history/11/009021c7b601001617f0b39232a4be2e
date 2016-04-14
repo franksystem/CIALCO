@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:menubar>
+		<p:menuitem value="Nuevo" title="Nueva pantalla"
+			actionListener="#{indexPantallaController.newPantalla}"
+			icon="ui-icon-document" update="@form" process="@this"
+			partialSubmit="true" />
+
+		<f:facet name="options">
+			<p:menuButton value="#{commonController.nombreApellido}">
+				<p:menuitem value="Salir"
+					actionListener="#{commonController.logout}" icon="ui-icon-extlink" />
+			</p:menuButton>
+		</f:facet>
+	</p:menubar>
+	<br />
+	<h:form>
+		<p:dataTable var="menu" value="#{indexMenuController.menuDTOs}" rows="10"
+		paginator="true"
+			widgetVar="menuTable"
+			emptyMessage="No se encontr&#243; ning&#250;n resultado"
+			filteredValue="#{indexMenuController.filteredMenuDTOs}">
+
+			<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="Filtro Global:" />
+					<p:inputText id="globalFilter" onkeyup="PF('menuTable').filter()"
+						style="width:150px" placeholder=" keyword" />
+				</p:outputPanel>
+			</f:facet>
+
+			<p:column filterBy="#{menu.idMenu}" headerText="Id"
+				filterMatchMode="contains">
+				<h:outputText value="#{menu.idMenu}" />
+			</p:column>
+
+			<p:column filterBy="#{menu.nombre}" headerText="Descripci&#243;n"
+				filterMatchMode="contains">
+				<h:outputText value="#{menu.nombre}" />
+			</p:column>
+			<p:column filterBy="#{menu.pantallaDTO.nombrePantalla}"
+				headerText="Pantalla" filterMatchMode="contains">
+				<h:outputText value="#{menu.pantallaDTO.nombrePantalla}" />
+			</p:column>
+		</p:dataTable>
+
+
+	</h:form>
+</ui:composition>

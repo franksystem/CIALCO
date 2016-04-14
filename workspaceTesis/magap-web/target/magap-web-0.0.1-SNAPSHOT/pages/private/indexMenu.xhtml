@@ -8,8 +8,8 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 	<p:menubar>
-		<p:menuitem value="Nuevo" title="Nueva pantalla"
-			actionListener="#{indexPantallaController.newPantalla}"
+		<p:menuitem value="Nuevo" title="Nuevo Menu"
+			actionListener="#{indexMenuController.newMenu}"
 			icon="ui-icon-document" update="@form" process="@this"
 			partialSubmit="true" />
 
@@ -21,9 +21,10 @@
 		</f:facet>
 	</p:menubar>
 	<br />
+	
 	<h:form>
 		<p:dataTable var="menu" value="#{indexMenuController.menuDTOs}"
-			widgetVar="menuTable"
+			rows="10" paginator="true" widgetVar="menuTable"
 			emptyMessage="No se encontr&#243; ning&#250;n resultado"
 			filteredValue="#{indexMenuController.filteredMenuDTOs}">
 
@@ -49,7 +50,5 @@
 				<h:outputText value="#{menu.pantallaDTO.nombrePantalla}" />
 			</p:column>
 		</p:dataTable>
-
-
 	</h:form>
 </ui:composition>

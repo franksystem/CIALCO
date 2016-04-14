@@ -38,7 +38,6 @@
 <fullyQualifiedTypeName name="ec.gob.magap.web.manager.SessionUser"/>
 <fullyQualifiedTypeName name="javax.faces.context.FacesContext"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="ec.gob.magap.factory.MagapFactory"/>
 <fullyQualifiedTypeName name="javax.persistence.PersistenceContext"/>
 <fullyQualifiedTypeName name="javax.persistence.PersistenceContextType"/>
 <fullyQualifiedTypeName name="org.hibernate.annotations.Proxy"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="javax.faces.bean.ManagedBean"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="ec.gob.magap.dto.MenuDTO"/>
+<fullyQualifiedTypeName name="ec.gob.magap.factory.MagapFactory"/>
 </qualifiedTypeNameHistroy>

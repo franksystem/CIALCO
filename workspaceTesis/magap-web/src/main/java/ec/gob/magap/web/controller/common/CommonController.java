@@ -161,6 +161,9 @@ public class CommonController {
 		case 15:
 			url = "/pages/private/page.xhtml";
 			break;
+		case 16:
+			url = "/pages/private/page.xhtml";
+			break;
 		default:
 			url = "/pages/private/index.xhtml";
 			break;
