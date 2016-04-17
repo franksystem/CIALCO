@@ -37,7 +37,6 @@ import ec.gob.magap.dto.UsuarioDTO;
 import ec.gob.magap.dto.UsuarioPerfilDTO;
 import ec.gob.magap.exception.MagapException;
 import ec.gob.magap.gestor.IMagapGestor;
-import ec.gob.magap.vo.PantallaVO;
 import ec.gob.magap.vo.ProductorVO;
 
 public class MagapGestor implements IMagapGestor {
@@ -199,29 +198,27 @@ public class MagapGestor implements IMagapGestor {
 
 	}
 
-	public void transSavePantalla(PantallaVO pantallaVO)
+	public void transSavePantalla(PantallaDTO pantallaDTO)
 			throws MagapException {
 		try {
-			PantallaDTO pantallaDTO = pantallaVO.getPantallaDTO();
-			this.genericDAO.save(pantallaDTO);
-			
+			this.genericDAO.saveOrUpdate(pantallaDTO);
 		} catch (MagapException e) {
-			MagapLogger.log.error("saveProductor ", e);
+			MagapLogger.log.error("savePantalla ", e);
 			throw new MagapException(e);
 		}
 
 	}
-	
-	public void transUpdatePantalla(PantallaVO pantallaVO) throws MagapException{
+
+	public void transUpdatePantalla(PantallaDTO pantallaDTO)
+			throws MagapException {
 		try {
-			PantallaDTO pantallaDTO = pantallaVO.getPantallaDTO();
 			this.genericDAO.update(pantallaDTO);
-		} catch (Exception e) {
-			MagapLogger.log.error("updateProductor ", e);
+		} catch (MagapException e) {
+			MagapLogger.log.error("savePantalla ", e);
 			throw new MagapException(e);
 		}
-	}
 
+	}
 	
 	private Long guardarPersona(PersonaDTO personaDTO) throws MagapException {
 		try {
@@ -611,7 +608,7 @@ public class MagapGestor implements IMagapGestor {
 	public List<PantallaDTO> findPantallaDTO(PantallaDTO pantallaDTO) throws MagapException{
 		DetachedCriteria criteriaPantalla = DetachedCriteria.forClass(PantallaDTO.class);
 		
-		if (pantallaDTO.getUrl() != null) {
+		if (pantallaDTO.getUrl() != null && pantallaDTO.getEstado().equals(Parameter.ESTADO_ACTIVO)) {
 			criteriaPantalla.add(Restrictions.eq("URLPantalla",
 					pantallaDTO.getUrl()));
 		}
@@ -626,7 +623,7 @@ public class MagapGestor implements IMagapGestor {
 	public List<MenuDTO> findMenuDTO(MenuDTO menuDTO) throws MagapException{
 		DetachedCriteria criteriaMenu = DetachedCriteria.forClass(MenuDTO.class);
 		
-		if (menuDTO.getNombre() != null) {
+		if (menuDTO.getNombre() != null && menuDTO.getEstado().equals(Parameter.ESTADO_ACTIVO)) {
 			criteriaMenu.add(Restrictions.eq("NombreMenu",
 					menuDTO.getNombre()));
 		}

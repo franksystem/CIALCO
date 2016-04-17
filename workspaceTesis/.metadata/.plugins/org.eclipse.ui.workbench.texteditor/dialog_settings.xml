@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="PantallaDTO" key="selection"/>
+		<item value="Pantalla" key="selection"/>
 		<list key="findhistory">
-			<item value="PantallaDTO"/>
+			<item value="pantalla"/>
+			<item value="url"/>
+			<item value="out"/>
 			<item value="guardar"/>
+			<item value="transSavePantalla"/>
+			<item value="estado"/>
+			<item value="PantallaDTO"/>
 			<item value="promCialcomes"/>
-			<item value="guardarForm"/>
-			<item value="set"/>
-			<item value="menuhija"/>
-			<item value="idMenu"/>
-			<item value="perfilDTO"/>
 		</list>
 		<list key="replacehistory">
 		</list>

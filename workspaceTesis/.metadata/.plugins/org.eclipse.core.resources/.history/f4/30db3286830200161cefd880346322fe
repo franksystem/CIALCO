@@ -1,0 +1,139 @@
+package ec.gob.magap.dto;
+
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Proxy;
+
+@Entity
+@Table(name = "PANTALLA_TBL")
+@Proxy(lazy = false)
+public class PantallaDTO implements Serializable{
+	
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5950350039287754988L;
+
+	@Id
+	@Column(name = "ID_PANTALLA", nullable = false, insertable = true, updatable = false, columnDefinition = "NUMBER")
+	@SequenceGenerator(name = "ID_PANTALLA_SEQ", sequenceName = "ID_PANTALLA_SEQ", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_PANTALLA_SEQ")
+	private Long idPantalla;
+	
+	@Column(name = "URL")
+	private String url;
+
+	@OneToMany(mappedBy = "pantallaDTO")
+    private List<MenuDTO> menuDTOs;
+	
+	@Column(name = "NOMBREPANTALLA")
+	private String nombrePantalla;
+	
+	@Column(name = "ID_USUARIOCREACION")
+	private Long idUsuarioCreacion;
+	
+	@Column(name = "FECHACREACION")
+	private Date fechaCreacion;
+	
+	@Column(name = "ID_USUARIOMODIFICACION")
+	private Long idUsuarioModificacion;
+	
+	@Column(name = "ESTADO")
+	private Integer estado;
+
+	//Constructores
+	public PantallaDTO() {
+		super();
+	}
+
+	public PantallaDTO(Long idPantalla, String url, List<MenuDTO> menuDTOs,
+			String nombrePantalla, Long idUsuarioCreacion, Date fechaCreacion,
+			Long idUsuarioModificacion, Integer estado) {
+		super();
+		this.idPantalla = idPantalla;
+		this.url = url;
+		this.menuDTOs = menuDTOs;
+		this.nombrePantalla = nombrePantalla;
+		this.idUsuarioCreacion = idUsuarioCreacion;
+		this.fechaCreacion = fechaCreacion;
+		this.idUsuarioModificacion = idUsuarioModificacion;
+		this.estado = estado;
+	}
+
+	//Getters y setters
+	public Long getIdPantalla() {
+		return idPantalla;
+	}
+
+	public void setIdPantalla(Long idPantalla) {
+		this.idPantalla = idPantalla;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public List<MenuDTO> getMenuDTOs() {
+		return menuDTOs;
+	}
+
+	public void setMenuDTOs(List<MenuDTO> menuDTOs) {
+		this.menuDTOs = menuDTOs;
+	}
+
+	public String getNombrePantalla() {
+		return nombrePantalla;
+	}
+
+	public void setNombrePantalla(String nombrePantalla) {
+		this.nombrePantalla = nombrePantalla;
+	}
+
+	public Long getIdUsuarioCreacion() {
+		return idUsuarioCreacion;
+	}
+
+	public void setIdUsuarioCreacion(Long idUsuarioCreacion) {
+		this.idUsuarioCreacion = idUsuarioCreacion;
+	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public Long getIdUsuarioModificacion() {
+		return idUsuarioModificacion;
+	}
+
+	public void setIdUsuarioModificacion(Long idUsuarioModificacion) {
+		this.idUsuarioModificacion = idUsuarioModificacion;
+	}
+
+	public Integer getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
+}

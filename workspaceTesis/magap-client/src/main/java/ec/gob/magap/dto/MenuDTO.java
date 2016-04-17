@@ -21,7 +21,7 @@ import org.hibernate.annotations.Proxy;
 @Entity
 @Table(name = "MENU_TBL")
 @Proxy(lazy = false)
-public class MenuDTO implements Serializable {
+public class MenuDTO extends AuditoriaDTO implements Serializable {
 
 	/**
 	 * 
@@ -40,18 +40,12 @@ public class MenuDTO implements Serializable {
 	@Column(name = "NOMBRE")
 	private String nombre;
 
-	/*@Column(name = "URL")
-	private String url;*/
-	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumns({ @JoinColumn(name = "ID_PANTALLA", referencedColumnName = "ID_PANTALLA", insertable = false, updatable = false) })
 	private PantallaDTO pantallaDTO;
 
 	@Column(name = "ICONO")
 	private String icono;
-
-	@Column(name = "ESTADO")
-	private Integer estado;
 
 	@Transient
 	private List<MenuDTO> menuHijaDTOs;
@@ -80,14 +74,14 @@ public class MenuDTO implements Serializable {
 		this.nombre = nombre;
 	}
 
-	/*public String getUrl() {
-		return url;
+	public PantallaDTO getPantallaDTO() {
+		return pantallaDTO;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}*/
-	
+	public void setPantallaDTO(PantallaDTO pantallaDTO) {
+		this.pantallaDTO = pantallaDTO;
+	}
+
 	public String getIcono() {
 		return icono;
 	}
@@ -96,27 +90,11 @@ public class MenuDTO implements Serializable {
 		this.icono = icono;
 	}
 
-	public Integer getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Integer estado) {
-		this.estado = estado;
-	}
-
 	public List<MenuDTO> getMenuHijaDTOs() {
 		return menuHijaDTOs;
 	}
 
 	public void setMenuHijaDTOs(List<MenuDTO> menuHijaDTOs) {
 		this.menuHijaDTOs = menuHijaDTOs;
-	}
-
-	public PantallaDTO getPantallaDTO() {
-		return pantallaDTO;
-	}
-
-	public void setPantallaDTO(PantallaDTO pantallaDTO) {
-		this.pantallaDTO = pantallaDTO;
 	}
 }

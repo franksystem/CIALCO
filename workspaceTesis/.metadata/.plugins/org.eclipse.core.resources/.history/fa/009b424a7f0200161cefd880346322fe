@@ -1,0 +1,26 @@
+package ec.gob.magap.web.controller;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import ec.gob.magap.dto.MenuDTO;
+
+@ManagedBean(name = "menuController")
+@ViewScoped
+public class MenuController {
+	MenuDTO menuDTO;
+	
+	public void newMenu() {
+		menuDTO = new MenuDTO();
+		//this.pageController.setPantallaDTO(pantallaDTO);
+	}
+
+	public MenuDTO getMenuDTO() {
+		return menuDTO;
+	}
+
+	public void setMenuDTO(MenuDTO menuDTO) {
+		this.menuDTO = menuDTO;
+	}
+
+}

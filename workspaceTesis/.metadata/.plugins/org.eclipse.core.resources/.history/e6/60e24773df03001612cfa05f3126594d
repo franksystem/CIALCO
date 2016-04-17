@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:menubar>
+		<p:menuitem value="Nuevo" title="Nueva pantalla"
+			actionListener="#{indexPantallaController.newPantalla}"
+			icon="ui-icon-document" update="@form" process="@this"
+			partialSubmit="true" ajax="false"/>
+
+		<f:facet name="options">
+			<p:menuButton value="#{commonController.nombreApellido}">
+				<p:menuitem value="Salir"
+					actionListener="#{commonController.logout}" icon="ui-icon-extlink" />
+			</p:menuButton>
+		</f:facet>
+	</p:menubar>
+	<br />
+
+
+	<h:form>
+		<p:dataTable var="pantalla"
+			value="#{indexPantallaController.pantallaDTOs}" rows="10"
+			paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15" widgetVar="carsTable"
+			emptyMessage="No se encontr&#243; ning&#250;n resultado"
+			filteredValue="#{indexPantallaController.filteredPantallaDTOs}">
+
+			<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="Filtro global:" />
+					<p:inputText id="globalFilter" onkeyup="PF('carsTable').filter()"
+						style="width:200px" placeholder="Enter keyword" />
+				</p:outputPanel>
+			</f:facet>
+
+			<p:column filterBy="#{pantalla.idPantalla}" headerText="Id"
+				filterMatchMode="contains">
+				<h:outputText value="#{pantalla.idPantalla}" />
+			</p:column>
+
+			<p:column filterBy="#{pantalla.nombrePantalla}"
+				headerText="Descripci&#243;n" filterMatchMode="contains">
+				<h:outputText value="#{pantalla.nombrePantalla}" />
+			</p:column>
+
+			<p:column filterBy="#{pantalla.url}" headerText="URL"
+				filterMatchMode="contains">
+				<h:outputText value="#{pantalla.url}" />
+			</p:column>
+
+			<p:column headerText="Acciones" style="text-align: center">
+				<p:commandButton icon="ui-icon-pencil" title="Editar Pantalla"
+					id="nonAjax"
+					actionListener="#{indexPantallaController.editPantalla(pantalla)}"
+					ajax="false" />
+					
+					<p:commandButton icon="ui-icon-trash" title="Eliminar Pantalla"
+					id="nonAjax"
+					actionListener="#{indexPantallaController.inactivaPantalla(pantalla)}"
+					ajax="false" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</ui:composition>
