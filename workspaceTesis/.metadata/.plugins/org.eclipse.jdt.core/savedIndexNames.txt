@@ -79,7 +79,6 @@ INDEX VERSION 1.126+C:\Users\Francisco Javier\Documents\workspaceTesis\.metadata
 1420719090.index
 2073363447.index
 4063353131.index
-1031016605.index
 1177871862.index
 1848971549.index
 448079275.index

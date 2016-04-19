@@ -1698,3 +1698,16 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsou
 
 !ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2016-04-19 12:56:04.803
 !MESSAGE Server Startup Succeeded
+!SESSION 2016-04-19 13:37:08.559 -----------------------------------------------
+eclipse.buildId=3.3.0.201307091644-RELEASE-e43
+java.version=1.7.0_79
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2016-04-19 13:42:18.207
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2016-04-19 13:42:27.631
+!MESSAGE Server Startup Succeeded

@@ -202,7 +202,39 @@
 			</p:panel>
 
 			<br />
+			<p:panel header="Datos sobre los Productos en Compra P&#250;blica"
+				style="margin-bottom:20px">
 
+				<p:panel header="Productos que participan en Compra P&#250;blica "
+					style="margin-bottom:20px">
+					<p:fieldset legend="Productos " style="margin-bottom:20px">
+						<p:selectManyCheckbox required="true"
+							requiredMessage="Debe seleccionar al menos un producto"
+							value="#{exportController.idProducts}" layout="responsive"
+							columns="1">
+							<f:selectItems value="#{exportController.productDTOs}"
+								var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+								itemValue="#{rubro.idCatalogo}" />
+						</p:selectManyCheckbox>
+
+
+						<p:panel
+							header="Datos sobre los productos de Compras P&#250;blica"
+							style="margin-bottom:20px">
+							<h:panelGrid columns="2">
+
+								<h:outputText value="Volumen total de Venta / contrato: *" />
+								<p:spinner value="#{exportController.cialcoDTO.montoCompras}"
+									prefix="$" min="0" />
+
+								<h:outputText value="Monto Total de Venta / contrato: *" />
+								<p:spinner value="#{exportController.cialcoDTO.montoVentas}"
+									prefix="$" min="0" />
+							</h:panelGrid>
+						</p:panel>
+					</p:fieldset>
+				</p:panel>
+			</p:panel>
 		</p:panel>
 	</h:form>
 </ui:composition>

@@ -2,13 +2,111 @@
 <?xml-stylesheet type="text/xsl" media="screen" href="/~d/styles/atom10full.xsl"?><?xml-stylesheet type="text/css" media="screen" href="http://feeds.feedburner.com/~d/styles/itemcontent.css"?><feed xmlns="http://www.w3.org/2005/Atom" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0">
 <title>JBoss Central</title>
 <generator uri="http://tt-rss.org/">Tiny Tiny RSS/1.9</generator>
-<updated>2016-03-16T14:46:37+00:00</updated>
+<updated>2016-03-16T15:42:01+00:00</updated>
 <id>http://tiny-man.rhcloud.com/public.php?op=rss&amp;id=1&amp;key=b0143615132bd9efc4e83ba42a5574f6ab939b28</id>
 
 
 <link href="http://tiny-man.rhcloud.com" rel="alternate" />
 
 <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/atom+xml" href="http://feeds.feedburner.com/jbossbuzz" /><feedburner:info uri="jbossbuzz" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /><entry>
+	<id>http://tools.jboss.org/blog/2016-04-18-debug-down-the-turtle-stack.html</id>
+	<link href="http://feedproxy.google.com/~r/jbossbuzz/~3/S00gYx_nHKw/2016-04-18-debug-down-the-turtle-stack.html" rel="alternate" type="text/html" />
+	<title>Debugging Down the Turtle Stack</title>
+	<summary type="html"><![CDATA[
+      <div><div id="preamble">
+      <div class="sectionbody">
+      <div class="paragraph">
+      <p>Recently, I was working on a <a href="https://issues.jboss.org/browse/JBIDE-21857">problem</a> with WildFly and Java hot code replacement. When the JVM refuses to update a class (for example, because you added a method), JBoss Server tooling tries to be helpful and offers to restart the web apps in the WildFly server. Unfortunately, this doesn’t work 100%: even though the class in question is deployed and used, further changes in the class will be refused. While debugging a potential fix for this (it’s a garbage collection problem, but that’s not the point of this story), I installed a new version of OpenJDK and bam! everything just stopped working. Ok, &quot;everything&quot; is overstating the problem a bit, but I couldn’t deploy to the server anymore, which for a web app is pretty bad. So forget about hot code replacement…​this is MUCH worse. Seems I was hitting a <a href="https://issues.jboss.org/browse/JBIDE-15203">known problem</a>.</p>
+      </div>
+      </div>
+      </div>
+      <div class="sect1">
+      <h2 id="so-what-s-the-problem"><a class="anchor" href="#so-what-s-the-problem"></a>So what’s the problem?</h2>
+      <div class="sectionbody">
+      <div class="paragraph">
+      <p>The tooling complained that it couldn’t move some file to its final location, in the deployment directory of the server. Often the root directory, but not always. Hmh…​the directory being locked maybe? This was on Windows, so I fired up <code>cmd.exe</code> and looked at the directory in question (<code>dir /Q</code> is helpful). This is where it gets weird. The directory was there, but it had no owner. Deleting it was impossible. Wat?!</p>
+      </div>
+      <div class="paragraph">
+      <p>I started <a href="https://technet.microsoft.com/en-us/sysinternals/processmonitor.aspx"><code>procmon.exe</code></a> to see what was happening. The move to the directory failed with <code>DELETE_PENDING</code>. Looking at the source, this directory had been deleted (successfully) as part of the deployment, and recreated. All of a sudden, my spidey sense tingled…​there <em>was</em> something weird about deleting stuff on Windows (I used to be a <em>real</em> hacker, you know…​). On Unix-like OS’s, deleting a file just removes it from the directory. Once the last link to the file is gone it is deleted as soon as the last handle to the file is closed. Windows <em>almost</em> does the same thing, but the file is not immediately removed from the directory. Instead, it is in a zombie state, where you can still see the file, but you can’t do anything with it. That would explain the problem, so like a good little scientist, I then had a hypothesis: the WildFly server was somehow keeping a handle to the deleted directory open and thus, kept it alive. Since WildFly is using the Java <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/WatchService.html">WatchService</a> to find out about changes in the deployment directory, the WatchService was my designated bad guy for the time being.</p>
+      </div>
+      </div>
+      </div>
+      <div class="sect1">
+      <h2 id="let-s-verify"><a class="anchor" href="#let-s-verify"></a>Let’s verify</h2>
+      <div class="sectionbody">
+      <div class="paragraph">
+      <p>It’s quite hard to test this against the WildFly server (it being a, let’s say, &quot;non-trivial&quot; program), so what was needed was a simple program that reproduces the problem…​clickety click…​here we go: two processes, one is watching a directory, the other tries to delete, recreate and modify the directory. Looks good, except it did NOT reproduce the problem.. This could be timing-dependent, so I applied a time tested strategy called &quot;poking at the problem&quot;. Just added some sleep(500)&apos;s in random places and hoped for the best. Indeed, after a couple of tries, I was able to reproduce the problem maybe 20% of the time. Even better: I could reproduce it with the debugger attached. Good thing this was on OpenJDK: it meant I could just download the sources and debug through the WatchService class. And indeed, the WatchService was stuck trying to clean up the handle to our directory. It had dutifully cancelled any pending &quot;overlapped&quot; I/O requests (that’s just asynchronous I/O for the non-Windows folk) and now was waiting for the I/O to be indeed cancelled. But the last operation on the directory had failed (it was deleted, remember?), so there was no pending I/O, which means the thread would wait forever.</p>
+      </div>
+      </div>
+      </div>
+      <div class="sect1">
+      <h2 id="the-takeaway"><a class="anchor" href="#the-takeaway"></a>The takeaway…​</h2>
+      <div class="sectionbody">
+      <div class="paragraph">
+      <p>We now have a <a href="https://bugs.openjdk.java.net/browse/JDK-8153925">bug report</a> and a patched build of OpenJDK that allows me to get back to solving the original problem. That’s pretty cool, eh? This is a good example of what you can do when a system is open to inspection. It helps that I can look at the OpenJDK sources; debugging bytecodes is definitely no fun. But the coding style used in the WatchService class is also very important. They mirror the Windows native calls in a Java class. This (and MSDN) makes it  possible to debug the windows specific implementation of the watch service.</p>
+      </div>
+      <div class="paragraph">
+      <p>Thanks to Rob Stryker and Alex Kashchenko who helped me debug this problem.</p>
+      </div>
+      </div>
+      </div></div>
+    ]]></summary>
+	<content type="html">&lt;html&gt;&lt;body&gt;&lt;div&gt;&lt;div&gt;
+      &lt;div&gt;
+      &lt;div&gt;
+      &lt;p&gt;Recently, I was working on a &lt;a href="https://issues.jboss.org/browse/JBIDE-21857" target="_blank"&gt;problem&lt;/a&gt; with WildFly and Java hot code replacement. When the JVM refuses to update a class (for example, because you added a method), JBoss Server tooling tries to be helpful and offers to restart the web apps in the WildFly server. Unfortunately, this doesn&amp;rsquo;t work 100%: even though the class in question is deployed and used, further changes in the class will be refused. While debugging a potential fix for this (it&amp;rsquo;s a garbage collection problem, but that&amp;rsquo;s not the point of this story), I installed a new version of OpenJDK and bam! everything just stopped working. Ok, "everything" is overstating the problem a bit, but I couldn&amp;rsquo;t deploy to the server anymore, which for a web app is pretty bad. So forget about hot code replacement&amp;hellip;&amp;#8203;this is MUCH worse. Seems I was hitting a &lt;a href="https://issues.jboss.org/browse/JBIDE-15203" target="_blank"&gt;known problem&lt;/a&gt;.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+      &lt;h2&gt;&lt;a href="#so-what-s-the-problem" target="_blank"&gt;&lt;/a&gt;So what&amp;rsquo;s the problem?&lt;/h2&gt;
+      &lt;div&gt;
+      &lt;div&gt;
+      &lt;p&gt;The tooling complained that it couldn&amp;rsquo;t move some file to its final location, in the deployment directory of the server. Often the root directory, but not always. Hmh&amp;hellip;&amp;#8203;the directory being locked maybe? This was on Windows, so I fired up &lt;code&gt;cmd.exe&lt;/code&gt; and looked at the directory in question (&lt;code&gt;dir /Q&lt;/code&gt; is helpful). This is where it gets weird. The directory was there, but it had no owner. Deleting it was impossible. Wat?!&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+      &lt;p&gt;I started &lt;a href="https://technet.microsoft.com/en-us/sysinternals/processmonitor.aspx" target="_blank"&gt;&lt;code&gt;procmon.exe&lt;/code&gt;&lt;/a&gt; to see what was happening. The move to the directory failed with &lt;code&gt;DELETE_PENDING&lt;/code&gt;. Looking at the source, this directory had been deleted (successfully) as part of the deployment, and recreated. All of a sudden, my spidey sense tingled&amp;hellip;&amp;#8203;there &lt;em&gt;was&lt;/em&gt; something weird about deleting stuff on Windows (I used to be a &lt;em&gt;real&lt;/em&gt; hacker, you know&amp;hellip;&amp;#8203;). On Unix-like OS&amp;rsquo;s, deleting a file just removes it from the directory. Once the last link to the file is gone it is deleted as soon as the last handle to the file is closed. Windows &lt;em&gt;almost&lt;/em&gt; does the same thing, but the file is not immediately removed from the directory. Instead, it is in a zombie state, where you can still see the file, but you can&amp;rsquo;t do anything with it. That would explain the problem, so like a good little scientist, I then had a hypothesis: the WildFly server was somehow keeping a handle to the deleted directory open and thus, kept it alive. Since WildFly is using the Java &lt;a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/WatchService.html" target="_blank"&gt;WatchService&lt;/a&gt; to find out about changes in the deployment directory, the WatchService was my designated bad guy for the time being.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+      &lt;h2&gt;&lt;a href="#let-s-verify" target="_blank"&gt;&lt;/a&gt;Let&amp;rsquo;s verify&lt;/h2&gt;
+      &lt;div&gt;
+      &lt;div&gt;
+      &lt;p&gt;It&amp;rsquo;s quite hard to test this against the WildFly server (it being a, let&amp;rsquo;s say, "non-trivial" program), so what was needed was a simple program that reproduces the problem&amp;hellip;&amp;#8203;clickety click&amp;hellip;&amp;#8203;here we go: two processes, one is watching a directory, the other tries to delete, recreate and modify the directory. Looks good, except it did NOT reproduce the problem.. This could be timing-dependent, so I applied a time tested strategy called "poking at the problem". Just added some sleep(500)'s in random places and hoped for the best. Indeed, after a couple of tries, I was able to reproduce the problem maybe 20% of the time. Even better: I could reproduce it with the debugger attached. Good thing this was on OpenJDK: it meant I could just download the sources and debug through the WatchService class. And indeed, the WatchService was stuck trying to clean up the handle to our directory. It had dutifully cancelled any pending "overlapped" I/O requests (that&amp;rsquo;s just asynchronous I/O for the non-Windows folk) and now was waiting for the I/O to be indeed cancelled. But the last operation on the directory had failed (it was deleted, remember?), so there was no pending I/O, which means the thread would wait forever.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+      &lt;h2&gt;&lt;a href="#the-takeaway" target="_blank"&gt;&lt;/a&gt;The takeaway&amp;hellip;&amp;#8203;&lt;/h2&gt;
+      &lt;div&gt;
+      &lt;div&gt;
+      &lt;p&gt;We now have a &lt;a href="https://bugs.openjdk.java.net/browse/JDK-8153925" target="_blank"&gt;bug report&lt;/a&gt; and a patched build of OpenJDK that allows me to get back to solving the original problem. That&amp;rsquo;s pretty cool, eh? This is a good example of what you can do when a system is open to inspection. It helps that I can look at the OpenJDK sources; debugging bytecodes is definitely no fun. But the coding style used in the WatchService class is also very important. They mirror the Windows native calls in a Java class. This (and MSDN) makes it  possible to debug the windows specific implementation of the watch service.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+      &lt;p&gt;Thanks to Rob Stryker and Alex Kashchenko who helped me debug this problem.&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
+&lt;img src="http://feeds.feedburner.com/~r/jbossbuzz/~4/S00gYx_nHKw" height="1" width="1" alt=""/&gt;</content>
+	<updated>2016-04-19T00:38:42+00:00</updated>
+	<author><name>tmader</name></author>
+	<source>
+		<link rel="self" href="http://tools.jboss.org/blog/" />
+		<title>JBoss Tools</title></source>
+
+	<category term="devstudio" />
+
+	<category term="jbosstools" />
+
+	<category term="eap" />
+
+	<category term="openjdk" />
+
+
+<feedburner:origLink>http://tools.jboss.org/blog/2016-04-18-debug-down-the-turtle-stack.html</feedburner:origLink></entry>
+
+<entry>
 	<id>https://developer.jboss.org/blogs/weekly-editorial/2016/04/16/this-week-in-jboss-16th-april-2016-better-late-than-never</id>
 	<link href="http://feedproxy.google.com/~r/jbossbuzz/~3/ehwxzD0UYjs/this-week-in-jboss-16th-april-2016-better-late-than-never" rel="alternate" type="text/html" />
 	<title>This week in JBoss (16th April 2016): Better Late Than Never!</title>
@@ -747,332 +845,6 @@
 
 
 <feedburner:origLink>http://tools.jboss.org/blog/ga-egit411-fix-mars.2.html</feedburner:origLink></entry>
-
-<entry>
-	<id>http://tools.jboss.org/blog/jenkins_github_pull_request_builder.html</id>
-	<link href="http://feedproxy.google.com/~r/jbossbuzz/~3/l0tjRjBEZyA/jenkins_github_pull_request_builder.html" rel="alternate" type="text/html" />
-	<title>Exploring how to build from pull requests in Jenkins for continuous feedback</title>
-	<summary type="html"><![CDATA[
-      <div><div id="preamble">
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>A couple weeks ago, I started prototyping how we could enable building PRs submitted against the JBoss Tools projects, in order to more easily create installable update sites (Eclipse p2 repositories) from pull requests. This is part of our new thrust to provide more continuous integration and deployment, to better be able to release software faster.</p>
-      </div>
-      </div>
-      </div>
-      <div class="sect1">
-      <h2 id="purpose"><a class="anchor" href="#purpose"></a>Purpose</h2>
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>Verify a commit before pushing it to master. Continuous feedback. Easier installation testing. Ability to share a proposed change, including the whole built update site so peer reviews can be done against binaries as well as sources.</p>
-      </div>
-      </div>
-      </div>
-      <div class="sect1">
-      <h2 id="job-config"><a class="anchor" href="#job-config"></a>Job Config</h2>
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>Here’s how to configure a job to use the <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin">Github Pull Request Builder Plugin</a>:</p>
-      </div>
-      <div class="olist arabic">
-      <ol class="arabic">
-      <li>
-      <p>add a sha1 parameter</p>
-      <div class="literalblock">
-      <div class="content">
-      <pre>&lt;hudson.model.StringParameterDefinition&gt;
-        &lt;name&gt;${sha1}&lt;/name&gt;
-        &lt;description/&gt;
-        &lt;defaultValue&gt;master&lt;/defaultValue&gt;
-      &lt;/hudson.model.StringParameterDefinition&gt;</pre>
-      </div>
-      </div>
-      </li>
-      <li>
-      <p>pull from git using this remote config:</p>
-      <div class="literalblock">
-      <div class="content">
-      <pre>&lt;name&gt;origin&lt;/name&gt;
-      &lt;refspec&gt;+refs/heads/*:refs/remotes/origin/* +refs/pull/*:refs/remotes/origin/pr/*&lt;/refspec&gt;</pre>
-      </div>
-      </div>
-      </li>
-      <li>
-      <p>pull from git using this branch:</p>
-      <div class="literalblock">
-      <div class="content">
-      <pre>${sha1}</pre>
-      </div>
-      </div>
-      </li>
-      <li>
-      <p>enable Github Pull Request Trigger</p>
-      <div class="literalblock">
-      <div class="content">
-      <pre>&lt;org.jenkinsci.plugins.ghprb.GhprbTrigger plugin=&quot;ghprb@1.20.1&quot;&gt;
-        &lt;spec&gt;H/5 * * * *&lt;/spec&gt;
-        &lt;adminlist&gt;nickboldt&lt;/adminlist&gt;
-        &lt;allowMembersOfWhitelistedOrgsAsAdmin&gt;false&lt;/allowMembersOfWhitelistedOrgsAsAdmin&gt;
-        &lt;orgslist&gt;jbosstools&lt;/orgslist&gt;
-        &lt;cron&gt;H/5 * * * *&lt;/cron&gt;
-        &lt;triggerPhrase/&gt;
-        &lt;onlyTriggerPhrase&gt;false&lt;/onlyTriggerPhrase&gt;
-        &lt;useGitHubHooks&gt;false&lt;/useGitHubHooks&gt;
-        &lt;permitAll&gt;false&lt;/permitAll&gt;
-        &lt;commentFilePath/&gt;
-        &lt;whitelist&gt;nickboldt&lt;/whitelist&gt;
-        &lt;autoCloseFailedPullRequests&gt;false&lt;/autoCloseFailedPullRequests&gt;
-        &lt;displayBuildErrorsOnDownstreamBuilds&gt;false&lt;/displayBuildErrorsOnDownstreamBuilds&gt;
-        &lt;whiteListTargetBranches&gt;
-          &lt;org.jenkinsci.plugins.ghprb.GhprbBranch&gt;
-            &lt;branch/&gt;
-          &lt;/org.jenkinsci.plugins.ghprb.GhprbBranch&gt;
-        &lt;/whiteListTargetBranches&gt;
-        &lt;msgSuccess/&gt;
-        &lt;msgFailure/&gt;
-        &lt;commitStatusContext/&gt;
-        &lt;project&gt;jbosstools-build-sites.aggregate.child-sites__pull-request_master&lt;/project&gt;
-      &lt;/org.jenkinsci.plugins.ghprb.GhprbTrigger&gt;</pre>
-      </div>
-      </div>
-      </li>
-      </ol>
-      </div>
-      </div>
-      </div>
-      <div class="sect1">
-      <h2 id="job-steps-deployment"><a class="anchor" href="#job-steps-deployment"></a>Job Steps &amp; Deployment</h2>
-      <div class="sectionbody">
-      <div class="paragraph">
-      <p>One way to react to a successful build of a PR is to simply deploy to a different URL than normal builds.</p>
-      </div>
-      <div class="paragraph">
-      <p>For example, a job could be set up such that if ${ghprbPullId} is defined, a deploy-pr profile is used; if not, the usual deploy-to-jboss.org profile could instead be used.</p>
-      </div>
-      <div class="literalblock">
-      <div class="content">
-      <pre>mvn deploy -Pdeploy-pr</pre>
-      </div>
-      </div>
-      <div class="paragraph">
-      <p>However, we might also want a different sequence of build steps in a job. Normally, we orchestrate jobs to build, deploy, &amp; test. But for a PR build, we might instead want to sequence the steps as build+test, and only deploy if successful.</p>
-      </div>
-      <div class="paragraph">
-      <p>So perhaps instead of parameterizing the job to publish to snapshots/pulls/ or snapshots/builds/, we might instead parameterize the maven lifecycle steps:</p>
-      </div>
-      <div class="literalblock">
-      <div class="content">
-      <pre>if [[ ! ${ghprbPullId} ]]; then
-          mvnStep1=&quot;clean install -DskipTests&quot; # build without tests
-          mvnStep2=&quot;deploy -Pdeploy-to-jboss.org&quot; # deploy if p2diff or SHA check shows difference into /builds/ folder
-          mvnStep3=&quot;verify&quot; # run tests &amp; fail job if problems found
-      else
-          mvnStep1=&quot;clean deploy -Pdeploy-pr&quot; # build and test, then deploy to /pulls/ folder if successful or fail if tests fail
-          mvnStep2=&quot;NONE&quot;
-          mvnStep3=&quot;NONE&quot;
-      fi</pre>
-      </div>
-      </div>
-      <div class="paragraph">
-      <p>Current experiment is here (sorry, VPN required):</p>
-      </div>
-      <div class="paragraph">
-      <p><a href="http://jenkins.mw.lab.eng.bos.redhat.com/hudson/job/jbosstools-build-sites.aggregate.child-sites__pull-request_master/" class="bare">http://jenkins.mw.lab.eng.bos.redhat.com/hudson/job/jbosstools-build-sites.aggregate.child-sites__pull-request_master/</a></p>
-      </div>
-      </div>
-      </div>
-      <div class="sect1">
-      <h2 id="questions-todos"><a class="anchor" href="#questions-todos"></a>Questions / TODOs</h2>
-      <div class="sectionbody">
-      <div class="ulist">
-      <ul>
-      <li>
-      <p>Can whitelists be set up programmatically? (git committerIDs which can trigger a build automatically)</p>
-      </li>
-      <li>
-      <p>Can admins be set up programmatically? (git committerIDs which can approve a PR to be built, rather than ANY submitted PR, to prevent malicious attacks)</p>
-      </li>
-      <li>
-      <p>How do we roll up a low-level project’s pull request build into a larger stack of projects or products? Do we rebuild everything that’s downstream? Or just the aggregates/product?</p>
-      </li>
-      <li>
-      <p>How aggressively should we purge pull request builds?</p>
-      </li>
-      <li>
-      <p>When running matrix jobs, what happens when one part of the job is running, another is waiting, and a force-push updated to a PR arrives? (Answer: the waiting configurations will fail because the expected SHA no longer exists, having been force-replaced.)</p>
-      </li>
-      </ul>
-      </div>
-      </div>
-      </div></div>
-    ]]></summary>
-	<content type="html">&lt;html&gt;&lt;body&gt;&lt;div&gt;&lt;div&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;p&gt;A couple weeks ago, I started prototyping how we could enable building PRs submitted against the JBoss Tools projects, in order to more easily create installable update sites (Eclipse p2 repositories) from pull requests. This is part of our new thrust to provide more continuous integration and deployment, to better be able to release software faster.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h2&gt;&lt;a href="#purpose" target="_blank"&gt;&lt;/a&gt;Purpose&lt;/h2&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;p&gt;Verify a commit before pushing it to master. Continuous feedback. Easier installation testing. Ability to share a proposed change, including the whole built update site so peer reviews can be done against binaries as well as sources.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h2&gt;&lt;a href="#job-config" target="_blank"&gt;&lt;/a&gt;Job Config&lt;/h2&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;p&gt;Here&amp;rsquo;s how to configure a job to use the &lt;a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin" target="_blank"&gt;Github Pull Request Builder Plugin&lt;/a&gt;:&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;ol&gt;&lt;li&gt;
-      &lt;p&gt;add a sha1 parameter&lt;/p&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;pre&gt;&amp;lt;hudson.model.StringParameterDefinition&amp;gt;
-        &amp;lt;name&amp;gt;${sha1}&amp;lt;/name&amp;gt;
-        &amp;lt;description/&amp;gt;
-        &amp;lt;defaultValue&amp;gt;master&amp;lt;/defaultValue&amp;gt;
-      &amp;lt;/hudson.model.StringParameterDefinition&amp;gt;&lt;/pre&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;pull from git using this remote config:&lt;/p&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;pre&gt;&amp;lt;name&amp;gt;origin&amp;lt;/name&amp;gt;
-      &amp;lt;refspec&amp;gt;+refs/heads/*:refs/remotes/origin/* +refs/pull/*:refs/remotes/origin/pr/*&amp;lt;/refspec&amp;gt;&lt;/pre&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;pull from git using this branch:&lt;/p&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;pre&gt;${sha1}&lt;/pre&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;enable Github Pull Request Trigger&lt;/p&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;pre&gt;&amp;lt;org.jenkinsci.plugins.ghprb.GhprbTrigger plugin="ghprb@1.20.1"&amp;gt;
-        &amp;lt;spec&amp;gt;H/5 * * * *&amp;lt;/spec&amp;gt;
-        &amp;lt;adminlist&amp;gt;nickboldt&amp;lt;/adminlist&amp;gt;
-        &amp;lt;allowMembersOfWhitelistedOrgsAsAdmin&amp;gt;false&amp;lt;/allowMembersOfWhitelistedOrgsAsAdmin&amp;gt;
-        &amp;lt;orgslist&amp;gt;jbosstools&amp;lt;/orgslist&amp;gt;
-        &amp;lt;cron&amp;gt;H/5 * * * *&amp;lt;/cron&amp;gt;
-        &amp;lt;triggerPhrase/&amp;gt;
-        &amp;lt;onlyTriggerPhrase&amp;gt;false&amp;lt;/onlyTriggerPhrase&amp;gt;
-        &amp;lt;useGitHubHooks&amp;gt;false&amp;lt;/useGitHubHooks&amp;gt;
-        &amp;lt;permitAll&amp;gt;false&amp;lt;/permitAll&amp;gt;
-        &amp;lt;commentFilePath/&amp;gt;
-        &amp;lt;whitelist&amp;gt;nickboldt&amp;lt;/whitelist&amp;gt;
-        &amp;lt;autoCloseFailedPullRequests&amp;gt;false&amp;lt;/autoCloseFailedPullRequests&amp;gt;
-        &amp;lt;displayBuildErrorsOnDownstreamBuilds&amp;gt;false&amp;lt;/displayBuildErrorsOnDownstreamBuilds&amp;gt;
-        &amp;lt;whiteListTargetBranches&amp;gt;
-          &amp;lt;org.jenkinsci.plugins.ghprb.GhprbBranch&amp;gt;
-            &amp;lt;branch/&amp;gt;
-          &amp;lt;/org.jenkinsci.plugins.ghprb.GhprbBranch&amp;gt;
-        &amp;lt;/whiteListTargetBranches&amp;gt;
-        &amp;lt;msgSuccess/&amp;gt;
-        &amp;lt;msgFailure/&amp;gt;
-        &amp;lt;commitStatusContext/&amp;gt;
-        &amp;lt;project&amp;gt;jbosstools-build-sites.aggregate.child-sites__pull-request_master&amp;lt;/project&amp;gt;
-      &amp;lt;/org.jenkinsci.plugins.ghprb.GhprbTrigger&amp;gt;&lt;/pre&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/li&gt;
-      &lt;/ol&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h2&gt;&lt;a href="#job-steps-deployment" target="_blank"&gt;&lt;/a&gt;Job Steps &amp;amp; Deployment&lt;/h2&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;p&gt;One way to react to a successful build of a PR is to simply deploy to a different URL than normal builds.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;For example, a job could be set up such that if ${ghprbPullId} is defined, a deploy-pr profile is used; if not, the usual deploy-to-jboss.org profile could instead be used.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;pre&gt;mvn deploy -Pdeploy-pr&lt;/pre&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;However, we might also want a different sequence of build steps in a job. Normally, we orchestrate jobs to build, deploy, &amp;amp; test. But for a PR build, we might instead want to sequence the steps as build+test, and only deploy if successful.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;So perhaps instead of parameterizing the job to publish to snapshots/pulls/ or snapshots/builds/, we might instead parameterize the maven lifecycle steps:&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;pre&gt;if [[ ! ${ghprbPullId} ]]; then
-          mvnStep1="clean install -DskipTests" # build without tests
-          mvnStep2="deploy -Pdeploy-to-jboss.org" # deploy if p2diff or SHA check shows difference into /builds/ folder
-          mvnStep3="verify" # run tests &amp;amp; fail job if problems found
-      else
-          mvnStep1="clean deploy -Pdeploy-pr" # build and test, then deploy to /pulls/ folder if successful or fail if tests fail
-          mvnStep2="NONE"
-          mvnStep3="NONE"
-      fi&lt;/pre&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;Current experiment is here (sorry, VPN required):&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;p&gt;&lt;a href="http://jenkins.mw.lab.eng.bos.redhat.com/hudson/job/jbosstools-build-sites.aggregate.child-sites__pull-request_master/" target="_blank"&gt;http://jenkins.mw.lab.eng.bos.redhat.com/hudson/job/jbosstools-build-sites.aggregate.child-sites__pull-request_master/&lt;/a&gt;&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-      &lt;h2&gt;&lt;a href="#questions-todos" target="_blank"&gt;&lt;/a&gt;Questions / TODOs&lt;/h2&gt;
-      &lt;div&gt;
-      &lt;div&gt;
-      &lt;ul&gt;&lt;li&gt;
-      &lt;p&gt;Can whitelists be set up programmatically? (git committerIDs which can trigger a build automatically)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;Can admins be set up programmatically? (git committerIDs which can approve a PR to be built, rather than ANY submitted PR, to prevent malicious attacks)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;How do we roll up a low-level project&amp;rsquo;s pull request build into a larger stack of projects or products? Do we rebuild everything that&amp;rsquo;s downstream? Or just the aggregates/product?&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;How aggressively should we purge pull request builds?&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-      &lt;p&gt;When running matrix jobs, what happens when one part of the job is running, another is waiting, and a force-push updated to a PR arrives? (Answer: the waiting configurations will fail because the expected SHA no longer exists, having been force-replaced.)&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;/ul&gt;&lt;/div&gt;
-      &lt;/div&gt;
-      &lt;/div&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;
-&lt;img src="http://feeds.feedburner.com/~r/jbossbuzz/~4/l0tjRjBEZyA" height="1" width="1" alt=""/&gt;</content>
-	<updated>2016-03-16T14:46:37+00:00</updated>
-	<author><name>nickboldt</name></author>
-	<source>
-		<link rel="self" href="http://tools.jboss.org/blog/" />
-		<title>JBoss Tools</title></source>
-
-	<category term="ci" />
-
-	<category term="cd" />
-
-	<category term="releng" />
-
-	<category term="devstudio" />
-
-	<category term="jbosstools" />
-
-
-<feedburner:origLink>http://tools.jboss.org/blog/jenkins_github_pull_request_builder.html</feedburner:origLink></entry>
 
 
 </feed><!-- vim:ft=xml

@@ -18392,3 +18392,23 @@ java.lang.NullPointerException: null
 2016-04-19 13:14:34,655 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
 2016-04-19 13:14:34,657 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2016-04-19 13:14:34,657 [Worker-22] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-04-19 13:37:41,309 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-19 13:37:41,315 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-04-19 13:37:41,317 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-19 13:37:41,318 [Worker-12] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-04-19 13:40:36,162 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-19 13:40:36,165 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-04-19 13:40:36,166 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-19 13:40:36,167 [Worker-9] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-04-19 13:40:44,815 [Worker-24] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Francisco Javier\Documents\workspaceTesis\magap-web
+2016-04-19 13:40:44,816 [Worker-24] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B -s "C:\Users\Francisco Javier\Documents\Java\apache-maven-3.1.0\conf\settings.xml" clean
+2016-04-19 13:40:46,662 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-19 13:40:46,663 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-04-19 13:40:46,664 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-19 13:40:46,664 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-04-19 13:41:12,517 [Worker-24] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\Francisco Javier\Documents\workspaceTesis\magap-web
+2016-04-19 13:41:12,517 [Worker-24] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn  -B -s "C:\Users\Francisco Javier\Documents\Java\apache-maven-3.1.0\conf\settings.xml" install
+2016-04-19 13:41:22,627 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-19 13:41:22,627 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-04-19 13:41:22,628 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-04-19 13:41:22,629 [Worker-13] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
