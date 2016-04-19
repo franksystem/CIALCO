@@ -360,6 +360,8 @@ public class ProducerController {
 			productorVO.setIdApoyoPro(this.idApoyoPro);
 			productorVO.setOrganizacionDTOs(this.organizacionDTOs);
 			productorVO.setDeleteOrganizacionDTOs(this.deleteOrganizacionDTOs);
+			
+			productorVO.setCialcoDTOs(cialcoDTOs);
 
 			productorVO.setIdDestComer(this.idDestComer);
 			// Datos productos

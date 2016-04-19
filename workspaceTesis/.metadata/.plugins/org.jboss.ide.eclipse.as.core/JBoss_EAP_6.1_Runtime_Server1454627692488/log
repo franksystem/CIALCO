@@ -1659,3 +1659,42 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsou
 
 !ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2016-04-18 21:34:56.391
 !MESSAGE Server Startup Succeeded
+!SESSION 2016-04-19 10:01:00.525 -----------------------------------------------
+eclipse.buildId=3.3.0.201307091644-RELEASE-e43
+java.version=1.7.0_79
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2016-04-19 10:01:36.214
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2016-04-19 10:01:57.536
+!MESSAGE Server Startup Succeeded
+!SESSION 2016-04-19 10:52:27.902 -----------------------------------------------
+eclipse.buildId=3.3.0.201307091644-RELEASE-e43
+java.version=1.7.0_79
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2016-04-19 10:54:54.309
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2016-04-19 10:55:04.332
+!MESSAGE Server Startup Succeeded
+!SESSION 2016-04-19 12:55:14.675 -----------------------------------------------
+eclipse.buildId=3.3.0.201307091644-RELEASE-e43
+java.version=1.7.0_79
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  -product org.springsource.sts.ide
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.springsource.sts.ide
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2016-04-19 12:55:58.957
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2016-04-19 12:56:04.803
+!MESSAGE Server Startup Succeeded

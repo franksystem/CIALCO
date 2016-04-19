@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Compras P&#250;blicas" style="margin-bottom:20px">
+
+
+		<p:panel header="Organizaci&#243;n" style="margin-bottom:20px">
+
+			
+
+	</p:panel>
+
+</ui:composition>
+
+
+

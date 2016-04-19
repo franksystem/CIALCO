@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_XK3tAP81EeWa2MXnPTZ4CA" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_XK3tAf81EeWa2MXnPTZ4CA" bindingContexts="_XK3tCv81EeWa2MXnPTZ4CA">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GenericDAO.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/dao/GenericDAO.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/dao/GenericDAO.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GenericDAOImpl.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/dao/GenericDAOImpl.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/dao/GenericDAOImpl.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MagapGestor.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/gestor/impl/MagapGestor.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/gestor/impl/MagapGestor.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;IMagapGestor.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/gestor/IMagapGestor.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/gestor/IMagapGestor.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MagapService.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/service/impl/MagapService.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/service/impl/MagapService.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;IMagapService.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/service/IMagapService.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/service/IMagapService.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MagapFactoryContexPath.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/factory/MagapFactoryContexPath.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/factory/MagapFactoryContexPath.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MagapFactoryBean.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/factory/MagapFactoryBean.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/factory/MagapFactoryBean.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MagapFactory.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/factory/MagapFactory.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/factory/MagapFactory.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.springsource.ide.eclipse.dashboard.ui.dashboard.elementFactory&quot; id=&quot;com.springsource.sts.internal.ide.ui.editors.MultiPageDashboardEditor&quot; name=&quot;Dashboard&quot; tooltip=&quot;Dashboard&quot;>&#xD;&#xA;&lt;persistable openDashboard=&quot;true&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;IndexUsuarioController.java&quot; tooltip=&quot;magap-web/src/main/java/ec/gob/magap/web/controller/adminusuario/IndexUsuarioController.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/adminusuario/IndexUsuarioController.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;SessionUser.java&quot; tooltip=&quot;magap-web/src/main/java/ec/gob/magap/web/manager/SessionUser.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/java/ec/gob/magap/web/manager/SessionUser.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;LoginController.java&quot; tooltip=&quot;magap-web/src/main/java/ec/gob/magap/web/controller/LoginController.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/LoginController.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;CommonController.java&quot; tooltip=&quot;magap-web/src/main/java/ec/gob/magap/web/controller/common/CommonController.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/common/CommonController.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ProductorVO.java&quot; tooltip=&quot;magap-client/src/main/java/ec/gob/magap/vo/ProductorVO.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-client/src/main/java/ec/gob/magap/vo/ProductorVO.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;ProducerController.java&quot; tooltip=&quot;magap-web/src/main/java/ec/gob/magap/web/controller/ProducerController.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/ProducerController.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MagapGestor.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/gestor/impl/MagapGestor.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/gestor/impl/MagapGestor.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;MagapService.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/service/impl/MagapService.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/service/impl/MagapService.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;IMagapService.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/service/IMagapService.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/service/IMagapService.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot; name=&quot;producer.xhtml&quot; tooltip=&quot;magap-web/src/main/webapp/pages/private/producer.xhtml&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/webapp/pages/private/producer.xhtml&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.springsource.ide.eclipse.dashboard.ui.dashboard.elementFactory&quot; id=&quot;com.springsource.sts.internal.ide.ui.editors.MultiPageDashboardEditor&quot; name=&quot;Dashboard&quot; tooltip=&quot;Dashboard&quot;>&#xD;&#xA;&lt;persistable openDashboard=&quot;true&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot; name=&quot;index.xhtml&quot; tooltip=&quot;magap-web/src/main/webapp/index.xhtml&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/webapp/index.xhtml&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot; name=&quot;compras.xhtml&quot; tooltip=&quot;magap-web/src/main/webapp/pages/private/compras.xhtml&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/webapp/pages/private/compras.xhtml&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot; name=&quot;page.xhtml&quot; tooltip=&quot;magap-web/src/main/webapp/pages/private/administracionusuario/page.xhtml&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/webapp/pages/private/administracionusuario/page.xhtml&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;OrganizationController.java&quot; tooltip=&quot;magap-web/src/main/java/ec/gob/magap/web/controller/OrganizationController.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/OrganizationController.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GenericDAO.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/dao/GenericDAO.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/dao/GenericDAO.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;GenericDAOImpl.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/dao/GenericDAOImpl.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/dao/GenericDAOImpl.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot; name=&quot;IMagapGestor.java&quot; tooltip=&quot;magap-core/src/main/java/ec/gob/magap/gestor/IMagapGestor.java&quot;>&#xD;&#xA;&lt;persistable path=&quot;/magap-core/src/main/java/ec/gob/magap/gestor/IMagapGestor.java&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.eclipse.ui.defaultAcceleratorConfiguration</tags>
   <children xsi:type="basic:TrimmedWindow" xmi:id="_XK3tAf81EeWa2MXnPTZ4CA" elementId="IDEWindow" contributorURI="platform:/plugin/org.eclipse.platform" selectedElement="_XZewwv81EeWa2MXnPTZ4CA" label="%trimmedwindow.label.eclipseSDK" x="0" y="0" width="1024" height="768">
     <persistedState key="coolBarVisible" value="true"/>
@@ -285,73 +285,61 @@
       <tags>categoryTag:Help</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_XmU58P81EeWa2MXnPTZ4CA" elementId="org.eclipse.ui.editorss" selectedElement="_XmU58f81EeWa2MXnPTZ4CA">
-      <children xsi:type="basic:PartStack" xmi:id="_XmU58f81EeWa2MXnPTZ4CA" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_sSf7MAXREeaGHtThxETLCw">
+      <children xsi:type="basic:PartStack" xmi:id="_XmU58f81EeWa2MXnPTZ4CA" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_gollcAZYEeaBMKH55L6JMg">
         <tags>newtablook</tags>
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <children xsi:type="basic:Part" xmi:id="_bbV_kAXLEeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="PersonaDTO.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-client/src/main/java/ec/gob/magap/dto/PersonaDTO.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-client/src/main/java/ec/gob/magap/dto/PersonaDTO.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;394&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_n-cL8AZIEeaEMdLjov4YuQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="OrganizationController.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-web/src/main/java/ec/gob/magap/web/controller/OrganizationController.java" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/OrganizationController.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1531&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_OEYWwAXREeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="UsuarioDTO.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-client/src/main/java/ec/gob/magap/dto/UsuarioDTO.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-client/src/main/java/ec/gob/magap/dto/UsuarioDTO.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;2139&quot; selectionTopPixel=&quot;189&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_0vXZYAZLEeaEMdLjov4YuQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="page.xhtml" iconURI="platform:/plugin/org.jboss.tools.jst.jsp/images/xstudio/editors/html_file.gif" tooltip="magap-web/src/main/webapp/pages/private/administracionusuario/page.xhtml" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.jboss.tools.common.core.resources.XModelObjectEditorInputFactory&quot; path=&quot;/magap-web/src/main/webapp/pages/private/administracionusuario/page.xhtml&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor</tags>
           <tags>removeOnHide</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_OqZN4AXREeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="PantallaDTO.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-client/src/main/java/ec/gob/magap/dto/PantallaDTO.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-client/src/main/java/ec/gob/magap/dto/PantallaDTO.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1161&quot; selectionTopPixel=&quot;185&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_ocPlcAZMEeaEMdLjov4YuQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="compras.xhtml" iconURI="platform:/plugin/org.jboss.tools.jst.jsp/images/xstudio/editors/html_file.gif" tooltip="magap-web/src/main/webapp/pages/private/compras.xhtml" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.jboss.tools.common.core.resources.XModelObjectEditorInputFactory&quot; path=&quot;/magap-web/src/main/webapp/pages/private/compras.xhtml&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor</tags>
           <tags>removeOnHide</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_O4cQ8AXREeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MenuDTO.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-client/src/main/java/ec/gob/magap/dto/MenuDTO.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-client/src/main/java/ec/gob/magap/dto/MenuDTO.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;220&quot; selectionOffset=&quot;1250&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_14i1sAZQEeaEMdLjov4YuQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="index.xhtml" iconURI="platform:/plugin/org.jboss.tools.jst.jsp/images/xstudio/editors/html_file.gif" tooltip="magap-web/src/main/webapp/index.xhtml" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.jboss.tools.common.core.resources.XModelObjectEditorInputFactory&quot; path=&quot;/magap-web/src/main/webapp/index.xhtml&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor</tags>
           <tags>removeOnHide</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_oanqsAXREeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MagapFactory.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-core/src/main/java/ec/gob/magap/factory/MagapFactory.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-core/src/main/java/ec/gob/magap/factory/MagapFactory.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;859&quot; selectionTopPixel=&quot;68&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_aXmIgAZYEeaBMKH55L6JMg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="producer.xhtml" iconURI="platform:/plugin/org.jboss.tools.jst.jsp/images/xstudio/editors/html_file.gif" tooltip="magap-web/src/main/webapp/pages/private/producer.xhtml" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.jboss.tools.common.core.resources.XModelObjectEditorInputFactory&quot; path=&quot;/magap-web/src/main/webapp/pages/private/producer.xhtml&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
+          <tags>org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor</tags>
           <tags>removeOnHide</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_sSf7MAXREeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MagapGestor.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-core/src/main/java/ec/gob/magap/gestor/impl/MagapGestor.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-core/src/main/java/ec/gob/magap/gestor/impl/MagapGestor.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1794&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_gollcAZYEeaBMKH55L6JMg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ProducerController.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-web/src/main/java/ec/gob/magap/web/controller/ProducerController.java" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/ProducerController.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;13&quot; selectionOffset=&quot;11726&quot; selectionTopPixel=&quot;5306&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
           <tags>activeOnClose</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_6nylwAXREeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="indexUsuario.xhtml" iconURI="platform:/plugin/org.jboss.tools.jst.jsp/images/xstudio/editors/html_file.gif" tooltip="magap-web/src/main/webapp/pages/private/administracionusuario/indexUsuario.xhtml" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.jboss.tools.common.core.resources.XModelObjectEditorInputFactory&quot; path=&quot;/magap-web/src/main/webapp/pages/private/administracionusuario/indexUsuario.xhtml&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.jboss.tools.jst.jsp.jspeditor.HTMLTextEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_20Cx4AXSEeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="CommonController.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-web/src/main/java/ec/gob/magap/web/controller/common/CommonController.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/common/CommonController.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;5205&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_NaKMQAZZEeaBMKH55L6JMg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MagapService.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-core/src/main/java/ec/gob/magap/service/impl/MagapService.java" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-core/src/main/java/ec/gob/magap/service/impl/MagapService.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;1973&quot; selectionTopPixel=&quot;663&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_4y0WQAXTEeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="LoginController.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-web/src/main/java/ec/gob/magap/web/controller/LoginController.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/LoginController.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;11&quot; selectionOffset=&quot;709&quot; selectionTopPixel=&quot;1396&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_TbxJYAZZEeaBMKH55L6JMg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MagapGestor.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-core/src/main/java/ec/gob/magap/gestor/impl/MagapGestor.java" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-core/src/main/java/ec/gob/magap/gestor/impl/MagapGestor.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;6379&quot; selectionTopPixel=&quot;1997&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
         </children>
-        <children xsi:type="basic:Part" xmi:id="_nEJfoAXUEeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="MagapService.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-core/src/main/java/ec/gob/magap/service/impl/MagapService.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-core/src/main/java/ec/gob/magap/service/impl/MagapService.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;670&quot; selectionTopPixel=&quot;0&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_FPFXwAXWEeaGHtThxETLCw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="IndexUsuarioController.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-web/src/main/java/ec/gob/magap/web/controller/adminusuario/IndexUsuarioController.java" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-web/src/main/java/ec/gob/magap/web/controller/adminusuario/IndexUsuarioController.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;781&quot; selectionTopPixel=&quot;217&quot;/>&#xD;&#xA;&lt;/editor>"/>
+        <children xsi:type="basic:Part" xmi:id="_CcGt0AZaEeaBMKH55L6JMg" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="ProductorVO.java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/obj16/jcu_obj.gif" tooltip="magap-client/src/main/java/ec/gob/magap/vo/ProductorVO.java" closeable="true">
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jdt.ui.CompilationUnitEditor&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/magap-client/src/main/java/ec/gob/magap/vo/ProductorVO.java&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;10&quot; selectionOffset=&quot;1085&quot; selectionTopPixel=&quot;670&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.jdt.ui.CompilationUnitEditor</tags>
           <tags>removeOnHide</tags>
@@ -549,18 +537,18 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XbaqcP81EeWa2MXnPTZ4CA" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTJfYAXXEea8m9kVBUviNg" elementId="new.group"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTJfYQXXEea8m9kVBUviNg" elementId="newWizardDropDown"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTJfYgXXEea8m9kVBUviNg" elementId="new.ext" visible="false"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTJfYwXXEea8m9kVBUviNg" elementId="save.group" visible="false"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTJfZAXXEea8m9kVBUviNg" elementId="save"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTKGcAXXEea8m9kVBUviNg" elementId="saveAll"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTKGcQXXEea8m9kVBUviNg" elementId="save.ext" visible="false"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_NTKGcgXXEea8m9kVBUviNg" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.gif" tooltip="Print" command="_XMv8Vv81EeWa2MXnPTZ4CA"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTNJwAXXEea8m9kVBUviNg" elementId="print.ext" visible="false"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTNw0AXXEea8m9kVBUviNg" elementId="build.group"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTNw0QXXEea8m9kVBUviNg" elementId="build.ext" visible="false"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTNw0gXXEea8m9kVBUviNg" elementId="additions"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VeuAAZXEeaBMKH55L6JMg" elementId="new.group"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VfVEAZXEeaBMKH55L6JMg" elementId="newWizardDropDown"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VfVEQZXEeaBMKH55L6JMg" elementId="new.ext" visible="false"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VfVEgZXEeaBMKH55L6JMg" elementId="save.group" visible="false"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VfVEwZXEeaBMKH55L6JMg" elementId="save"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VfVFAZXEeaBMKH55L6JMg" elementId="saveAll"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VfVFQZXEeaBMKH55L6JMg" elementId="save.ext" visible="false"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_4Vf8IAZXEeaBMKH55L6JMg" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.gif" tooltip="Print" command="_XMv8Vv81EeWa2MXnPTZ4CA"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4ViYYAZXEeaBMKH55L6JMg" elementId="print.ext" visible="false"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4ViYYQZXEeaBMKH55L6JMg" elementId="build.group"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4Vi_cAZXEeaBMKH55L6JMg" elementId="build.ext" visible="false"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4Vi_cQZXEeaBMKH55L6JMg" elementId="additions"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Xbaqcf81EeWa2MXnPTZ4CA" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -568,63 +556,75 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_48xhQP81EeWaE9ap2XUSpw" elementId="org.eclipse.debug.ui.breakpointActionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVAgkAXXEea8m9kVBUviNg" elementId="breakpointGroup"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVAgkQXXEea8m9kVBUviNg" elementId="org.eclipse.debug.ui.actions.SkipAllBreakpoints"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XWWQAZXEeaBMKH55L6JMg" elementId="breakpointGroup"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XWWQQZXEeaBMKH55L6JMg" elementId="org.eclipse.debug.ui.actions.SkipAllBreakpoints"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XnYC0P81EeWa2MXnPTZ4CA" elementId="com.springsource.sts.ide.ui.actionSet.workbench">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVAgkgXXEea8m9kVBUviNg" elementId="main"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVAgkwXXEea8m9kVBUviNg" elementId="com.springsource.sts.ide.ui.action.dashboard"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XW9UAZXEeaBMKH55L6JMg" elementId="main"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XW9UQZXEeaBMKH55L6JMg" elementId="com.springsource.sts.ide.ui.action.dashboard"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XnQHAP81EeWa2MXnPTZ4CA" elementId="org.eclipse.debug.ui.launchActionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVAglAXXEea8m9kVBUviNg" elementId="debug"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVAglQXXEea8m9kVBUviNg" elementId="org.eclipse.debug.internal.ui.actions.DebugDropDownAction"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBHoAXXEea8m9kVBUviNg" elementId="org.eclipse.debug.internal.ui.actions.RunDropDownAction"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBHoQXXEea8m9kVBUviNg" elementId="org.eclipse.ui.externaltools.ExternalToolMenuDelegateToolbar"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBHogXXEea8m9kVBUviNg" elementId="org.springsource.ide.eclipse.commons.launch.relaunch.action"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBHowXXEea8m9kVBUviNg" elementId="org.springsource.ide.eclipse.commons.launch.relaunch.action"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XW9UgZXEeaBMKH55L6JMg" elementId="debug"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XW9UwZXEeaBMKH55L6JMg" elementId="org.eclipse.debug.internal.ui.actions.DebugDropDownAction"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XW9VAZXEeaBMKH55L6JMg" elementId="org.eclipse.debug.internal.ui.actions.RunDropDownAction"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XW9VQZXEeaBMKH55L6JMg" elementId="org.eclipse.ui.externaltools.ExternalToolMenuDelegateToolbar"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XW9VgZXEeaBMKH55L6JMg" elementId="org.springsource.ide.eclipse.commons.launch.relaunch.action"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XW9VwZXEeaBMKH55L6JMg" elementId="org.springsource.ide.eclipse.commons.launch.relaunch.action"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XnIyQP81EeWa2MXnPTZ4CA" elementId="org.eclipse.jdt.ui.JavaElementCreationActionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBHpAXXEea8m9kVBUviNg" elementId="JavaWizards"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBHpQXXEea8m9kVBUviNg" elementId="openajprojectwizard"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBHpgXXEea8m9kVBUviNg" elementId="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBHpwXXEea8m9kVBUviNg" elementId="org.eclipse.jdt.ui.actions.OpenPackageWizard"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBusAXXEea8m9kVBUviNg" elementId="org.eclipse.jdt.ui.actions.NewTypeDropDown"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XXkYAZXEeaBMKH55L6JMg" elementId="JavaWizards"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XXkYQZXEeaBMKH55L6JMg" elementId="openajprojectwizard"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XXkYgZXEeaBMKH55L6JMg" elementId="org.eclipse.jdt.ui.actions.OpenProjectWizard"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XXkYwZXEeaBMKH55L6JMg" elementId="org.eclipse.jdt.ui.actions.OpenPackageWizard"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XXkZAZXEeaBMKH55L6JMg" elementId="org.eclipse.jdt.ui.actions.NewTypeDropDown"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_48wTIP81EeWaE9ap2XUSpw" elementId="org.eclipse.search.searchActionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBusQXXEea8m9kVBUviNg" elementId="Search"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBusgXXEea8m9kVBUviNg" elementId="openType"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBuswXXEea8m9kVBUviNg" elementId="org.eclipse.mylyn.tasks.ui.openTask"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVButAXXEea8m9kVBUviNg" elementId="org.eclipse.search.OpenSearchDialogPage"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVButQXXEea8m9kVBUviNg" elementId="org.springframework.ide.eclipse.beans.ui.openBeanAction"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XXkZQZXEeaBMKH55L6JMg" elementId="Search"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XXkZgZXEeaBMKH55L6JMg" elementId="openType"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XXkZwZXEeaBMKH55L6JMg" elementId="org.eclipse.mylyn.tasks.ui.openTask"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYLcAZXEeaBMKH55L6JMg" elementId="org.eclipse.search.OpenSearchDialogPage"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYLcQZXEeaBMKH55L6JMg" elementId="org.springframework.ide.eclipse.beans.ui.openBeanAction"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_4JFIgP_7EeWiUI74b_ZBuA" elementId="org.eclipse.ui.edit.text.actionSet.presentation">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_O_dQMAXXEea8m9kVBUviNg" elementId="Presentation"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_O_dQMQXXEea8m9kVBUviNg" elementId="org.eclipse.jdt.ui.edit.text.java.toggleBreadcrumb"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_O_d3QAXXEea8m9kVBUviNg" elementId="org.eclipse.jdt.ui.edit.text.java.toggleMarkOccurrences"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_O_d3QQXXEea8m9kVBUviNg" elementId="org.eclipse.mylyn.java.ui.editor.folding.auto"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_O_d3QgXXEea8m9kVBUviNg" elementId="org.eclipse.ui.edit.text.toggleBlockSelectionMode"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_O_d3QwXXEea8m9kVBUviNg" elementId="org.eclipse.ui.edit.text.toggleShowWhitespaceCharacters"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_O_d3RAXXEea8m9kVBUviNg" elementId="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_j6jO0AY_EeaNG7t1U5Mkhw" elementId="Presentation"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_j6jO0QY_EeaNG7t1U5Mkhw" elementId="org.eclipse.jdt.ui.edit.text.java.toggleBreadcrumb"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_j6jO0gY_EeaNG7t1U5Mkhw" elementId="org.eclipse.jdt.ui.edit.text.java.toggleMarkOccurrences"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_j6jO0wY_EeaNG7t1U5Mkhw" elementId="org.eclipse.mylyn.java.ui.editor.folding.auto"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_j6j14AY_EeaNG7t1U5Mkhw" elementId="org.eclipse.ui.edit.text.toggleBlockSelectionMode"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_j6j14QY_EeaNG7t1U5Mkhw" elementId="org.eclipse.ui.edit.text.toggleShowWhitespaceCharacters"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_j6j14gY_EeaNG7t1U5Mkhw" elementId="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_oDRooAZIEeaEMdLjov4YuQ" elementId="org.eclipse.jdt.ui.edit.text.java.toggleBreadcrumb"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_oDSPsAZIEeaEMdLjov4YuQ" elementId="org.eclipse.jdt.ui.edit.text.java.toggleMarkOccurrences"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_oDSPsQZIEeaEMdLjov4YuQ" elementId="org.eclipse.mylyn.java.ui.editor.folding.auto"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_oDS2wAZIEeaEMdLjov4YuQ" elementId="org.eclipse.ui.edit.text.toggleBlockSelectionMode"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_oDS2wQZIEeaEMdLjov4YuQ" elementId="org.eclipse.ui.edit.text.toggleShowWhitespaceCharacters"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_oDTd0AZIEeaEMdLjov4YuQ" elementId="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_gsTn0AZYEeaBMKH55L6JMg" elementId="org.eclipse.jdt.ui.edit.text.java.toggleBreadcrumb"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_gsUO4AZYEeaBMKH55L6JMg" elementId="org.eclipse.jdt.ui.edit.text.java.toggleMarkOccurrences"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_gsU18AZYEeaBMKH55L6JMg" elementId="org.eclipse.mylyn.java.ui.editor.folding.auto"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_gsVdAAZYEeaBMKH55L6JMg" elementId="org.eclipse.ui.edit.text.toggleBlockSelectionMode"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_gsVdAQZYEeaBMKH55L6JMg" elementId="org.eclipse.ui.edit.text.toggleShowWhitespaceCharacters"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_gsWEEAZYEeaBMKH55L6JMg" elementId="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XnjpAP81EeWa2MXnPTZ4CA" elementId="org.eclipse.wst.server.ui.internal.webbrowser.actionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVButgXXEea8m9kVBUviNg" elementId="browser"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVButwXXEea8m9kVBUviNg" elementId="org.eclipse.wst.server.ui.internal.webbrowser.action.open"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYLcgZXEeaBMKH55L6JMg" elementId="browser"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYLcwZXEeaBMKH55L6JMg" elementId="org.eclipse.wst.server.ui.internal.webbrowser.action.open"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XnbtMP81EeWa2MXnPTZ4CA" elementId="org.jboss.tools.jst.web.ui.server.actionSet">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVBuuAXXEea8m9kVBUviNg" elementId="SelectServer"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVCVwAXXEea8m9kVBUviNg" elementId="org.jboss.tools.jst.web.ui.action.server.SelectServerActionDelegate"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVCVwQXXEea8m9kVBUviNg" elementId="server"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVCVwgXXEea8m9kVBUviNg" elementId="org.jboss.tools.jst.web.ui.action.server.RunServerActionDelegate"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVCVwwXXEea8m9kVBUviNg" elementId="org.jboss.tools.jst.web.ui.action.server.DebugServerActionDelegate"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVCVxAXXEea8m9kVBUviNg" elementId="org.jboss.tools.jst.web.ui.action.server.StopServerActionDelegate"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVCVxQXXEea8m9kVBUviNg" elementId="org.jboss.tools.jst.web.ui.action.server.ChangeTimeStampActionDelegate"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYLdAZXEeaBMKH55L6JMg" elementId="SelectServer"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYLdQZXEeaBMKH55L6JMg" elementId="org.jboss.tools.jst.web.ui.action.server.SelectServerActionDelegate"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYLdgZXEeaBMKH55L6JMg" elementId="server"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYLdwZXEeaBMKH55L6JMg" elementId="org.jboss.tools.jst.web.ui.action.server.RunServerActionDelegate"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYygAZXEeaBMKH55L6JMg" elementId="org.jboss.tools.jst.web.ui.action.server.DebugServerActionDelegate"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYygQZXEeaBMKH55L6JMg" elementId="org.jboss.tools.jst.web.ui.action.server.StopServerActionDelegate"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYyggZXEeaBMKH55L6JMg" elementId="org.jboss.tools.jst.web.ui.action.server.ChangeTimeStampActionDelegate"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_Xbaqc_81EeWa2MXnPTZ4CA" elementId="group.nav" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -632,15 +632,15 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XbbRgP81EeWa2MXnPTZ4CA" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTNw0wXXEea8m9kVBUviNg" elementId="history.group"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTNw1AXXEea8m9kVBUviNg" elementId="group.application" visible="false"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTNw1QXXEea8m9kVBUviNg" elementId="backardHistory"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTOX4AXXEea8m9kVBUviNg" elementId="forwardHistory"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTOX4QXXEea8m9kVBUviNg" elementId="pin.group"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_NTOX4gXXEea8m9kVBUviNg" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.gif" tooltip="Pin Editor" enabled="false" command="_XMp1wf81EeWa2MXnPTZ4CA"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVCVxgXXEea8m9kVBUviNg" elementId="org.eclipse.ui.edit.text.gotoNextAnnotation"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVC80AXXEea8m9kVBUviNg" elementId="org.eclipse.ui.edit.text.gotoPreviousAnnotation"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVC80QXXEea8m9kVBUviNg" elementId="org.eclipse.ui.edit.text.gotoLastEditPosition"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4Vi_cgZXEeaBMKH55L6JMg" elementId="history.group"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4Vi_cwZXEeaBMKH55L6JMg" elementId="group.application" visible="false"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4Vi_dAZXEeaBMKH55L6JMg" elementId="backardHistory"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4Vi_dQZXEeaBMKH55L6JMg" elementId="forwardHistory"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4Vi_dgZXEeaBMKH55L6JMg" elementId="pin.group"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_4VjmgAZXEeaBMKH55L6JMg" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.gif" tooltip="Pin Editor" enabled="false" command="_XMp1wf81EeWa2MXnPTZ4CA"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYygwZXEeaBMKH55L6JMg" elementId="org.eclipse.ui.edit.text.gotoNextAnnotation"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYyhAZXEeaBMKH55L6JMg" elementId="org.eclipse.ui.edit.text.gotoPreviousAnnotation"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYyhQZXEeaBMKH55L6JMg" elementId="org.eclipse.ui.edit.text.gotoLastEditPosition"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XbbRgf81EeWa2MXnPTZ4CA" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -652,9 +652,9 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XbbRhf81EeWa2MXnPTZ4CA" elementId="org.eclipse.ui.workbench.help">
         <tags>Draggable</tags>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTO-8AXXEea8m9kVBUviNg" elementId="group.help"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NTO-8QXXEea8m9kVBUviNg" elementId="group.application" visible="false"/>
-        <children xsi:type="menu:OpaqueToolItem" xmi:id="_NVC80gXXEea8m9kVBUviNg" elementId="org.jboss.tools.central.actions.ShowJBossCentralHandler"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VjmgQZXEeaBMKH55L6JMg" elementId="group.help"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4VkNkAZXEeaBMKH55L6JMg" elementId="group.application" visible="false"/>
+        <children xsi:type="menu:OpaqueToolItem" xmi:id="_4XYyhgZXEeaBMKH55L6JMg" elementId="org.jboss.tools.central.actions.ShowJBossCentralHandler"/>
       </children>
       <children xsi:type="menu:ToolControl" xmi:id="_Xj8UUP81EeWa2MXnPTZ4CA" elementId="PerspectiveSpacer" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
         <tags>stretch</tags>

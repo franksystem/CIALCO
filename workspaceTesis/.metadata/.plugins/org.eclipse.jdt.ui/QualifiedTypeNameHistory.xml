@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="ec.gob.magap.web.util.CompareUtil"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.controller.ProducerController"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.ConsumerController"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.util.DateUtil"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="ec.gob.magap.exception.MagapException"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.CommonController"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

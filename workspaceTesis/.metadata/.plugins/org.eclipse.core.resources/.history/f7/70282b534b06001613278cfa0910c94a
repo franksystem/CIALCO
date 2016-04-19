@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Compras P&#250;blicas" style="margin-bottom:20px">
+
+
+		<p:panel header="Organizaci&#243;n" style="margin-bottom:20px">
+
+			<p:panel header="Datos generales" style="margin-bottom:20px">
+				<h:panelGrid columns="2">
+					<h:outputText value="Grado: *" />
+					<p:selectOneMenu required="true"
+						requiredMessage="El campo Grado es requerido"
+						value="#{organizationController.organizacionDTO.idcatalogoGrado}"
+						style="width:125px">
+						<f:selectItem itemLabel="Seleccione" itemValue="" />
+						<f:selectItem itemLabel="1" itemValue="1" />
+						<f:selectItem itemLabel="2" itemValue="2" />
+						<f:selectItem itemLabel="3" itemValue="3" />
+						<p:ajax event="change" partialSubmit="true" process="@this"
+							update="@this" global="false" />
+					</p:selectOneMenu>
+
+
+
+				
+
+				<h:panelGroup layout="block">
+					<ui:include src="/pages/private/common/support.xhtml" />
+				</h:panelGroup>
+
+
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-disk" process="@form" update="@form"
+						actionListener="#{organizationController.guardarOrganizacion}">
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+					</p:commandButton>
+				</h:panelGroup>
+			</p:panel>
+		</p:panel>
+
+
+	</p:panel>
+
+</ui:composition>
+
+
+
