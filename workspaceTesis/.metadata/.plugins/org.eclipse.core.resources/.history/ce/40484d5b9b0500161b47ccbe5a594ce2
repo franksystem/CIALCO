@@ -1,0 +1,35 @@
+package ec.gob.magap.web.controller.adminusuario;
+
+import java.util.ArrayList;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import ec.gob.magap.dto.MenuDTO;
+import ec.gob.magap.dto.PerfilDTO;
+import ec.gob.magap.factory.MagapFactory;
+
+@ManagedBean(name = "indexPerfilController")
+@ViewScoped
+public class IndexPerfilController {
+	private PerfilDTO perfilDTO;
+	Private List<PerfilDTO> perfilDTOs;
+	Private List<PerfilDTO> filteredPerfilDTO;
+	
+	@PostConstruct
+	public void init() {
+		this.perfilDTO = new PerfilDTO();
+		if (this.perfilDTOs == null) {
+			this.perfilDTOs = new ArrayList<PerfilDTO>();
+		}
+		findPerfil();
+	}
+
+	public void findPerfil() {
+		this.perfilDTOs = MagapFactory.getInstance().getIMagapService()
+				.findMenuDTO(this.perfilDTO);
+	}
+
+	
+}

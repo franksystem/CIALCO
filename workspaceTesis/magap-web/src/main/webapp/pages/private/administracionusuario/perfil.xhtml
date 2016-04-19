@@ -1,0 +1,62 @@
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Men&#250;" style="margin-bottom:20px">
+
+		<ui:param name="personTitle" value="Datos del perfil" />
+		<h:panelGrid columns="2" cellpadding="5">
+			<h:outputText value="Nombre: " />
+			<p:inputText id="nombrePerfil" required="true"
+				requiredMessage="El campo nombre es requerido"
+				value="#{perfilController.perfilDTO.nombrePerfil}">
+				<p:ajax event="blur" update="nombrePerfil" global="false" />
+			</p:inputText>
+
+			<h:outputText value="Descripci&#243;n: " />
+			<p:inputText id="descripcionMenu" required="true"
+				requiredMessage="El campo Descripci&#243;n es requerido"
+				value="#{perfilController.perfilDTO.descripcionPerfil}">
+				<p:ajax event="blur" update="nombrePerfil" global="false" />
+			</p:inputText>
+
+		</h:panelGrid>
+		<p:fragment autoUpdate="true">
+			<h:panelGrid columns="3" cellpadding="5">
+				<p:outputLabel value="Men&#250;: " />
+				<p:selectOneMenu id="idMenu"
+					value="#{indexMenuController.menuDTO.idMenu}"
+					style="width:150px" required="true"
+					requiredMessage="El campo men&#250; es requerido">
+					<f:selectItem itemLabel="Seleccione Men&#250;" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{indexMenuController.menuDTOs}"
+						var="men" itemLabel="#{men.nombre}"
+						itemValue="#{men.idMenu}" />
+				</p:selectOneMenu>
+				<p:commandButton value="Agregar Men&#250;" icon="ui-icon-plus"
+					actionListener="#{indexMenuController.newMenu()}"
+					oncomplete="" partialSubmit="true" process="@this"
+					update="idMenu" />
+
+			</h:panelGrid>
+		</p:fragment>
+	</p:panel>
+
+	<h:panelGroup layout="block" style="text-align: center">
+
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form"
+			actionListener="#{menuController.guardarForm}">
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

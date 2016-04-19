@@ -1,5 +1,7 @@
 package ec.gob.magap.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,8 +19,13 @@ import org.hibernate.annotations.Proxy;
 @Entity
 @Table(name = "USUARIOPERFIL_TBL")
 @Proxy(lazy = false)
-public class UsuarioPerfilDTO {
+public class UsuarioPerfilDTO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 659018609487965517L;
+
 	@Id
 	@Column(name = "ID_USUARIOPERFIL", nullable = false, insertable = true, updatable = false, columnDefinition = "NUMBER")
 	@SequenceGenerator(name = "ID_USUARIOPERFIL_SEQ", sequenceName = "ID_USUARIOPERFIL_SEQ", initialValue = 1, allocationSize = 1)
@@ -32,7 +39,7 @@ public class UsuarioPerfilDTO {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumns({ @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO", insertable = false, updatable = false) })
 	private UsuarioDTO usuarioDTO;
-
+	
 	public Long getIdUsuarioPerfil() {
 		return idUsuarioPerfil;
 	}
@@ -56,4 +63,5 @@ public class UsuarioPerfilDTO {
 	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
 		this.usuarioDTO = usuarioDTO;
 	}
+	
 }

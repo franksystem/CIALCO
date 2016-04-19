@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:panel header="Men&#250;" style="margin-bottom:20px">
+
+		<ui:param name="personTitle" value="Datos del men&#250;" />
+		<h:panelGrid columns="2">
+
+			<h:outputText value="Descripci&#243;n:" />
+			<p:inputText id="nombreMenu" required="true"
+				requiredMessage="El campo Descripci&#243;n es requerido"
+				value="#{menuController.menuDTO.nombre}">
+				<p:ajax event="blur" update="nombreMenu" global="false" />
+			</p:inputText>
+
+			<p:outputLabel value="Men&#250; padre " />
+			<p:selectOneMenu id="idMenuPadre"
+				value="#{indexMenuController.menuDTO.idMenu}" style="width:150px">
+				<f:selectItem itemLabel="Seleccione Menu" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{indexMenuController.menuDTOs}" var="men"
+					itemLabel="#{men.nombre}" itemValue="#{men.idMenu}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel value="Pantalla " />
+			<p:selectOneMenu id="idPantalla"
+				value="#{indexPantallaController.pantallaDTO.idPantalla}"
+				style="width:150px" required="true"
+				requiredMessage="El campo pantalla es requerido">
+				<f:selectItem itemLabel="Seleccione pantalla" itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{indexPantallaController.pantallaDTOs}"
+					var="pant" itemLabel="#{pant.nombrePantalla}"
+					itemValue="#{pant}" />
+			</p:selectOneMenu>
+
+		</h:panelGrid>
+	</p:panel>
+
+	<h:panelGroup layout="block" style="text-align: center">
+
+		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+			icon="ui-icon-disk" process="@form" update="@form"
+			actionListener="#{menuController.guardarForm}">
+		</p:commandButton>
+		<p:spacer width="5px"></p:spacer>
+		<p:commandButton value="Cancelar" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+		</p:commandButton>
+
+	</h:panelGroup>
+</ui:composition>

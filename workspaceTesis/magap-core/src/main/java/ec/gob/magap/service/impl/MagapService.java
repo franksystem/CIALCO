@@ -8,6 +8,7 @@ import ec.gob.magap.dto.CialcoDTO;
 import ec.gob.magap.dto.MenuDTO;
 import ec.gob.magap.dto.PantallaDTO;
 import ec.gob.magap.dto.ParroquiaDTO;
+import ec.gob.magap.dto.PerfilDTO;
 import ec.gob.magap.dto.PersonaDTO;
 import ec.gob.magap.dto.ProvinciaDTO;
 import ec.gob.magap.dto.UsuarioDTO;
@@ -69,8 +70,8 @@ public class MagapService implements IMagapService {
 		magapGestor.transSavePantalla(pantallaDTO);
 	}
 	
-	public void transUpdatePantalla(PantallaDTO pantallaDTO) throws MagapException{
-		magapGestor.transUpdatePantalla(pantallaDTO);
+	public void transSaveMenu(MenuDTO menuDTO) throws MagapException{
+		magapGestor.transSaveMenu(menuDTO);
 	}
 
 	public void transSaveCialco(CialcoDTO cialcoDTO) throws MagapException {
@@ -82,6 +83,10 @@ public class MagapService implements IMagapService {
 		return magapGestor.findProductor(personaDTO);
 	}
 
+	public List<PersonaDTO> findUsuario(PersonaDTO personaDTO) throws MagapException{
+		return magapGestor.findUsuario(personaDTO);
+	}
+	
 	public List<PantallaDTO> findPantallaDTO(PantallaDTO pantallaDTO) throws MagapException{
 		return magapGestor.findPantallaDTO(pantallaDTO);
 	}
@@ -90,9 +95,14 @@ public class MagapService implements IMagapService {
 		return magapGestor.findMenuDTO(menuDTO);
 	}
 	
+	public List<PerfilDTO> findPerfilDTO(PerfilDTO perfilDTO) throws MagapException{
+		return magapGestor.findPerfilDTO(perfilDTO);
+	}
 	public ProductorVO findDatosProductor(PersonaDTO personaDTO)
 			throws MagapException {
 		return magapGestor.findDatosProductor(personaDTO);
 	}
+
+	
 
 }

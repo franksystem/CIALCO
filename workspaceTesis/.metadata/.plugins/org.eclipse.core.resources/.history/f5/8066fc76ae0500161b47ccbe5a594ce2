@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+	<p:menubar>
+		<p:menuitem value="Nuevo" title="Nuevo Menu"
+			actionListener="#{indexPerfilController.newPerfil}"
+			icon="ui-icon-document" update="@form" process="@this"
+			partialSubmit="true" ajax="true" />
+
+		<f:facet name="options">
+			<p:menuButton value="#{commonController.nombreApellido}">
+				<p:menuitem value="Salir"
+					actionListener="#{commonController.logout}" icon="ui-icon-extlink" />
+			</p:menuButton>
+		</f:facet>
+	</p:menubar>
+	<br />
+	<h:form>
+		<p:dataTable var="perfil" value="#{indexPerfilController.perfilDTOs}"
+			rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15" widgetVar="perfilTable"
+			emptyMessage="No se encontr&#243; ning&#250;n resultado"
+			filteredValue="#{indexPerfilController.filteredPerfilDTOs}">
+
+			<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="Filtro global:" />
+					<p:inputText id="globalFilter" onkeyup="PF('perfilTable').filter()"
+						style="width:200px" placeholder="Buscar" />
+				</p:outputPanel>
+			</f:facet>
+
+			<p:column filterBy="#{perfil.idPerfil}" headerText="Id"
+				filterMatchMode="contains">
+				<h:outputText value="#{perfil.idPerfil}" />
+			</p:column>
+
+			<p:column filterBy="#{perfil.nombrePerfil}" headerText="Nombre"
+				filterMatchMode="contains">
+				<h:outputText value="#{perfil.nombrePerfil}" />
+			</p:column>
+
+			<p:column filterBy="#{perfil.descripcionPerfil}"
+				headerText="Descripci&#243;n" filterMatchMode="contains">
+				<h:outputText value="#{perfil.descripcionPerfil}" />
+			</p:column>
+
+			<p:column filterBy="#{perfil.menuDTO.nombre}" headerText="Men&#250;"
+				filterMatchMode="contains">
+				<h:outputText value="#{perfil.menuDTO.nombre}" />
+			</p:column>
+
+			<p:column headerText="Acciones" style="text-align: center">
+				<p:commandButton icon="ui-icon-pencil" title="Editar Pantalla"
+					id="editarPantalla" ajax="false" />
+				<!-- 		actionListener="#{indexPantallaController.editPantalla(pantalla)}" -->
+
+				<p:commandButton icon="ui-icon-trash" title="Eliminar Pantalla"
+					id="inactivarPantalla" ajax="true" />
+
+				<!--  					actionListener="#{indexPantallaController.inactivaPantalla(pantalla)}"-->
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
+</ui:composition>

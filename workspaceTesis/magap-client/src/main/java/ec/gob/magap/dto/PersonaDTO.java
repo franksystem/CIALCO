@@ -15,8 +15,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Proxy;
+
 @Entity
 @Table(name = "PERSONA_TBL")
+@Proxy (lazy = false)
 public class PersonaDTO extends AuditoriaDTO implements Serializable {
 
 	/**
@@ -73,7 +76,7 @@ public class PersonaDTO extends AuditoriaDTO implements Serializable {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumns({ @JoinColumn(name = "ID_PERSONA", referencedColumnName = "ID_PERSONA", insertable = false, updatable = false) })
 	private ProductorDTO productorDTO;
-
+	
 	@Transient
 	private String parentesco;
 
@@ -195,6 +198,5 @@ public class PersonaDTO extends AuditoriaDTO implements Serializable {
 
 	public void setTelefonoMovil(String telefonoMovil) {
 		this.telefonoMovil = telefonoMovil;
-	}
-
+	}	
 }

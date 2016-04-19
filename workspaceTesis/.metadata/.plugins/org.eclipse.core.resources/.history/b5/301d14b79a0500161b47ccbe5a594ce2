@@ -1,0 +1,5 @@
+package ec.gob.magap.web.controller.adminusuario;
+
+public class IndexPerfilController {
+
+}

@@ -56,6 +56,7 @@ public class UsuarioDTO extends AuditoriaDTO implements Serializable {
 	@JoinColumns({ @JoinColumn(name = "ID_PERSONA", referencedColumnName = "ID_PERSONA", insertable = false, updatable = false) })
 	private PersonaDTO personaDTO;
 
+   
 	public Long getIdUsuario() {
 		return idUsuario;
 	}

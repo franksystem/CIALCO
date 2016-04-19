@@ -25,6 +25,7 @@ import ec.gob.magap.dto.MenuDTO;
 import ec.gob.magap.dto.OrganizacionDTO;
 import ec.gob.magap.dto.PantallaDTO;
 import ec.gob.magap.dto.ParroquiaDTO;
+import ec.gob.magap.dto.PerfilDTO;
 import ec.gob.magap.dto.PersonaCialcoDTO;
 import ec.gob.magap.dto.PersonaDTO;
 import ec.gob.magap.dto.PracticaProductivaDTO;
@@ -43,7 +44,7 @@ public class MagapGestor implements IMagapGestor {
 
 	private GenericDAOImpl genericDAO;
 	private UsuarioPerfilDTO valor;
-	
+
 	public GenericDAOImpl getGenericDAO() {
 		return genericDAO;
 	}
@@ -64,31 +65,31 @@ public class MagapGestor implements IMagapGestor {
 		criteriaUsuario.add(Restrictions.eq("estado", Parameter.ESTADO_ACTIVO));
 		criteriaUsuario.setFetchMode("personaDTO", FetchMode.JOIN);
 		criteriaUsuario.setFetchMode("perfilDTO", FetchMode.JOIN);
-		//criteriaUsuario.add(Restrictions.eq("perfilDTO.estado",
-		//		Parameter.ESTADO_ACTIVO));
+		// criteriaUsuario.add(Restrictions.eq("perfilDTO.estado",
+		// Parameter.ESTADO_ACTIVO));
 
 		List<UsuarioDTO> usuarioDTOs = (List<UsuarioDTO>) this.genericDAO
 				.findCriteria(criteriaUsuario);
 
 		if (usuarioDTOs != null && !usuarioDTOs.isEmpty()) {
 			UsuarioDTO usuarioDTO = usuarioDTOs.iterator().next();
-			
-			//Verifico si tienen perfiles
-			if (usuarioDTO.getUsuarioPerfilDTOs() != null){
-				//Recorro los perfiles del usuario
-				for(Iterator<UsuarioPerfilDTO> it = usuarioDTO.getUsuarioPerfilDTOs().iterator();it.hasNext();){
+
+			// Verifico si tienen perfiles
+			if (usuarioDTO.getUsuarioPerfilDTOs() != null) {
+				// Recorro los perfiles del usuario
+				for (Iterator<UsuarioPerfilDTO> it = usuarioDTO
+						.getUsuarioPerfilDTOs().iterator(); it.hasNext();) {
 					valor = it.next();
 				}
-				List<MenuDTO> menuDTOs = findMenu(valor.getPerfilDTO().getIdMenu());
+				List<MenuDTO> menuDTOs = findMenu(valor.getPerfilDTO()
+						.getIdMenu());
 				valor.getPerfilDTO().setMenuDTOs(menuDTOs);
 			}
-/*
-			if (usuarioDTO.getPerfilDTO() != null) {
-				List<MenuDTO> menuDTOs = findMenu(usuarioDTO.getPerfilDTO()
-						.getIdMenu());
-				usuarioDTO.getPerfilDTO().setMenuDTOs(menuDTOs);
-			}
-*/
+			/*
+			 * if (usuarioDTO.getPerfilDTO() != null) { List<MenuDTO> menuDTOs =
+			 * findMenu(usuarioDTO.getPerfilDTO() .getIdMenu());
+			 * usuarioDTO.getPerfilDTO().setMenuDTOs(menuDTOs); }
+			 */
 			return usuarioDTO;
 		}
 		return null;
@@ -141,15 +142,15 @@ public class MagapGestor implements IMagapGestor {
 		criteriaPesona.add(Restrictions.eq("cedulaPersona", cedula));
 		return (PersonaDTO) this.genericDAO.findUnique(criteriaPesona);
 	}
-	
-	public PantallaDTO findPantallaByDescripcion(String nombrePantalla) throws MagapException{
-		DetachedCriteria criteriaPantalla = DetachedCriteria.forClass(PantallaDTO.class);
+
+	public PantallaDTO findPantallaByDescripcion(String nombrePantalla)
+			throws MagapException {
+		DetachedCriteria criteriaPantalla = DetachedCriteria
+				.forClass(PantallaDTO.class);
 		criteriaPantalla.add(Restrictions.eq("nombrePantalla", nombrePantalla));
 		return (PantallaDTO) this.genericDAO.findUnique(criteriaPantalla);
 	}
-	
-	
-	
+
 	public void transSaveProductor(ProductorVO productorVO)
 			throws MagapException {
 		try {
@@ -209,17 +210,16 @@ public class MagapGestor implements IMagapGestor {
 
 	}
 
-	public void transUpdatePantalla(PantallaDTO pantallaDTO)
-			throws MagapException {
+	public void transSaveMenu(MenuDTO menuDTO) throws MagapException {
 		try {
-			this.genericDAO.update(pantallaDTO);
+			this.genericDAO.saveOrUpdate(menuDTO);
 		} catch (MagapException e) {
-			MagapLogger.log.error("savePantalla ", e);
+			MagapLogger.log.error("saveMenu ", e);
 			throw new MagapException(e);
 		}
 
 	}
-	
+
 	private Long guardarPersona(PersonaDTO personaDTO) throws MagapException {
 		try {
 			if (personaDTO.getIdPersona() == null) {
@@ -605,12 +605,38 @@ public class MagapGestor implements IMagapGestor {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<PantallaDTO> findPantallaDTO(PantallaDTO pantallaDTO) throws MagapException{
-		DetachedCriteria criteriaPantalla = DetachedCriteria.forClass(PantallaDTO.class);
-		
-		if (pantallaDTO.getUrl() != null && pantallaDTO.getEstado().equals(Parameter.ESTADO_ACTIVO)) {
-			criteriaPantalla.add(Restrictions.eq("URLPantalla",
-					pantallaDTO.getUrl()));
+	public List<PersonaDTO> findUsuario(PersonaDTO personaDTO)
+			throws MagapException {
+
+		DetachedCriteria criteriaUsuario = DetachedCriteria
+				.forClass(PersonaDTO.class);
+		if (personaDTO.getCedulaPersona() != null) {
+			criteriaUsuario.add(Restrictions.eq("cedulaPersona",
+					personaDTO.getCedulaPersona()));
+		}
+
+		if (personaDTO.getEstado() != null) {
+			criteriaUsuario.add(Restrictions.eq("estado",
+					personaDTO.getEstado()));
+		}
+		criteriaUsuario.setFetchMode("usuarioDTO", FetchMode.JOIN);
+
+		List<PersonaDTO> personaDTOs = (List<PersonaDTO>) this.genericDAO
+				.findCriteria(criteriaUsuario);
+
+		return personaDTOs;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PantallaDTO> findPantallaDTO(PantallaDTO pantallaDTO)
+			throws MagapException {
+		DetachedCriteria criteriaPantalla = DetachedCriteria
+				.forClass(PantallaDTO.class);
+
+		if (pantallaDTO.getUrl() != null) {
+			criteriaPantalla.add(Restrictions.eq("url", pantallaDTO.getUrl()));
+			criteriaPantalla.add(Restrictions.eq("estado",
+					Parameter.ESTADO_ACTIVO));
 		}
 
 		List<PantallaDTO> pantallaDTOs = (List<PantallaDTO>) this.genericDAO
@@ -620,12 +646,15 @@ public class MagapGestor implements IMagapGestor {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<MenuDTO> findMenuDTO(MenuDTO menuDTO) throws MagapException{
-		DetachedCriteria criteriaMenu = DetachedCriteria.forClass(MenuDTO.class);
-		
-		if (menuDTO.getNombre() != null && menuDTO.getEstado().equals(Parameter.ESTADO_ACTIVO)) {
-			criteriaMenu.add(Restrictions.eq("NombreMenu",
-					menuDTO.getNombre()));
+	public List<MenuDTO> findMenuDTO(MenuDTO menuDTO) throws MagapException {
+		DetachedCriteria criteriaMenu = DetachedCriteria
+				.forClass(MenuDTO.class);
+
+		if (menuDTO.getNombre() != null) {
+			criteriaMenu
+					.add(Restrictions.eq("nombre", menuDTO.getNombre()));
+			criteriaMenu.add(Restrictions.eq("estado",
+					Parameter.ESTADO_ACTIVO));
 		}
 
 		List<MenuDTO> menuDTOs = (List<MenuDTO>) this.genericDAO
@@ -633,6 +662,25 @@ public class MagapGestor implements IMagapGestor {
 
 		return menuDTOs;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<PerfilDTO> findPerfilDTO(PerfilDTO perfilDTO) throws MagapException {
+		DetachedCriteria criteriaPerfil = DetachedCriteria
+				.forClass(PerfilDTO.class);
+
+		if (perfilDTO.getNombrePerfil() != null) {
+			criteriaPerfil
+					.add(Restrictions.eq("nombrePerfil", perfilDTO.getNombrePerfil()));
+			criteriaPerfil.add(Restrictions.eq("estado",
+					Parameter.ESTADO_ACTIVO));
+		}
+
+		List<PerfilDTO> perfilDTOs = (List<PerfilDTO>) this.genericDAO
+				.findCriteria(criteriaPerfil);
+
+		return perfilDTOs;
+	}
+	
 
 	public ProductorVO findDatosProductor(PersonaDTO personaDTO)
 			throws MagapException {
@@ -673,7 +721,8 @@ public class MagapGestor implements IMagapGestor {
 		DetachedCriteria criteriaMenuHija = DetachedCriteria
 				.forClass(MenuDTO.class);
 		criteriaMenuHija.add(Restrictions.eq("idMenuPadre", idMenuPadre));
-		criteriaMenuHija.add(Restrictions.eq("estado", Parameter.ESTADO_ACTIVO));
+		criteriaMenuHija
+				.add(Restrictions.eq("estado", Parameter.ESTADO_ACTIVO));
 		List<MenuDTO> menuDTOs = (List<MenuDTO>) this.genericDAO
 				.findCriteria(criteriaMenuHija);
 

@@ -32,17 +32,23 @@ create sequence ID_USUARIOPERFIL_SEQ start with 1 increment by 1;
 /*Inicialización de pantallas*/
 /*Pantallas de mantenimientos*/
 INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
-VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/indexPantalla.xhtml','Mantenimiento de URLs',1,current_date,1);
+VALUES(nextval('ID_PANTALLA_SEQ'),'url','Principal',1,current_date,1);
 
 INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
-VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/indexMenu.xhtml','Mantenimiento de Menús',1,current_date,1);
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/administracionusuario/indexUsuario.xhtml','Mantenimiento de Usuarios',1,current_date,1);
 
 INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
-VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/indexProducer.xhtml','Mantenimiento Productores',1,current_date,1);
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/administracionusuario/indexPerfil.xhtml','Mantenimiento de Perfiles',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/administracionusuario/indexPantalla.xhtml','Mantenimiento de URLs',1,current_date,1);
+
+INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/administracionusuario/indexMenu.xhtml','Mantenimiento de Menús',1,current_date,1);
 
 /*Estas pantallas son temporales hasta que se realisen las pantallas de mantenimiento de los formularios*/
 INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
-VALUES(nextval('ID_PANTALLA_SEQ'),'url','Principal',1,current_date,1);
+VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/indexProducer.xhtml','Mantenimiento Productores',1,current_date,1);
 
 INSERT INTO pantalla_tbl(id_pantalla,url,nombrePantalla,id_usuarioCreacion,fechaCreacion,estado)
 VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/store.xhtml','Formulario de Tienda',1,current_date,1);
@@ -64,42 +70,65 @@ VALUES(nextval('ID_PANTALLA_SEQ'),'/pages/private/report/producerReport.xhtml','
 
 
 /*Inicialización del menú*/
+/*Menu de parametrizacion del sistema para perfil de Administracion*/
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'),null,1,'Administración',null,1,current_date,1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 1, 2, 'Administración de Usuarios', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 1, 3, 'Administración de Perfiles', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 1, 4, 'Administración de Pantallas', 'ui-icon-star', 1, current_date, 1);
+
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 1, 5, 'Administración Menú', 'ui-icon-star', 1, current_date, 1);
+
+/*Menu para cialcos del perfil de técnico*/
+/*Administracion General MAGAP, ejemplo: Productores, Organizaciones, etc.*/
 INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
 VALUES (nextval('ID_MENU_SEQ'),null,1,'Magap',null,1,current_date,1);
 
 INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 1, 2, 'Productor', 'ui-icon-star', 1, current_date, 1);
+VALUES (nextval('ID_MENU_SEQ'), 6, 6, 'Administración Productor', 'ui-icon-star', 1, current_date, 1);
 
 INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 1, 1, 'Cialco', null, 1, current_date, 1);
+VALUES (nextval('ID_MENU_SEQ'), 6, 11, 'Formulario Organización', 'ui-icon-star', 1, current_date, 1);
+
+/*Administracion de CIALCOS*/
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 6, 1, 'Cialcos', null, 1, current_date, 1);
 
 INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 3, 3, 'Tienda', 'ui-icon-star', 1, current_date, 1);
+VALUES (nextval('ID_MENU_SEQ'), 9, 7, 'Formulario Tienda', 'ui-icon-star', 1, current_date, 1);
 
 INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 3, 4, 'Pie de finca', 'ui-icon-star', 1, current_date, 1);
+VALUES (nextval('ID_MENU_SEQ'), 9, 8, 'Formulario Pie de finca', 'ui-icon-star', 1, current_date, 1);
 
 INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 3, 5, 'Canasta', 'ui-icon-star', 1, current_date, 1);
+VALUES (nextval('ID_MENU_SEQ'), 9, 9, 'Formualrio Canasta', 'ui-icon-star', 1, current_date, 1);
 
 INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 3, 6, 'Feria', 'ui-icon-star', 1, current_date, 1);
+VALUES (nextval('ID_MENU_SEQ'), 9, 10, 'Formualrio Feria', 'ui-icon-star', 1, current_date, 1);
+
+/*Reportes*/
+INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_MENU_SEQ'), 6, 1, 'Reportes', null, 1, current_date, 1);
 
 INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 3, 7, 'Organización', 'ui-icon-star', 1, current_date, 1);
+VALUES (nextval('ID_MENU_SEQ'), 14, 10, 'Productores', 'ui-icon-star', 1, current_date, 1);	
 
-INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 1, 1, 'Reportes', null, 1, current_date, 1);
 
-INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 9, 8, 'Productores', 'ui-icon-star', 1, current_date, 1);	
-
-INSERT INTO MENU_TBL(id_menu, id_menupadre, id_pantalla, nombre, icono, id_usuarioCreacion, fechaCreacion, estado) 
-VALUES (nextval('ID_MENU_SEQ'), 9, 9, 'Pantallas', 'ui-icon-star', 1, current_date, 1);
-
+/*Creacion de perfiles*/
 /*Creación del perfil de administrador*/		
 INSERT INTO PERFIL_TBL (id_Perfil, id_menu, nombrePerfil, descripcionPerfil, id_usuarioCreacion, fechaCreacion, estado) 
 VALUES (nextval('ID_PERFIL_SEQ'),1,'Administrator','Administrador el sistema', 1, current_date, 1);
+
+INSERT INTO PERFIL_TBL (id_Perfil, id_menu, nombrePerfil, descripcionPerfil, id_usuarioCreacion, fechaCreacion, estado) 
+VALUES (nextval('ID_PERFIL_SEQ'),6,'Técnico','Operador del sistema', 1, current_date, 1);
+
 
 /*Creacion del Usuario Administrador*/
 INSERT INTO usuario_tbl( id_usuario, id_persona, nombreusuario, contrasena, estado, fechacreacion) 
@@ -120,6 +149,26 @@ UPDATE usuario_tbl SET  id_persona=1 WHERE ID_USUARIO = 1;
 /*asignacion del perfil al usuario*/
 INSERT INTO usuarioperfil_tbl(id_usuarioPerfil, id_perfil, id_usuario, fechacaducidad, crearpermiso, editarpermiso, consultapermiso, eliminarpermiso, fechaCreacion, id_usuarioCreacion, estado)
 VALUES(nextval('ID_USUARIOPERFIL_SEQ'),1, 1, null, TRUE, TRUE, TRUE, TRUE, current_date,1,1);
+
+/*Creacion del Usuario tecnico*/
+INSERT INTO usuario_tbl( id_usuario, id_persona, nombreusuario, contrasena, estado, fechacreacion) 
+VALUES (nextval('ID_USUARIO_SEQ'), null, 'tecnico', 'wB0ZHjsTys0=', 1, current_date);
+
+INSERT INTO persona_tbl(
+            id_persona, nombrepersona, apellidopersona, cedulapersona, edadpersona, 
+            mailpersona, actividadpersona, id_catalogoescolaridad, id_catalogoetnia, 
+            id_catalogogenero, telefonofijo, telefonomovil, estado, id_usuariocreacion, 
+            fechacreacion, id_usuariomodificacion, fechamodificacion, id_catalogoparentesco)
+    VALUES (nextval('ID_PERSONA_SEQ'), 'Técnico', 'Magap', '0999999999', null, 
+            'panasfrank@hotmail.com', null, 1, 1, 
+            1, null, null, 1, 1, 
+            current_date, null, null, null);
+
+UPDATE usuario_tbl SET  id_persona=2 WHERE ID_USUARIO = 2;
+
+/*asignacion del perfil al usuario*/
+INSERT INTO usuarioperfil_tbl(id_usuarioPerfil, id_perfil, id_usuario, fechacaducidad, crearpermiso, editarpermiso, consultapermiso, eliminarpermiso, fechaCreacion, id_usuarioCreacion, estado)
+VALUES(nextval('ID_USUARIOPERFIL_SEQ'),2, 2, null, TRUE, TRUE, TRUE, TRUE, current_date,1,1);
 
 /*
 INSERT INTO MENU_TBL (ID_MENU, NOMBRE, URL, ICONO, ESTADO, ID_MENUPADRE) VALUES (nextval('ID_MENU_SEQ'), 'Magap', 'url', null, 1, null);

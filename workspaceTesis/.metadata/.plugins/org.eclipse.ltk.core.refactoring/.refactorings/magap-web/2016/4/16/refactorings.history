@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;magap-web/src/main/webapp/pages/private/administracionusuario/IndexPerfil.xhtml&apos; to &apos;indexPerfil.xhtml&apos;" description="Rename resource &apos;IndexPerfil.xhtml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/pages/private/administracionusuario/IndexPerfil.xhtml" name="indexPerfil.xhtml" stamp="1461010864423" updateReferences="true"/>
+</session>

@@ -1,0 +1,18 @@
+package ec.gob.magap.web.controller.adminusuario;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
+
+import ec.gob.magap.dto.PantallaDTO;
+import ec.gob.magap.web.controller.LoginController;
+
+@ManagedBean(name = "perfilController")
+@ViewScoped
+public class PerfilController {
+	@ManagedProperty(value = "#{loginController}")
+	private LoginController loginController;
+
+	private PerfilDTO perfilDTO;
+
+}

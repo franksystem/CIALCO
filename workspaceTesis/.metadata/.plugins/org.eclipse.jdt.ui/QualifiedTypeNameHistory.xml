@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.SupportController"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.util.CompareUtil"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.controller.ProducerController"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.ConsumerController"/>
@@ -17,7 +16,6 @@
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="javax.persistence.JoinTable"/>
 <fullyQualifiedTypeName name="javax.persistence.ManyToMany"/>
-<fullyQualifiedTypeName name="ec.gob.magap.dto.PerfilDTO"/>
 <fullyQualifiedTypeName name="javax.persistence.Id"/>
 <fullyQualifiedTypeName name="javax.persistence.SequenceGenerator"/>
 <fullyQualifiedTypeName name="javax.persistence.GeneratedValue"/>
@@ -38,26 +36,28 @@
 <fullyQualifiedTypeName name="org.hibernate.annotations.Proxy"/>
 <fullyQualifiedTypeName name="org.hibernate.criterion.DetachedCriteria"/>
 <fullyQualifiedTypeName name="org.hibernate.criterion.Restrictions"/>
-<fullyQualifiedTypeName name="javax.annotation.PostConstruct"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.PageController"/>
 <fullyQualifiedTypeName name="ec.gob.magap.vo.PantallaVO"/>
-<fullyQualifiedTypeName name="java.io.Serializable"/>
-<fullyQualifiedTypeName name="ec.gob.magap.dto.PantallaDTO"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
-<fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.CommonController"/>
 <fullyQualifiedTypeName name="ec.gob.magap.gestor.impl.MagapGestor"/>
 <fullyQualifiedTypeName name="javax.faces.bean.ViewScoped"/>
 <fullyQualifiedTypeName name="javax.faces.bean.ManagedBean"/>
 <fullyQualifiedTypeName name="ec.gob.magap.factory.MagapFactory"/>
-<fullyQualifiedTypeName name="ec.gob.magap.dto.MenuDTO"/>
 <fullyQualifiedTypeName name="javax.persistence.Column"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
-<fullyQualifiedTypeName name="ec.gob.magap.exception.MagapException"/>
-<fullyQualifiedTypeName name="ec.gob.magap.common.util.Parameter"/>
 <fullyQualifiedTypeName name="com.fasterxml.jackson.core.sym.Name"/>
-<fullyQualifiedTypeName name="javax.faces.bean.ManagedProperty"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.controller.LoginController"/>
-<fullyQualifiedTypeName name="ec.gob.magap.dto.AuditoriaDTO"/>
 <fullyQualifiedTypeName name="javax.annotation.ManagedBean"/>
+<fullyQualifiedTypeName name="ec.gob.magap.dto.PantallaDTO"/>
+<fullyQualifiedTypeName name="javax.annotation.PostConstruct"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="ec.gob.magap.common.util.Parameter"/>
+<fullyQualifiedTypeName name="javax.faces.bean.ManagedProperty"/>
+<fullyQualifiedTypeName name="ec.gob.magap.web.controller.adminusuario.PerfilController"/>
+<fullyQualifiedTypeName name="ec.gob.magap.dto.PerfilDTO"/>
+<fullyQualifiedTypeName name="ec.gob.magap.dto.MenuDTO"/>
+<fullyQualifiedTypeName name="ec.gob.magap.dto.AuditoriaDTO"/>
+<fullyQualifiedTypeName name="ec.gob.magap.exception.MagapException"/>
+<fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.CommonController"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
 </qualifiedTypeNameHistroy>
