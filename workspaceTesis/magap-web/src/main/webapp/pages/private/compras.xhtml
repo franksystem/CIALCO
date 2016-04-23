@@ -6,10 +6,13 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-	<h:form>
-		<p:panel header="Compras P&#250;blicas" style="margin-bottom:20px">
-			<p:panel header="Organizaci&#243;n Datos Generales"
-				style="margin-bottom:20px">
+
+	<p:panel header="Compras P&#250;blicas" style="margin-bottom:20px">
+
+
+		<p:panel header="Organizaci&#243;n" style="margin-bottom:20px">
+
+			<p:panel header="Datos generales" style="margin-bottom:20px">
 				<h:panelGrid columns="2">
 					<h:outputText value="Grado: *" />
 					<p:selectOneMenu required="true"
@@ -128,113 +131,129 @@
 						value="#{organizationController.organizacionDTO.numeroParticipantes}">
 						<pe:keyFilter regEx="/[\d\-]/" />
 					</p:inputText>
-				</h:panelGrid>
-			</p:panel>
-
-			<br />
-
-			<p:panel
-				header="Datos sobre la Organizaci&#243;n de Compras P&#250;blica "
-				style="margin-bottom:20px">
-				<h:panelGrid columns="2">
-					<h:outputText value="Provincia: *" />
-					<p:selectOneMenu value="#{exportController.cialcoDTO.idProvincia}"
-						required="true" requiredMessage="El campo Provicia es requerido">
-						<f:selectItem itemLabel="Seleccione" />
-						<f:selectItems value="#{exportController.provinciaDTOs}"
-							var="prov" itemLabel="#{prov.nombreProvincia}"
-							itemValue="#{prov.idProvincia}" />
-						<p:ajax event="change" partialSubmit="true" process="@this"
-							update="comboCan @this"
-							listener="#{exportController.findCantones}" global="false" />
-					</p:selectOneMenu>
-
-					<h:outputText value="Cant&#243;n: *" />
-					<p:selectOneMenu id="comboCan"
-						value="#{exportController.cialcoDTO.idCanton}" required="true"
-						requiredMessage="El campo Canton es requerido">
-						<f:selectItem itemLabel="Seleccione" />
-						<f:selectItems value="#{exportController.cantonDTOs}" var="can"
-							itemLabel="#{can.nombreCanton}" itemValue="#{can.idCanton}" />
-						<p:ajax event="change" partialSubmit="true" process="@this"
-							update="comboPa @this"
-							listener="#{exportController.findParroquias}" global="false" />
-					</p:selectOneMenu>
-
-
-
-
-					<h:outputText value="Parroquia: *" />
-					<p:selectOneMenu id="comboPa"
-						value="#{exportController.cialcoDTO.idParroquia}">
-						<f:selectItem itemLabel="Seleccione" />
-						<f:selectItems value="#{exportController.parroquiaDTOs}" var="par"
-							itemLabel="#{par.nombreParroquia}" itemValue="#{par.idParroquia}" />
-						<p:ajax event="change" partialSubmit="true" process="@this"
-							update="@this" global="false" />
-					</p:selectOneMenu>
-
-					<h:outputText value="Localidad:" />
-					<p:inputText maxlength="99"
-						value="#{exportController.cialcoDTO.localidad}">
-						<pe:keyFilter regEx="/[a-z_\s]/i" />
-					</p:inputText>
-
-					<h:outputText value="Coordenada x:" />
-					<p:inputText maxlength="20"
-						value="#{exportController.cialcoDTO.cordenadaX}">
-						<pe:keyFilter regEx="/[\d\-]/" />
-					</p:inputText>
-
-					<h:outputText value="Coordenada y:" />
-					<p:inputText maxlength="20"
-						value="#{exportController.cialcoDTO.cordenadaY}">
-						<pe:keyFilter regEx="/[\d\-]/" />
-					</p:inputText>
-
-					<h:outputText value="Coordenada z:" />
-					<p:inputText maxlength="20"
-						value="#{exportController.cialcoDTO.cordenadaZ}">
-						<pe:keyFilter regEx="/[\d\-]/" />
-					</p:inputText>
 
 				</h:panelGrid>
-			</p:panel>
+				<br />
 
-			<br />
-			<p:panel header="Datos sobre los Productos en Compra P&#250;blica"
-				style="margin-bottom:20px">
-
-				<p:panel header="Productos que participan en Compra P&#250;blica "
+				<p:panel
+					header="Datos sobre la Organizaci&#243;n de Compras P&#250;blica "
 					style="margin-bottom:20px">
-					<p:fieldset legend="Productos " style="margin-bottom:20px">
-						<p:selectManyCheckbox required="true"
-							requiredMessage="Debe seleccionar al menos un producto"
-							value="#{exportController.idProducts}" layout="responsive"
-							columns="1">
-							<f:selectItems value="#{exportController.productDTOs}"
-								var="rubro" itemLabel="#{rubro.elementoCatalogo}"
-								itemValue="#{rubro.idCatalogo}" />
-						</p:selectManyCheckbox>
+					<h:panelGrid columns="2">
 
 
-						<p:panel
-							header="Datos sobre los productos de Compras P&#250;blica"
-							style="margin-bottom:20px">
-							<h:panelGrid columns="2">
+						<h:outputText value="Provincia: *" />
+						<p:selectOneMenu value="#{exportController.cialcoDTO.idProvincia}"
+							required="true" requiredMessage="El campo Provicia es requerido">
+							<f:selectItem itemLabel="Seleccione" />
+							<f:selectItems value="#{exportController.provinciaDTOs}"
+								var="prov" itemLabel="#{prov.nombreProvincia}"
+								itemValue="#{prov.idProvincia}" />
+							<p:ajax event="change" partialSubmit="true" process="@this"
+								update="comboCan @this"
+								listener="#{exportController.findCantones}" global="false" />
+						</p:selectOneMenu>
 
-								<h:outputText value="Volumen total de Venta / contrato: *" />
-								<p:spinner value="#{exportController.cialcoDTO.montoCompras}"
-									prefix="$" min="0" />
+						<h:outputText value="Cant&#243;n: *" />
+						<p:selectOneMenu id="comboCan"
+							value="#{exportController.cialcoDTO.idCanton}" required="true"
+							requiredMessage="El campo Canton es requerido">
+							<f:selectItem itemLabel="Seleccione" />
+							<f:selectItems value="#{exportController.cantonDTOs}" var="can"
+								itemLabel="#{can.nombreCanton}" itemValue="#{can.idCanton}" />
+							<p:ajax event="change" partialSubmit="true" process="@this"
+								update="comboPa @this"
+								listener="#{exportController.findParroquias}" global="false" />
+						</p:selectOneMenu>
+						
+						<h:outputText value="Parroquia: *" />
+						<p:selectOneMenu id="comboPa"
+							value="#{exportController.cialcoDTO.idParroquia}">
+							<f:selectItem itemLabel="Seleccione" />
+							<f:selectItems value="#{exportController.parroquiaDTOs}"
+								var="par" itemLabel="#{par.nombreParroquia}"
+								itemValue="#{par.idParroquia}" />
+							<p:ajax event="change" partialSubmit="true" process="@this"
+								update="@this" global="false" />
+						</p:selectOneMenu>
 
-								<h:outputText value="Monto Total de Venta / contrato: *" />
-								<p:spinner value="#{exportController.cialcoDTO.montoVentas}"
-									prefix="$" min="0" />
-							</h:panelGrid>
-						</p:panel>
-					</p:fieldset>
+						<h:outputText value="Localidad:" />
+						<p:inputText maxlength="99"
+							value="#{exportController.cialcoDTO.localidad}">
+							<pe:keyFilter regEx="/[a-z_\s]/i" />
+						</p:inputText>
+
+						<h:outputText value="Coordenada x:" />
+						<p:inputText maxlength="20"
+							value="#{exportController.cialcoDTO.cordenadaX}">
+							<pe:keyFilter regEx="/[\d\-]/" />
+						</p:inputText>
+
+						<h:outputText value="Coordenada y:" />
+						<p:inputText maxlength="20"
+							value="#{exportController.cialcoDTO.cordenadaY}">
+							<pe:keyFilter regEx="/[\d\-]/" />
+						</p:inputText>
+
+						<h:outputText value="Coordenada z:" />
+						<p:inputText maxlength="20"
+							value="#{exportController.cialcoDTO.cordenadaZ}">
+							<pe:keyFilter regEx="/[\d\-]/" />
+						</p:inputText>
+
+					</h:panelGrid>
 				</p:panel>
+
+
+				<p:panel header="Datos sobre los Productos en Compra P&#250;blica"
+					style="margin-bottom:20px">
+
+					<p:panel header="Productos que participan en Compra P&#250;blica "
+						style="margin-bottom:20px">
+						<p:fieldset legend="Productos " style="margin-bottom:20px">
+							<p:selectManyCheckbox required="true"
+								requiredMessage="Debe seleccionar al menos un producto"
+								value="#{exportController.idProducts}" layout="responsive"
+								columns="1">
+								<f:selectItems value="#{exportController.productDTOs}"
+									var="rubro" itemLabel="#{rubro.elementoCatalogo}"
+									itemValue="#{rubro.idCatalogo}" />
+							</p:selectManyCheckbox>
+
+
+							<p:panel
+								header="Datos sobre los productos de Compras P&#250;blica"
+								style="margin-bottom:20px">
+								<h:panelGrid columns="2">
+
+									<h:outputText value="Volumen total de Venta / contrato: *" />
+									<p:spinner value="#{exportController.cialcoDTO.montoCompras}"
+										prefix="$" min="0" />
+
+									<h:outputText value="Monto Total de Venta / contrato: *" />
+									<p:spinner value="#{exportController.cialcoDTO.montoVentas}"
+										prefix="$" min="0" />
+								</h:panelGrid>
+							</p:panel>
+							
+						</p:fieldset>
+					</p:panel>
+				</p:panel>
+
+				<h:panelGroup layout="block">
+					<ui:include src="/pages/private/common/support.xhtml" />
+				</h:panelGroup>
+
+				<h:panelGroup layout="block" style="text-align: center">
+					<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
+						icon="ui-icon-disk" process="@form" update="@form"
+						actionListener="#{organizationController.guardarOrganizacion}">
+					</p:commandButton>
+					<p:spacer width="5px"></p:spacer>
+					<p:commandButton value="Cancelar" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close">
+					</p:commandButton>
+				</h:panelGroup>
 			</p:panel>
 		</p:panel>
-	</h:form>
+	</p:panel>
 </ui:composition>

@@ -1,18 +1,9 @@
 package ec.gob.magap.web.controller.adminusuario;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 import javax.annotation.ManagedBean;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-
-import ec.gob.magap.common.util.Parameter;
 import ec.gob.magap.dto.MenuDTO;
-import ec.gob.magap.dto.PantallaDTO;
-import ec.gob.magap.factory.MagapFactory;
 import ec.gob.magap.web.controller.LoginController;
 
 @ManagedBean(value = "pantallaController")
@@ -21,31 +12,23 @@ public class MenuController {
 	@ManagedProperty(value = "loginController")
 	private LoginController loginController;
 	
+	@ManagedProperty(value="pantallaController")
+	private PantallaController pantallaController;
+	
 	private MenuDTO menuDTO;
-	private PantallaDTO pantallaDTO;
 	
 	public void newMenu() {
 		// Creo el objeto e inicializo los datos de auditoria
 		menuDTO = new MenuDTO();
-		pantallaDTO = new PantallaDTO();
-		
-		menuDTO.setPantallaDTO(pantallaDTO);
-		menuDTO.setEstado(Parameter.ESTADO_ACTIVO);
-		menuDTO.setIdUsuarioCreacion(loginController.getSessionUser()
-				.getUsuarioDTO().getIdUsuario());
-		menuDTO.setFechaCreacion(new Timestamp(new Date().getTime()));
-		setMenuDTO(menuDTO);
+		//this.pantallaController.setPantallaDTO(new PantallaDTO());
 	}
-	
+	/*
 	public void guardarForm() {
 		try {
 			// Recupero la menu
 			MenuDTO menuDTO = getMenuDTO();
 			// Pregunto si es un registro nuevo o es uno para actualizar
 			if (menuDTO.getIdMenu() == null) {
-				
-				/*MagapFactory.getInstance().getIMagapService()
-						.transSaveMenu(menuDTO);*/
 				FacesContext.getCurrentInstance().addMessage(
 						null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, "",
@@ -76,7 +59,7 @@ public class MenuController {
 		}
 	}
 
-
+*/
 	public MenuDTO getMenuDTO() {
 		return menuDTO;
 	}
@@ -92,5 +75,10 @@ public class MenuController {
 	public void setLoginController(LoginController loginController) {
 		this.loginController = loginController;
 	}
-	
+	public PantallaController getPantallaController() {
+		return pantallaController;
+	}
+	public void setPantallaController(PantallaController pantallaController) {
+		this.pantallaController = pantallaController;
+	}
 }

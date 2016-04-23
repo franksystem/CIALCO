@@ -13,16 +13,16 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="logout" key="selection"/>
+		<item value="" key="selection"/>
 		<list key="findhistory">
+			<item value="page"/>
+			<item value="supportTitle"/>
 			<item value="logout"/>
 			<item value="find"/>
 			<item value="dlgAddOrg"/>
 			<item value="initOrganizacion"/>
 			<item value="newOrgan"/>
 			<item value="savepantalla"/>
-			<item value="pantalla"/>
-			<item value="url"/>
 		</list>
 		<list key="replacehistory">
 		</list>

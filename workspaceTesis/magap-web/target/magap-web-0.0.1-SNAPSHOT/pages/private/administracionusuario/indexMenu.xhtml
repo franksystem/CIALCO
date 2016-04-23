@@ -23,7 +23,8 @@
 	<br />
 
 
-	<h:form>
+	<h:form id="form">
+	<p:panel header="Mantenimiento de mun&#250;s">
 		<p:dataTable var="menu" value="#{indexMenuController.menuDTOs}"
 			rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -66,5 +67,6 @@
 			</p:column>
 
 		</p:dataTable>
+		</p:panel>
 	</h:form>
 </ui:composition>

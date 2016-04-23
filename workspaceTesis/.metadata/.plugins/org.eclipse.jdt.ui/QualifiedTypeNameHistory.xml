@@ -26,7 +26,6 @@
 <fullyQualifiedTypeName name="javax.persistence.CascadeType"/>
 <fullyQualifiedTypeName name="javax.persistence.OneToMany"/>
 <fullyQualifiedTypeName name="ec.gob.magap.dto.UsuarioPerfilDTO"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.manager.SessionUser"/>
 <fullyQualifiedTypeName name="javax.faces.context.FacesContext"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
@@ -51,13 +50,14 @@
 <fullyQualifiedTypeName name="javax.annotation.PostConstruct"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="ec.gob.magap.common.util.Parameter"/>
-<fullyQualifiedTypeName name="javax.faces.bean.ManagedProperty"/>
 <fullyQualifiedTypeName name="ec.gob.magap.web.controller.adminusuario.PerfilController"/>
 <fullyQualifiedTypeName name="ec.gob.magap.dto.PerfilDTO"/>
 <fullyQualifiedTypeName name="ec.gob.magap.dto.MenuDTO"/>
 <fullyQualifiedTypeName name="ec.gob.magap.dto.AuditoriaDTO"/>
 <fullyQualifiedTypeName name="ec.gob.magap.exception.MagapException"/>
-<fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.CommonController"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="ec.gob.magap.web.controller.common.CommonController"/>
+<fullyQualifiedTypeName name="javax.faces.bean.ManagedProperty"/>
 </qualifiedTypeNameHistroy>

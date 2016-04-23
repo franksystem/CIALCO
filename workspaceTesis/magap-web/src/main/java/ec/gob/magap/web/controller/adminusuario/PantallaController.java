@@ -17,10 +17,7 @@ import ec.gob.magap.web.controller.LoginController;
 @ManagedBean(name = "pantallaController")
 @ViewScoped
 public class PantallaController {
-	/*
-	 * @ManagedProperty(value = "#{pageController}") private PageController
-	 * pageController;
-	 */
+	 
 	@ManagedProperty(value = "#{loginController}")
 	private LoginController loginController;
 
@@ -126,5 +123,5 @@ public class PantallaController {
 				.getUsuarioDTO().getIdUsuario());
 		pantallaDTO.setFechaCreacion(new Timestamp(new Date().getTime()));
 		setPantallaDTO(pantallaDTO);
-	}
+	}	
 }

@@ -25,7 +25,8 @@ public class IndexMenuController {
 	private MenuDTO menuDTO;
 	private List<MenuDTO> menuDTOs;
 	private List<MenuDTO> filteredMenuDTOs;
-
+	
+	
 	@PostConstruct
 	public void init() {
 		this.menuDTO = new MenuDTO();
@@ -84,6 +85,4 @@ public class IndexMenuController {
 	public void setMenuController(MenuController menuController) {
 		this.menuController = menuController;
 	}
-	
-	
 }

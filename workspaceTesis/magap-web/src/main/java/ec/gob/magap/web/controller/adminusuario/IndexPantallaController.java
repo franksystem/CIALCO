@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+
 import ec.gob.magap.dto.PantallaDTO;
 import ec.gob.magap.factory.MagapFactory;
 import ec.gob.magap.web.controller.common.CommonController;
@@ -52,10 +53,10 @@ public class IndexPantallaController {
 		this.pantallaController.setPantallaDTO(pantallaDTO);
 		this.pantallaController.inactivaPantallaDTO();
 	}
-	/*public void consultarPantalla(PantallaDTO pantallaDTO) {
-		this.commonController.menuItem(15);
-		this.pantallaController.getPageController().setPantallaDTO(pantallaDTO);
-	}*/
+	
+	public void consultarPantalla(PantallaDTO pantallaDTO) {
+		this.pantallaController.setPantallaDTO(pantallaDTO);
+	}
 	
 	public PantallaDTO getPantallaDTO() {
 		return pantallaDTO;
