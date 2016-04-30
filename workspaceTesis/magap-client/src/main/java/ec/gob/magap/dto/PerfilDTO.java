@@ -1,6 +1,6 @@
 package ec.gob.magap.dto;
 
-import java.sql.Timestamp;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,7 +23,12 @@ import org.hibernate.annotations.Proxy;
 @Entity
 @Table(name = "PERFIL_TBL")
 @Proxy(lazy = false)
-public class PerfilDTO {
+public class PerfilDTO extends AuditoriaDTO implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2387527762306905584L;
 
 	@Id
 	@Column(name = "ID_PERFIL", nullable = false, insertable = true, updatable = false, columnDefinition = "NUMBER")
@@ -39,13 +44,6 @@ public class PerfilDTO {
 
 	@Column(name = "DESCRIPCIONPERFIL")
 	private String descripcionPerfil;
-
-	@Column(name = "ESTADO")
-	private Integer estado;
-
-	@Column(name = "FECHACREACION")
-	private Timestamp fechaCreacion;
-
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumns({ @JoinColumn(name = "ID_MENU", referencedColumnName = "ID_MENU", insertable = false, updatable = false) })
@@ -83,22 +81,6 @@ public class PerfilDTO {
 
 	public void setDescripcionPerfil(String descripcionPerfil) {
 		this.descripcionPerfil = descripcionPerfil;
-	}
-
-	public Integer getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Integer estado) {
-		this.estado = estado;
-	}
-
-	public Timestamp getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-	public void setFechaCreacion(Timestamp fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
 	}
 
 	public Long getIdMenu() {

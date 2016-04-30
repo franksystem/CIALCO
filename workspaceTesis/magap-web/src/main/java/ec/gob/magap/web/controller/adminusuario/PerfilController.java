@@ -1,9 +1,13 @@
 package ec.gob.magap.web.controller.adminusuario;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
+import ec.gob.magap.common.util.Parameter;
 import ec.gob.magap.dto.PerfilDTO;
 import ec.gob.magap.web.controller.LoginController;
 
@@ -18,6 +22,10 @@ public class PerfilController {
 	public void newPerfil() {
 		// Creo el objeto e inicializo los datos de auditoria
 		perfilDTO = new PerfilDTO();
+		perfilDTO.setEstado(Parameter.ESTADO_ACTIVO);
+		perfilDTO.setIdUsuarioCreacion(loginController.getSessionUser()
+				.getUsuarioDTO().getIdUsuario());
+		perfilDTO.setFechaCreacion(new Timestamp(new Date().getTime()));
 		setPerfilDTO(perfilDTO);
 	}
 
@@ -25,6 +33,9 @@ public class PerfilController {
 		return loginController;
 	}
 
+	public void guardarForm(){
+		
+	}
 	public void setLoginController(LoginController loginController) {
 		this.loginController = loginController;
 	}

@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import ec.gob.magap.dto.MenuDTO;
+import ec.gob.magap.dto.PantallaDTO;
 import ec.gob.magap.factory.MagapFactory;
 import ec.gob.magap.web.controller.common.CommonController;
 
@@ -18,14 +19,15 @@ public class IndexMenuController {
 
 	@ManagedProperty(value = "#{commonController}")
 	private CommonController commonController;
-	
+
 	@ManagedProperty(value = "#{menuController}")
 	private MenuController menuController;
-	
+
 	private MenuDTO menuDTO;
+	private PantallaDTO pantallaDTO;
 	private List<MenuDTO> menuDTOs;
 	private List<MenuDTO> filteredMenuDTOs;
-	
+	private List<MenuDTO> filtroMenuPadres;
 	
 	@PostConstruct
 	public void init() {
@@ -33,19 +35,43 @@ public class IndexMenuController {
 		if (this.menuDTOs == null) {
 			this.menuDTOs = new ArrayList<MenuDTO>();
 		}
+		if(this.filtroMenuPadres == null){
+			this.filtroMenuPadres = new ArrayList<MenuDTO>();
+		}
 		findMenu();
 	}
 
 	public void findMenu() {
 		this.menuDTOs = MagapFactory.getInstance().getIMagapService()
 				.findMenuDTO(this.menuDTO);
+		this.filtroMenuPadres = MagapFactory.getInstance().getIMagapService()
+		.findMenuPadreDTO(this.menuDTO);
 	}
+	
 
-	public void newMenu(){
+	public void newMenu() {
 		this.commonController.menuItem(16);
 		this.menuController.newMenu();
 	}
 	
+	public void editarMenu(MenuDTO menuDTO) {
+		this.commonController.menuItem(16);
+		this.menuController.setMenuDTO(menuDTO);
+	}
+
+	public void inactivaMenu(MenuDTO menuDTO){
+		this.menuController.setMenuDTO(menuDTO);
+		this.menuController.inactivaMenu();
+	}
+	
+	public void guardarForm() {
+		this.menuController.guardarForm();
+	}
+
+	public void consultarMenu(MenuDTO menuDTO) {
+		this.menuController.setMenuDTO(menuDTO);
+	}
+
 	public List<MenuDTO> getMenuDTOs() {
 		return menuDTOs;
 	}
@@ -85,4 +111,22 @@ public class IndexMenuController {
 	public void setMenuController(MenuController menuController) {
 		this.menuController = menuController;
 	}
+
+	public PantallaDTO getPantallaDTO() {
+		return pantallaDTO;
+	}
+
+	public void setPantallaDTO(PantallaDTO pantallaDTO) {
+		this.pantallaDTO = pantallaDTO;
+	}
+
+	public List<MenuDTO> getFiltroMenuPadres() {
+		return filtroMenuPadres;
+	}
+
+	public void setFiltroMenuPadres(List<MenuDTO> filtroMenuPadres) {
+		this.filtroMenuPadres = filtroMenuPadres;
+	}
+
+	
 }

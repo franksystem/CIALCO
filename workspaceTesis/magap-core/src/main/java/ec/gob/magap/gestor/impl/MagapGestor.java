@@ -1,6 +1,7 @@
 package ec.gob.magap.gestor.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -646,15 +647,33 @@ public class MagapGestor implements IMagapGestor {
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<CialcoDTO> findCialcoDTO(CialcoDTO cialcoDTO)
+			throws MagapException {
+		DetachedCriteria criteriaCialco = DetachedCriteria
+				.forClass(CialcoDTO.class);
+
+		if (cialcoDTO.getNombreCialco() != null) {
+			criteriaCialco.add(Restrictions.eq("nombre", cialcoDTO.getNombreCialco()));
+			criteriaCialco.add(Restrictions.eq("estado",
+					Parameter.ESTADO_ACTIVO));
+		}
+
+		List<CialcoDTO> cialcoDTOs = (List<CialcoDTO>) this.genericDAO
+				.findCriteria(criteriaCialco);
+
+		return cialcoDTOs;
+	}
+
+	
+	@SuppressWarnings("unchecked")
 	public List<MenuDTO> findMenuDTO(MenuDTO menuDTO) throws MagapException {
 		DetachedCriteria criteriaMenu = DetachedCriteria
 				.forClass(MenuDTO.class);
 
 		if (menuDTO.getNombre() != null) {
+			criteriaMenu.add(Restrictions.eq("nombre", menuDTO.getNombre()));
 			criteriaMenu
-					.add(Restrictions.eq("nombre", menuDTO.getNombre()));
-			criteriaMenu.add(Restrictions.eq("estado",
-					Parameter.ESTADO_ACTIVO));
+					.add(Restrictions.eq("estado", Parameter.ESTADO_ACTIVO));
 		}
 
 		List<MenuDTO> menuDTOs = (List<MenuDTO>) this.genericDAO
@@ -662,15 +681,36 @@ public class MagapGestor implements IMagapGestor {
 
 		return menuDTOs;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<PerfilDTO> findPerfilDTO(PerfilDTO perfilDTO) throws MagapException {
+	public List<MenuDTO> findMenuPadreDTO(MenuDTO menuDTO)
+			throws MagapException {
+		DetachedCriteria criteriaMenuPadre = DetachedCriteria
+				.forClass(MenuDTO.class);
+		// Recupero todos los registros de la tabla Menus
+		List<MenuDTO> menuDTOs = (List<MenuDTO>) this.genericDAO
+				.findCriteria(criteriaMenuPadre);
+
+		List<MenuDTO> menuPadres = new ArrayList<MenuDTO>();
+		for (MenuDTO menuDTO2 : menuDTOs) {
+			if (menuDTO2.getIcono() == null
+					&& menuDTO2.getEstado().equals(Parameter.ESTADO_ACTIVO)) {
+				menuPadres.add(menuDTO2);
+			}
+		}
+
+		return menuPadres;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PerfilDTO> findPerfilDTO(PerfilDTO perfilDTO)
+			throws MagapException {
 		DetachedCriteria criteriaPerfil = DetachedCriteria
 				.forClass(PerfilDTO.class);
 
 		if (perfilDTO.getNombrePerfil() != null) {
-			criteriaPerfil
-					.add(Restrictions.eq("nombrePerfil", perfilDTO.getNombrePerfil()));
+			criteriaPerfil.add(Restrictions.eq("nombrePerfil",
+					perfilDTO.getNombrePerfil()));
 			criteriaPerfil.add(Restrictions.eq("estado",
 					Parameter.ESTADO_ACTIVO));
 		}
@@ -680,7 +720,6 @@ public class MagapGestor implements IMagapGestor {
 
 		return perfilDTOs;
 	}
-	
 
 	public ProductorVO findDatosProductor(PersonaDTO personaDTO)
 			throws MagapException {

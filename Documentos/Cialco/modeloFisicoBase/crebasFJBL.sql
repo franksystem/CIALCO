@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      PostgreSQL 8                                 */
-/* Created on:     11/04/2016 11:01:05                          */
+/* Created on:     23/04/2016 9:43:52                           */
 /*==============================================================*/
 
 
@@ -19,6 +19,8 @@ drop table CATALOGO_TBL;
 drop index INDEX_7;
 
 drop table CIALCO_TBL;
+
+drop table CONTRATO_TBL;
 
 drop table DESTINOINGRESO_TBL;
 
@@ -192,6 +194,24 @@ ID_CIALCO
 );
 
 /*==============================================================*/
+/* Table: CONTRATO_TBL                                          */
+/*==============================================================*/
+create table CONTRATO_TBL (
+   ID_CONTRATO          INT8                 not null,
+   ID_CIALCO            INT8                 null,
+   ENTIDAD              CHAR(200)            null,
+   ESTADO               INT2                 null,
+   ID_USUARIOCREACION   INT8                 null,
+   FECHACREACION        TIMESTAMP            null,
+   ID_USUARIOMODIFICACION INT8                 null,
+   FECHAMODIFIACION     TIMESTAMP            null,
+   constraint PK_CONTRATO_TBL primary key (ID_CONTRATO)
+);
+
+comment on table CONTRATO_TBL is
+'aqui ubiamos los contratos y las entidadesdel cialco de compra publica';
+
+/*==============================================================*/
 /* Table: DESTINOINGRESO_TBL                                    */
 /*==============================================================*/
 create table DESTINOINGRESO_TBL (
@@ -304,8 +324,8 @@ ID_ENTREGACANASTA
 /*==============================================================*/
 create table MENU_TBL (
    ID_MENU              INT8                 not null,
-   ID_MENUPADRE         INT8                 null,
    ID_PANTALLA          INT8                 null,
+   ID_MENUPADRE         INT8                 null,
    NOMBRE               VARCHAR(100)         not null,
    ICONO                VARCHAR(20)          null,
    ID_USUARIOCREACION   INT8                 null,
@@ -712,6 +732,11 @@ alter table CIALCO_TBL
       references PARROQUIA_TBL (ID_PARROQUIA)
       on delete restrict on update restrict;
 
+alter table CONTRATO_TBL
+   add constraint FK_CONTRATO_REFERENCE_CIALCO_T foreign key (ID_CIALCO)
+      references CIALCO_TBL (ID_CIALCO)
+      on delete restrict on update restrict;
+
 alter table DESTINOINGRESO_TBL
    add constraint FK_DESTINOI_REFERENCE_PRODUCTO foreign key (ID_PRODUCTOR)
       references PRODUCTOR_TBL (ID_PRODUCTOR)
@@ -780,11 +805,6 @@ alter table INSTITUCIONAPOYO_TBL
 alter table LUGARENTREGACANASTA_TBL
    add constraint FK_LUGARENT_REFERENCE_ENTREGAC foreign key (ID_ENTREGACANASTA)
       references ENTREGACANASTA_TBL (ID_ENTREGACANASTA)
-      on delete restrict on update restrict;
-
-alter table MENU_TBL
-   add constraint FK_MENU_TBL_REFERENCE_MENU_TBL foreign key (ID_MENUPADRE)
-      references MENU_TBL (ID_MENU)
       on delete restrict on update restrict;
 
 alter table MENU_TBL

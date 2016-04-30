@@ -42,7 +42,11 @@ public interface IMagapService {
 	
 	List<PantallaDTO> findPantallaDTO(PantallaDTO pantallaDTO) throws MagapException;
 	
+	List<CialcoDTO> findCialcoDTO(CialcoDTO cialcoDTO) throws MagapException;
+	
 	List<MenuDTO> findMenuDTO(MenuDTO menuDTO) throws MagapException;
+	
+	List<MenuDTO> findMenuPadreDTO(MenuDTO menuDTO) throws MagapException;
 	
 	List<PerfilDTO> findPerfilDTO(PerfilDTO perfilDTO) throws MagapException;
 	

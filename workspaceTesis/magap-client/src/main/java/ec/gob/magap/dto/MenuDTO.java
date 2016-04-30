@@ -40,6 +40,9 @@ public class MenuDTO extends AuditoriaDTO implements Serializable {
 	@Column(name = "NOMBRE")
 	private String nombre;
 
+	@Column(name = "ID_PANTALLA")
+	private Long idPantalla;
+
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumns({ @JoinColumn(name = "ID_PANTALLA", referencedColumnName = "ID_PANTALLA", insertable = false, updatable = false) })
 	private PantallaDTO pantallaDTO;
@@ -97,4 +100,14 @@ public class MenuDTO extends AuditoriaDTO implements Serializable {
 	public void setMenuHijaDTOs(List<MenuDTO> menuHijaDTOs) {
 		this.menuHijaDTOs = menuHijaDTOs;
 	}
+
+	public Long getIdPantalla() {
+		return idPantalla;
+	}
+
+	public void setIdPantalla(Long idPantalla) {
+		this.idPantalla = idPantalla;
+	}
+	
+	
 }

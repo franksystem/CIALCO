@@ -5,20 +5,23 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import ec.gob.magap.dto.PerfilDTO;
 import ec.gob.magap.factory.MagapFactory;
+import ec.gob.magap.web.controller.common.CommonController;
 
 @ManagedBean(name = "indexPerfilController")
 @ViewScoped
 public class IndexPerfilController {
-	/*@ManagedProperty(value="commonController")
+
+	@ManagedProperty(value = "#{commonController}")
 	private CommonController commonController;
-	
-	@ManagedProperty(value="perfilController")
+
+	@ManagedProperty(value = "#{perfilController}")
 	private PerfilController perfilController;
-	*/
+
 	private PerfilDTO perfilDTO;
 	private List<PerfilDTO> perfilDTOs;
 	private List<PerfilDTO> filteredPerfilDTOs;
@@ -36,12 +39,16 @@ public class IndexPerfilController {
 		this.perfilDTOs = MagapFactory.getInstance().getIMagapService()
 				.findPerfilDTO(this.perfilDTO);
 	}
-
-	/*public void newPerfil() {
+	
+	public void newPerfil() {
 		this.commonController.menuItem(17);
 		this.perfilController.newPerfil();
-	}*/
-	
+	}
+
+	public void consultarPerfil(PerfilDTO perfilDTO) {
+		this.perfilController.setPerfilDTO(perfilDTO);
+	}
+
 	public PerfilDTO getPerfilDTO() {
 		return perfilDTO;
 	}
@@ -66,14 +73,6 @@ public class IndexPerfilController {
 		this.filteredPerfilDTOs = filteredPerfilDTOs;
 	}
 
-	/*public CommonController getCommonController() {
-		return commonController;
-	}
-
-	public void setCommonController(CommonController commonController) {
-		this.commonController = commonController;
-	}
-
 	public PerfilController getPerfilController() {
 		return perfilController;
 	}
@@ -81,5 +80,12 @@ public class IndexPerfilController {
 	public void setPerfilController(PerfilController perfilController) {
 		this.perfilController = perfilController;
 	}
-	*/
+
+	public CommonController getCommonController() {
+		return commonController;
+	}
+
+	public void setCommonController(CommonController commonController) {
+		this.commonController = commonController;
+	}
 }

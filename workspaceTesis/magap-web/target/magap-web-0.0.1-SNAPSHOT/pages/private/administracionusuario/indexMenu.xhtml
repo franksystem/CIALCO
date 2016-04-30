@@ -24,49 +24,73 @@
 
 
 	<h:form id="form">
-	<p:panel header="Mantenimiento de mun&#250;s">
-		<p:dataTable var="menu" value="#{indexMenuController.menuDTOs}"
-			rows="10" paginator="true"
-			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="5,10,15" widgetVar="menuTable"
-			emptyMessage="No se encontr&#243; ning&#250;n resultado"
-			filteredValue="#{indexMenuController.filteredMenuDTOs}">
+		<p:panel header="Mantenimiento de men&#250;s">
+			<p:dataTable var="menu" value="#{indexMenuController.menuDTOs}"
+				rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,10,15" widgetVar="menuTable"
+				emptyMessage="No se encontr&#243; ning&#250;n resultado"
+				filteredValue="#{indexMenuController.filteredMenuDTOs}">
 
-			<f:facet name="header">
-				<p:outputPanel>
-					<h:outputText value="Filtro global:" />
-					<p:inputText id="globalFilter" onkeyup="PF('menuTable').filter()"
-						style="width:200px" placeholder="Enter keyword" />
-				</p:outputPanel>
-			</f:facet>
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Filtro global:" />
+						<p:inputText id="globalFilter" onkeyup="PF('menuTable').filter()"
+							style="width:200px" placeholder="Enter keyword" />
+					</p:outputPanel>
+				</f:facet>
 
-			<p:column filterBy="#{menu.idMenu}" headerText="Id"
-				filterMatchMode="contains">
-				<h:outputText value="#{menu.idMenu}" />
-			</p:column>
+				<p:column filterBy="#{menu.idMenu}" headerText="Id"
+					sortBy="#{menu.idMenu}" filterMatchMode="contains">
+					<h:outputText value="#{menu.idMenu}" />
+				</p:column>
 
-			<p:column filterBy="#{menu.nombre}" headerText="Descripci&#243;n"
-				filterMatchMode="contains">
-				<h:outputText value="#{menu.nombre}" />
-			</p:column>
+				<p:column filterBy="#{menu.nombre}" headerText="Descripci&#243;n"
+					sortBy="#{menu.nombre}" filterMatchMode="contains">
+					<h:outputText value="#{menu.nombre}" />
+				</p:column>
 
-			<p:column filterBy="#{menu.pantallaDTO.nombrePantalla}"
-				headerText="URL" filterMatchMode="contains">
-				<h:outputText value="#{menu.pantallaDTO.nombrePantalla}" />
-			</p:column>
+				<p:column filterBy="#{menu.pantallaDTO.nombrePantalla}"
+					headerText="Pantalla" sortBy="#{menu.pantallaDTO.nombrePantalla}"
+					filterMatchMode="contains">
+					<h:outputText value="#{menu.pantallaDTO.nombrePantalla}" />
+				</p:column>
 
-			<p:column headerText="Acciones" style="text-align: center">
-				<p:commandButton icon="ui-icon-pencil" title="Editar Pantalla"
-					id="editarPantalla" ajax="false" />
-				<!-- 		actionListener="#{indexPantallaController.editPantalla(pantalla)}" -->
+				<p:column headerText="Acciones" style="text-align: center">
+					<p:commandButton icon="ui-icon-search" title="Consultar men&#250;"
+						actionListener="#{indexMenuController.consultarMenu(menu)}"
+						oncomplete="PF('menuDialog').show()" update="@form:menuDetail" />
 
-				<p:commandButton icon="ui-icon-trash" title="Eliminar Pantalla"
-					id="inactivarPantalla" ajax="true" />
+					<p:commandButton icon="ui-icon-pencil" title="Editar men&#250;"
+						actionListener="#{indexMenuController.editarMenu(menu)}"
+						id="editarMenu" ajax="false" />
 
-				<!--  					actionListener="#{indexPantallaController.inactivaPantalla(pantalla)}"-->
-			</p:column>
+					<p:commandButton icon="ui-icon-trash" title="Eliminar men&#250;"
+					actionListener="#{indexMenuController.inactivaMenu(menu)}"
+						id="inactivarPantalla" ajax="true" />
 
-		</p:dataTable>
+				</p:column>
+
+			</p:dataTable>
 		</p:panel>
+
+		<p:dialog id="dial" header="Info. Men&#250;" widgetVar="menuDialog"
+			showEffect="explode" hideEffect="explode" resizable="false">
+			<p:outputPanel id="menuDetail" style="text-align:center;">
+				<p:panelGrid columns="2" columnClasses="label,value">
+
+					<h:outputText value="Id:" style="font-weight:bold" />
+					<h:outputText value="#{menuController.menuDTO.idMenu}" />
+
+					<h:outputText value="Nombre:" style="font-weight:bold" />
+					<h:outputText value="#{menuController.menuDTO.nombre}" />
+
+					<h:outputText value="Pantalla:" style="font-weight:bold" />
+					<h:outputText value="#{menuController.menuDTO.pantallaDTO.nombrePantalla}" />
+
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+
 	</h:form>
 </ui:composition>

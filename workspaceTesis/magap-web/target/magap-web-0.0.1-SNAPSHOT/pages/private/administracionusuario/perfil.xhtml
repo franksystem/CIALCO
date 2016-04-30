@@ -18,7 +18,7 @@
 			</p:inputText>
 
 			<h:outputText value="Descripci&#243;n: " />
-			<p:inputText id="descripcionMenu" required="true"
+			<p:inputText id="descripcionPerfil" required="true"
 				requiredMessage="El campo Descripci&#243;n es requerido"
 				value="#{perfilController.perfilDTO.descripcionPerfil}">
 				<p:ajax event="blur" update="nombrePerfil" global="false" />
@@ -29,20 +29,13 @@
 			<h:panelGrid columns="3" cellpadding="5">
 				<p:outputLabel value="Men&#250;: " />
 				<p:selectOneMenu id="idMenu"
-					value="#{indexMenuController.menuDTO.idMenu}"
-					style="width:150px" required="true"
-					requiredMessage="El campo men&#250; es requerido">
+					value="#{perfilController.perfilDTO.idMenu}" style="width:150px"
+					required="true" requiredMessage="El campo men&#250; es requerido">
 					<f:selectItem itemLabel="Seleccione Men&#250;" itemValue=""
 						noSelectionOption="true" />
-					<f:selectItems value="#{indexMenuController.menuDTOs}"
-						var="men" itemLabel="#{men.nombre}"
-						itemValue="#{men.idMenu}" />
+					<f:selectItems value="#{indexMenuController.menuDTOs}" var="men"
+						itemLabel="#{men.nombre}" itemValue="#{men.idMenu}" />
 				</p:selectOneMenu>
-				<p:commandButton value="Agregar Men&#250;" icon="ui-icon-plus"
-					actionListener="#{indexMenuController.newMenu()}"
-					oncomplete="" partialSubmit="true" process="@this"
-					update="idMenu" />
-
 			</h:panelGrid>
 		</p:fragment>
 	</p:panel>
@@ -51,7 +44,7 @@
 
 		<p:commandButton value="Guardar" styleClass="ui-confirmdialog-no"
 			icon="ui-icon-disk" process="@form" update="@form"
-			actionListener="#{menuController.guardarForm}">
+			actionListener="#{perfilController.guardarForm}">
 		</p:commandButton>
 		<p:spacer width="5px"></p:spacer>
 		<p:commandButton value="Cancelar" type="button"

@@ -91,10 +91,17 @@ public class MagapService implements IMagapService {
 		return magapGestor.findPantallaDTO(pantallaDTO);
 	}
 	
+	public List<CialcoDTO> findCialcoDTO(CialcoDTO cialcoDTO) throws MagapException{
+		return magapGestor.findCialcoDTO(cialcoDTO);
+	}
+	
 	public List<MenuDTO> findMenuDTO(MenuDTO menuDTO) throws MagapException{
 		return magapGestor.findMenuDTO(menuDTO);
 	}
 	
+	public List<MenuDTO> findMenuPadreDTO(MenuDTO menuDTO) throws MagapException{
+		return magapGestor.findMenuPadreDTO(menuDTO);
+	}
 	public List<PerfilDTO> findPerfilDTO(PerfilDTO perfilDTO) throws MagapException{
 		return magapGestor.findPerfilDTO(perfilDTO);
 	}
